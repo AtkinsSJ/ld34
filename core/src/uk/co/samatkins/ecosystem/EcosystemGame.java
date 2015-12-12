@@ -1,5 +1,6 @@
 package uk.co.samatkins.ecosystem;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -57,7 +58,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum PlantType {
 		Leafy(
-			0.05f,
+			0.05f, 0.6f,
 			3f, 3.5f, // Growth time range
 			3, 5, // Min/max mature height
 			new Texture("plant1_top.png"),
@@ -66,22 +67,25 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_2.png"),
 			},
 			new Texture("plant1_flower.png"),
-			new Texture("seed1.png"), 3f
+			new Texture("seed1.png"), 5f
 		);
 
 		final float thirst; // Water consumed per second
+		final float desiredSoilHumidity;
+		final float minGrowthTime, maxGrowthTime;
 		final int minMatureHeight, maxMatureHeight;
 		final Texture texPlantTop;
 		final Texture[] texPlant;
-		final Texture texSeed;
 		final Texture texFlower;
+		final Texture texSeed;
 		final float seedLife;
-		final float minGrowthTime, maxGrowthTime;
 
-		PlantType(float thirst, float minGrowthTime, float maxGrowthTime, int minMatureHeight, int maxMatureHeight,
+		PlantType(float thirst, float desiredSoilHumidity,
+		          float minGrowthTime, float maxGrowthTime, int minMatureHeight, int maxMatureHeight,
 		          Texture texPlantTop, Texture[] texPlant, Texture texFlower,
 		          Texture texSeed, float seedLife) {
 			this.thirst = thirst;
+			this.desiredSoilHumidity = desiredSoilHumidity;
 			this.minMatureHeight = minMatureHeight;
 			this.maxMatureHeight = maxMatureHeight;
 			this.texPlantTop = texPlantTop;
@@ -116,6 +120,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		int size;
 		int matureHeight;
+		float health;
 
 		float growthTimer;
 		float water;
@@ -127,6 +132,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.y = y;
 
 			this.water = 0.5f;
+			this.health = 1.0f;
 
 			this.size = 1;
 			this.matureHeight = randomInt(random, this.type.minMatureHeight, this.type.maxMatureHeight + 1);
@@ -167,9 +173,14 @@ public class EcosystemGame extends ApplicationAdapter {
 	public static float randomFloat(Random random, float min, float max) {
 		return min + (random.nextFloat() * (max - min));
 	}
+	public static void log(String string) {
+		Gdx.app.debug("Whatever", string);
+	}
 	
 	@Override
 	public void create () {
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		viewport = new ScreenViewport(camera);
@@ -364,7 +375,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		// Draw plants
 		for (Plant plant : plants) {
-			setBatchColourLerped(colPlantDry, colPlantWet, plant.water);
+			setBatchColourLerped(colPlantDry, colPlantWet, plant.health);
 			for (int i=0; i<plant.size - 1; i++) {
 				batch.draw(plant.type.texPlant[i % plant.type.texPlant.length], plant.x * 16f, (plant.y + i) * 16f);
 			}
@@ -410,8 +421,22 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		Tile groundTile = tiles[plant.x][plant.y-1];
 
-		// Growth!
-		if (plant.water > 0.8f) { // We assume plants at 80% water are happy.
+		// Water
+		plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
+		log("Plant water is " + plant.water);
+		float waterWanted = plant.type.desiredSoilHumidity - plant.water;
+		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
+			log("Plant drank " + waterWanted);
+			float water = Math.min(waterWanted, groundTile.humidity) * dt;
+			groundTile.humidity -= water;
+			plant.water += water;
+		}
+
+		float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
+		log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
+		if (humidityDifference < 0.1f) {
+			// Happy
+			plant.health = Math.min(1.0f, plant.health + dt);
 
 			plant.growthTimer -= dt;
 
@@ -440,22 +465,17 @@ public class EcosystemGame extends ApplicationAdapter {
 					}
 				}
 			}
+
+		} else if (humidityDifference < 0.4f) {
+			// Unhappy but ok
+		} else {
+			// Dying
+			plant.health -= (dt * 0.1f);
+			log("Dying, health = " + plant.health);
 		}
 
-		// Water
-		plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
-		float waterWanted = 1.0f - plant.water;
-		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-			float water = Math.min(waterWanted, groundTile.humidity) * dt;
-			groundTile.humidity -= water;
-			plant.water += water;
-		}
-
-		if (plant.water <= 0) {
+		if (plant.health <= 0f) {
 			plantDied = true;
-		}
-
-		if (plantDied) {
 			tiles[plant.x][plant.y].plant = null;
 		}
 
