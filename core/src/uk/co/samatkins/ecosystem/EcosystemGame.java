@@ -56,13 +56,33 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum PlantType {
-		Leafy(new Texture("plant1.png"), new Texture("seed1.png"));
+		Leafy(
+			0.05f,
+			3, 5, // Min/max mature height
+			new Texture("plant1_top.png"),
+			new Texture[]{
+				new Texture("plant1_1.png"),
+				new Texture("plant1_2.png"),
+			},
+			new Texture("seed1.png"),
+			new Texture("plant1_flower.png")
+		);
 
-		final Texture plantTexture, seedTexture;
+		final float thirst; // Water consumed per second
+		final int minMatureHeight, maxMatureHeight;
+		final Texture texPlantTop;
+		final Texture[] texPlant;
+		final Texture texSeed;
+		final Texture texFlower;
 
-		PlantType(Texture plantTexture, Texture seedTexture) {
-			this.plantTexture = plantTexture;
-			this.seedTexture = seedTexture;
+		PlantType(float thirst, int minMatureHeight, int maxMatureHeight, Texture texPlantTop, Texture[] texPlant, Texture texSeed, Texture texFlower) {
+			this.thirst = thirst;
+			this.minMatureHeight = minMatureHeight;
+			this.maxMatureHeight = maxMatureHeight;
+			this.texPlantTop = texPlantTop;
+			this.texPlant = texPlant;
+			this.texSeed = texSeed;
+			this.texFlower = texFlower;
 		}
 	}
 
@@ -82,9 +102,13 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	class Plant {
 		PlantType type;
-		int x, y;
+		int x, y; // Base
+
+		int size;
+		int matureHeight;
 
 		float water;
+		boolean isMature;
 
 		public Plant(PlantType type, int x, int y) {
 			this.type = type;
@@ -92,6 +116,10 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.y = y;
 
 			this.water = 0.5f;
+
+			this.size = 1;
+			this.matureHeight = randomInt(random, this.type.minMatureHeight, this.type.maxMatureHeight + 1);
+			this.isMature = false;
 		}
 	}
 
@@ -291,11 +319,26 @@ public class EcosystemGame extends ApplicationAdapter {
 			Plant plant = plants.get(i);
 			Tile groundTile = tiles[plant.x][plant.y-1];
 
+			// Growth!
+			if (!plant.isMature
+			 && (plant.water > 0.5f)
+			 && (random.nextFloat() > 0.99f)) {
+				plant.size++;
+				plant.water -= 0.1f;
+
+				// Slightly hacky!
+				// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
+				if (plant.size >= plant.matureHeight) {
+					plant.isMature = true;
+					plant.size = plant.matureHeight;
+				}
+			}
+
 			// Water
-			plant.water -= 0.001f;
+			plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
 			float waterWanted = 1.0f - plant.water;
 			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-				float water = Math.min(waterWanted, groundTile.humidity) * 0.2f;
+				float water = Math.min(waterWanted, groundTile.humidity) * dt;
 				groundTile.humidity -= water;
 				plant.water += water;
 			}
@@ -326,13 +369,19 @@ public class EcosystemGame extends ApplicationAdapter {
 		// Draw plants
 		for (Plant plant : plants) {
 			setBatchColourLerped(colPlantDry, colPlantWet, plant.water);
-			batch.draw(plant.type.plantTexture, plant.x * 16f, plant.y * 16f);
+			for (int i=0; i<plant.size - 1; i++) {
+				batch.draw(plant.type.texPlant[i % plant.type.texPlant.length], plant.x * 16f, (plant.y + i) * 16f);
+			}
+			batch.draw(plant.type.texPlantTop, plant.x * 16f, (plant.y + plant.size - 1) * 16f);
+			if (plant.isMature) {
+				batch.draw(plant.type.texFlower, plant.x * 16f, (plant.y + plant.size - 1) * 16f);
+			}
 		}
 
 		// Draw seeds
 		batch.setColor(Color.WHITE);
 		for (Seed seed : seeds) {
-			batch.draw(seed.type.seedTexture, seed.x - 4f, seed.y - 4f);
+			batch.draw(seed.type.texSeed, seed.x - 4f, seed.y - 4f);
 		}
 		// Draw droplets
 		batch.setColor(Color.WHITE);
@@ -350,7 +399,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			interactionMode = Water;
 		}
 		buttonX += buttonSize;
-		if (drawButton(buttonX, 0, buttonSize, buttonSize, PlantType.Leafy.seedTexture, interactionMode == InteractionMode.PlantSeed)) {
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, PlantType.Leafy.texSeed, interactionMode == InteractionMode.PlantSeed)) {
 			interactionMode = InteractionMode.PlantSeed;
 		}
 
@@ -410,7 +459,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 			float difference = source.humidity - dest.humidity;
 			if (difference > 0) {
-				float exchange = difference * 0.005f; // Tweak this to adjust speed of equalisation, bigger = faster
+				float exchange = difference * 0.01f; // Tweak this to adjust speed of equalisation, bigger = faster
 				source.humidity -= exchange;
 				dest.humidity += exchange;
 			}
