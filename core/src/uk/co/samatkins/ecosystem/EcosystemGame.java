@@ -58,6 +58,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	enum PlantType {
 		Leafy(
 			0.05f,
+			3f, 3.5f, // Growth time range
 			3, 5, // Min/max mature height
 			new Texture("plant1_top.png"),
 			new Texture[]{
@@ -75,8 +76,10 @@ public class EcosystemGame extends ApplicationAdapter {
 		final Texture texSeed;
 		final Texture texFlower;
 		final float seedLife;
+		final float minGrowthTime, maxGrowthTime;
 
-		PlantType(float thirst, int minMatureHeight, int maxMatureHeight, Texture texPlantTop, Texture[] texPlant, Texture texFlower,
+		PlantType(float thirst, float minGrowthTime, float maxGrowthTime, int minMatureHeight, int maxMatureHeight,
+		          Texture texPlantTop, Texture[] texPlant, Texture texFlower,
 		          Texture texSeed, float seedLife) {
 			this.thirst = thirst;
 			this.minMatureHeight = minMatureHeight;
@@ -86,6 +89,8 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.texSeed = texSeed;
 			this.texFlower = texFlower;
 			this.seedLife = seedLife;
+			this.minGrowthTime = minGrowthTime;
+			this.maxGrowthTime = maxGrowthTime;
 		}
 	}
 
@@ -112,6 +117,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		int size;
 		int matureHeight;
 
+		float growthTimer;
 		float water;
 		boolean isMature;
 
@@ -125,6 +131,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.size = 1;
 			this.matureHeight = randomInt(random, this.type.minMatureHeight, this.type.maxMatureHeight + 1);
 			this.isMature = false;
+			this.growthTimer = randomFloat(random, type.minGrowthTime, type.maxGrowthTime);
 		}
 	}
 
@@ -156,6 +163,9 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	public static int randomInt(Random random, int minInclusive, int maxExclusive) {
 		return minInclusive + random.nextInt(maxExclusive - minInclusive);
+	}
+	public static float randomFloat(Random random, float min, float max) {
+		return min + (random.nextFloat() * (max - min));
 	}
 	
 	@Override
@@ -330,49 +340,8 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		// Update plants
 		for (int i=0; i<plants.size; i++) {
-			Plant plant = plants.get(i);
-			Tile groundTile = tiles[plant.x][plant.y-1];
-
-			// Growth!
-			if ((plant.water > 0.5f)
-			 && (random.nextFloat() > 0.99f)) {
-
-				plant.water -= 0.1f;
-
-				if (plant.isMature) {
-					// Spawn seeds!
-					Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
-					seed.dx = (random.nextFloat() - 0.5f) * 50f;
-					seed.dy = 20f + (random.nextFloat() * 20f);
-					seeds.add(seed);
-
-				} else if (plant.size >= plant.matureHeight) {
-					plant.isMature = true;
-					plant.size = plant.matureHeight;
-				} else {
-					plant.size++;
-
-					// Slightly hacky!
-					// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
-					if (plant.size >= plant.matureHeight) {
-						plant.isMature = true;
-						plant.size = plant.matureHeight;
-					}
-				}
-			}
-
-			// Water
-			plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
-			float waterWanted = 1.0f - plant.water;
-			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-				float water = Math.min(waterWanted, groundTile.humidity) * dt;
-				groundTile.humidity -= water;
-				plant.water += water;
-			}
-
-			if (plant.water <= 0) {
+			if (updatePlant(plants.get(i), dt)) {
 				plants.removeIndex(i);
-				tiles[plant.x][plant.y].plant = null;
 			}
 		}
 
@@ -434,6 +403,63 @@ public class EcosystemGame extends ApplicationAdapter {
 		batch.end();
 
 		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	private boolean updatePlant(Plant plant, float dt) {
+		boolean plantDied = false;
+
+		Tile groundTile = tiles[plant.x][plant.y-1];
+
+		// Growth!
+		if (plant.water > 0.8f) { // We assume plants at 80% water are happy.
+
+			plant.growthTimer -= dt;
+
+			if (plant.growthTimer <= 0f) {
+				plant.growthTimer = randomFloat(random, plant.type.minGrowthTime, plant.type.maxGrowthTime);
+
+				plant.water -= 0.1f;
+				if (plant.isMature) {
+					// Spawn seeds!
+					Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
+					seed.dx = (random.nextFloat() - 0.5f) * 50f;
+					seed.dy = 20f + (random.nextFloat() * 20f);
+					seeds.add(seed);
+
+				} else if (plant.size >= plant.matureHeight) {
+					plant.isMature = true;
+					plant.size = plant.matureHeight;
+				} else {
+					plant.size++;
+
+					// Slightly hacky!
+					// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
+					if (plant.size >= plant.matureHeight) {
+						plant.isMature = true;
+						plant.size = plant.matureHeight;
+					}
+				}
+			}
+		}
+
+		// Water
+		plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
+		float waterWanted = 1.0f - plant.water;
+		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
+			float water = Math.min(waterWanted, groundTile.humidity) * dt;
+			groundTile.humidity -= water;
+			plant.water += water;
+		}
+
+		if (plant.water <= 0) {
+			plantDied = true;
+		}
+
+		if (plantDied) {
+			tiles[plant.x][plant.y].plant = null;
+		}
+
+		return plantDied;
 	}
 
 	private void setBatchColourLerped(final Color minColour, final Color maxColour, float ratio) {
