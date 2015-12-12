@@ -35,6 +35,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	class Tile {
 		Terrain terrain = Terrain.Air;
 		float humidity = 0;
+		Plant plant = null;
 	}
 
 	enum InteractionMode {
@@ -244,8 +245,13 @@ public class EcosystemGame extends ApplicationAdapter {
 				} else {
 					seed.dy = 0;
 
-					if (random.nextFloat() > 0.99f) {
-						plants.add(new Plant(seed.type, tx, ty + 1));
+					// Prevent overlapping plants
+
+					if ((tiles[tx][ty+1].plant == null)
+						&& (random.nextFloat() > 0.99f)) {
+						Plant newPlant = new Plant(seed.type, tx, ty + 1);
+						plants.add(newPlant);
+						tiles[tx][ty+1].plant = newPlant;
 						seeds.removeIndex(i);
 					}
 				}
@@ -296,6 +302,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 			if (plant.water <= 0) {
 				plants.removeIndex(i);
+				tiles[plant.x][plant.y].plant = null;
 			}
 		}
 
@@ -310,10 +317,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				Tile tile = tiles[x][y];
 				Texture texture = tile.terrain.texture;
 				if (texture != null) {
-
-					// LibGDX is STUPID why does lerping a color edit the color??!?!??!?!?!?
-					dumpColor.set(colNoHumidity);
-					batch.setColor(dumpColor.lerp(colMaxHumidity, tile.humidity));
+					setBatchColourLerped(colNoHumidity, colMaxHumidity, tile.humidity);
 					batch.draw(texture, x * 16f, y * 16f);
 				}
 			}
@@ -321,8 +325,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		// Draw plants
 		for (Plant plant : plants) {
-			dumpColor.set(colPlantDry);
-			batch.setColor(dumpColor.lerp(colPlantWet, plant.water));
+			setBatchColourLerped(colPlantDry, colPlantWet, plant.water);
 			batch.draw(plant.type.plantTexture, plant.x * 16f, plant.y * 16f);
 		}
 
@@ -354,6 +357,13 @@ public class EcosystemGame extends ApplicationAdapter {
 		batch.end();
 
 		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	private void setBatchColourLerped(final Color minColour, final Color maxColour, float ratio) {
+		// LibGDX is STUPID why does lerping a color edit the color??!?!??!?!?!?
+		dumpColor.set(minColour);
+		dumpColor.lerp(maxColour, ratio);
+		batch.setColor(dumpColor);
 	}
 
 	private boolean drawButton(int x, int y, int w, int h, Texture image, boolean selected) {
@@ -400,7 +410,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 			float difference = source.humidity - dest.humidity;
 			if (difference > 0) {
-				float exchange = difference * 0.002f; // Tweak this to adjust speed of equalisation, bigger = faster
+				float exchange = difference * 0.005f; // Tweak this to adjust speed of equalisation, bigger = faster
 				source.humidity -= exchange;
 				dest.humidity += exchange;
 			}
