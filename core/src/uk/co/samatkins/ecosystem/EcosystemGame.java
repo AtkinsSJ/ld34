@@ -19,6 +19,8 @@ import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.Water;
 
 public class EcosystemGame extends ApplicationAdapter {
 
+	private Random random;
+
 	enum Terrain {
 		Air(null),
 		Soil(new Texture("soil.png"));
@@ -53,11 +55,12 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum PlantType {
-		Leafy(new Texture("seed1.png"));
+		Leafy(new Texture("plant1.png"), new Texture("seed1.png"));
 
-		final Texture seedTexture;
+		final Texture plantTexture, seedTexture;
 
-		PlantType(Texture seedTexture) {
+		PlantType(Texture plantTexture, Texture seedTexture) {
+			this.plantTexture = plantTexture;
 			this.seedTexture = seedTexture;
 		}
 	}
@@ -65,14 +68,25 @@ public class EcosystemGame extends ApplicationAdapter {
 	class Seed {
 		PlantType type;
 		float x, y;
-		float dx, dy;
+		float dy;
 
 		public Seed(float x, float y, PlantType type) {
 			this.x = x;
 			this.y = y;
 			this.type = type;
 
-			this.dx = this.dy = 0;
+			this.dy = 0;
+		}
+	}
+
+	class Plant {
+		PlantType type;
+		int x, y;
+
+		public Plant(PlantType type, int x, int y) {
+			this.type = type;
+			this.x = x;
+			this.y = y;
 		}
 	}
 
@@ -91,6 +105,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	Texture texCloud;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
+	final Array<Plant> plants = new Array<Plant>(false, 128);
 
 	Texture texDroplet;
 	final Array<Droplet> droplets = new Array<Droplet>(false, 128);
@@ -117,12 +132,13 @@ public class EcosystemGame extends ApplicationAdapter {
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
 		droplets.clear();
 		seeds.clear();
+		plants.clear();
 
 		// Really crummy terrain generation
 		worldWidth = 40;
 		worldHeight = 30;
 		tiles = new Tile[worldWidth][worldHeight];
-		Random random = new Random();
+		random = new Random();
 
 		int depth = randomInt(random, 1, 10);
 
@@ -206,7 +222,6 @@ public class EcosystemGame extends ApplicationAdapter {
 		for (int i = 0; i < seeds.size; i++) {
 
 			Seed seed = seeds.get(i);
-			seed.x += dt * seed.dx;
 			seed.y += dt * seed.dy;
 
 			int tx = (int) (seed.x / 16f),
@@ -215,13 +230,18 @@ public class EcosystemGame extends ApplicationAdapter {
 				|| (ty < 0) || (ty >= worldHeight)) {
 				seeds.removeIndex(i);
 			} else {
-				// Water the ground!
+				// Seeds fall through the air
 				Tile tile = tiles[tx][ty];
 				if (tile.terrain == Terrain.Air) {
 					seed.dy -= 98f * dt;
 					if (seed.dy < -98f) seed.dy = -98f;
 				} else {
 					seed.dy = 0;
+
+					if (random.nextFloat() > 0.99f) {
+						plants.add(new Plant(seed.type, tx, ty + 1));
+						seeds.removeIndex(i);
+					}
 				}
 			}
 		}
@@ -272,6 +292,12 @@ public class EcosystemGame extends ApplicationAdapter {
 					batch.draw(texture, x * 16f, y * 16f);
 				}
 			}
+		}
+
+		// Draw plants
+		batch.setColor(Color.WHITE);
+		for (Plant plant : plants) {
+			batch.draw(plant.type.plantTexture, plant.x * 16f, plant.y * 16f);
 		}
 
 		// Draw seeds
