@@ -64,8 +64,8 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_1.png"),
 				new Texture("plant1_2.png"),
 			},
-			new Texture("seed1.png"),
-			new Texture("plant1_flower.png")
+			new Texture("plant1_flower.png"),
+			new Texture("seed1.png"), 3f
 		);
 
 		final float thirst; // Water consumed per second
@@ -74,8 +74,10 @@ public class EcosystemGame extends ApplicationAdapter {
 		final Texture[] texPlant;
 		final Texture texSeed;
 		final Texture texFlower;
+		final float seedLife;
 
-		PlantType(float thirst, int minMatureHeight, int maxMatureHeight, Texture texPlantTop, Texture[] texPlant, Texture texSeed, Texture texFlower) {
+		PlantType(float thirst, int minMatureHeight, int maxMatureHeight, Texture texPlantTop, Texture[] texPlant, Texture texFlower,
+		          Texture texSeed, float seedLife) {
 			this.thirst = thirst;
 			this.minMatureHeight = minMatureHeight;
 			this.maxMatureHeight = maxMatureHeight;
@@ -83,20 +85,23 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.texPlant = texPlant;
 			this.texSeed = texSeed;
 			this.texFlower = texFlower;
+			this.seedLife = seedLife;
 		}
 	}
 
 	class Seed {
 		PlantType type;
 		float x, y;
-		float dy;
+		float dx, dy;
+		float life;
 
 		public Seed(float x, float y, PlantType type) {
 			this.x = x;
 			this.y = y;
 			this.type = type;
 
-			this.dy = 0;
+			this.dx = this.dy = 0;
+			this.life = type.seedLife;
 		}
 	}
 
@@ -257,6 +262,8 @@ public class EcosystemGame extends ApplicationAdapter {
 		for (int i = 0; i < seeds.size; i++) {
 
 			Seed seed = seeds.get(i);
+
+			seed.x += dt * seed.dx;
 			seed.y += dt * seed.dy;
 
 			int tx = (int) (seed.x / 16f),
@@ -271,14 +278,16 @@ public class EcosystemGame extends ApplicationAdapter {
 					seed.dy -= 98f * dt;
 					if (seed.dy < -98f) seed.dy = -98f;
 				} else {
+					seed.dx = 0;
 					seed.dy = 0;
+					seed.life -= dt;
 
-					// If we're in the ground, no good
-					if (tiles[tx][ty+1].terrain != Terrain.Air) {
+					// Die if lain around too long, or 'suffocated'
+					if ((seed.life < 0f)
+					 || (tiles[tx][ty + 1].terrain != Terrain.Air)){
 						seeds.removeIndex(i);
 					} else {
-
-						// Prevent overlapping plants
+						// Randomly grow into a plant if there's room
 						if ((tiles[tx][ty + 1].plant == null)
 							&& (random.nextFloat() > 0.99f)) {
 							Plant newPlant = new Plant(seed.type, tx, ty + 1);
@@ -325,17 +334,30 @@ public class EcosystemGame extends ApplicationAdapter {
 			Tile groundTile = tiles[plant.x][plant.y-1];
 
 			// Growth!
-			if (!plant.isMature
-			 && (plant.water > 0.5f)
+			if ((plant.water > 0.5f)
 			 && (random.nextFloat() > 0.99f)) {
-				plant.size++;
+
 				plant.water -= 0.1f;
 
-				// Slightly hacky!
-				// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
-				if (plant.size >= plant.matureHeight) {
+				if (plant.isMature) {
+					// Spawn seeds!
+					Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
+					seed.dx = (random.nextFloat() - 0.5f) * 50f;
+					seed.dy = 20f + (random.nextFloat() * 20f);
+					seeds.add(seed);
+
+				} else if (plant.size >= plant.matureHeight) {
 					plant.isMature = true;
 					plant.size = plant.matureHeight;
+				} else {
+					plant.size++;
+
+					// Slightly hacky!
+					// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
+					if (plant.size >= plant.matureHeight) {
+						plant.isMature = true;
+						plant.size = plant.matureHeight;
+					}
 				}
 			}
 
@@ -379,6 +401,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 			batch.draw(plant.type.texPlantTop, plant.x * 16f, (plant.y + plant.size - 1) * 16f);
 			if (plant.isMature) {
+				batch.setColor(Color.WHITE);
 				batch.draw(plant.type.texFlower, plant.x * 16f, (plant.y + plant.size - 1) * 16f);
 			}
 		}
