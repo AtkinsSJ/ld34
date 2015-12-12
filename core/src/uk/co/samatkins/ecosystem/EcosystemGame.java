@@ -273,14 +273,19 @@ public class EcosystemGame extends ApplicationAdapter {
 				} else {
 					seed.dy = 0;
 
-					// Prevent overlapping plants
-
-					if ((tiles[tx][ty+1].plant == null)
-						&& (random.nextFloat() > 0.99f)) {
-						Plant newPlant = new Plant(seed.type, tx, ty + 1);
-						plants.add(newPlant);
-						tiles[tx][ty+1].plant = newPlant;
+					// If we're in the ground, no good
+					if (tiles[tx][ty+1].terrain != Terrain.Air) {
 						seeds.removeIndex(i);
+					} else {
+
+						// Prevent overlapping plants
+						if ((tiles[tx][ty + 1].plant == null)
+							&& (random.nextFloat() > 0.99f)) {
+							Plant newPlant = new Plant(seed.type, tx, ty + 1);
+							plants.add(newPlant);
+							tiles[tx][ty + 1].plant = newPlant;
+							seeds.removeIndex(i);
+						}
 					}
 				}
 			}
