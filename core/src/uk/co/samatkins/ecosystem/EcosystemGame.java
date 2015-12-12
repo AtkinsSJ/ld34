@@ -7,12 +7,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Random;
+
+import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.Water;
 
 public class EcosystemGame extends ApplicationAdapter {
 
@@ -33,7 +36,8 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum InteractionMode {
-		Water;
+		Water,
+		PlantSeed;
 	}
 
 	class Droplet {
@@ -48,19 +52,48 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 	}
 
+	enum PlantType {
+		Leafy(new Texture("seed1.png"));
+
+		final Texture seedTexture;
+
+		PlantType(Texture seedTexture) {
+			this.seedTexture = seedTexture;
+		}
+	}
+
+	class Seed {
+		PlantType type;
+		float x, y;
+		float dx, dy;
+
+		public Seed(float x, float y, PlantType type) {
+			this.x = x;
+			this.y = y;
+			this.type = type;
+
+			this.dx = this.dy = 0;
+		}
+	}
+
 	SpriteBatch batch;
-	OrthographicCamera camera;
-	private ScreenViewport viewport;
-	private final Vector3 mousePos = new Vector3();
+	OrthographicCamera camera, uiCamera;
+	ScreenViewport viewport;
+	final Vector3 mousePos = new Vector3();
+	final Vector3 uiMousePos = new Vector3();
+	boolean mouseWasDown = false;
 
 	int worldWidth, worldHeight;
 	Tile[][] tiles;
-	InteractionMode interactionMode = InteractionMode.Water;
+	InteractionMode interactionMode = Water;
 
+	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
+	Texture texCloud;
+
+	final Array<Seed> seeds = new Array<Seed>(false, 128);
 
 	Texture texDroplet;
-	final int maxDroplets = 128;
-	final Array<Droplet> droplets = new Array<Droplet>(false, maxDroplets);
+	final Array<Droplet> droplets = new Array<Droplet>(false, 128);
 
 	final Color colNoHumidity = new Color(1,1,1,1),
 				colMaxHumidity = new Color(0,0,1,1);
@@ -73,12 +106,17 @@ public class EcosystemGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera = new OrthographicCamera();
 		viewport = new ScreenViewport(camera);
-		viewport.setUnitsPerPixel(1f/16f);
+		uiCamera = new OrthographicCamera();
 
 		texDroplet = new Texture("raindrop.png");
+		texCloud = new Texture("cloud.png");
+		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
+		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
+		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
 		droplets.clear();
+		seeds.clear();
 
 		// Really crummy terrain generation
 		worldWidth = 40;
@@ -111,7 +149,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		float dt = Gdx.graphics.getDeltaTime();
 
 		// Camera controls
-		final float scrollSpeed = 15f * dt;
+		final float scrollSpeed = 150f * dt;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
 			camera.translate(-scrollSpeed, 0f);
 		} else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
@@ -128,12 +166,17 @@ public class EcosystemGame extends ApplicationAdapter {
 		camera.unproject(mousePos);
 
 		// Click for rain!
-		if (interactionMode == InteractionMode.Water) {
-			if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-				if (droplets.size < maxDroplets) {
-					droplets.add(new Droplet(mousePos.x, mousePos.y, 0f, -10f));
+		switch (interactionMode) {
+			case Water: {
+				if (Gdx.input.isTouched()) {
+					droplets.add(new Droplet(mousePos.x, mousePos.y, 0f, -100f));
 				}
-			}
+			} break;
+			case PlantSeed: {
+				if (Gdx.input.justTouched()) {
+					seeds.add(new Seed(mousePos.x, mousePos.y, PlantType.Leafy));
+				}
+			} break;
 		}
 
 		// Update droplets
@@ -143,8 +186,8 @@ public class EcosystemGame extends ApplicationAdapter {
 			droplet.x += dt * droplet.dx;
 			droplet.y += dt * droplet.dy;
 
-			int tx = (int) droplet.x,
-				ty = (int) droplet.y;
+			int tx = (int) (droplet.x / 16f),
+				ty = (int) (droplet.y / 16f);
 			if ((tx < 0) || (tx >= worldWidth)
 				|| (ty < 0) || (ty >= worldHeight)) {
 				droplets.removeIndex(i);
@@ -155,6 +198,30 @@ public class EcosystemGame extends ApplicationAdapter {
 					// Raindrops keep falling on my head
 					tile.humidity += 0.1f;
 					droplets.removeIndex(i);
+				}
+			}
+		}
+
+		// Update seeds
+		for (int i = 0; i < seeds.size; i++) {
+
+			Seed seed = seeds.get(i);
+			seed.x += dt * seed.dx;
+			seed.y += dt * seed.dy;
+
+			int tx = (int) (seed.x / 16f),
+				ty = (int) (seed.y / 16f);
+			if ((tx < 0) || (tx >= worldWidth)
+				|| (ty < 0) || (ty >= worldHeight)) {
+				seeds.removeIndex(i);
+			} else {
+				// Water the ground!
+				Tile tile = tiles[tx][ty];
+				if (tile.terrain == Terrain.Air) {
+					seed.dy -= 98f * dt;
+					if (seed.dy < -98f) seed.dy = -98f;
+				} else {
+					seed.dy = 0;
 				}
 			}
 		}
@@ -202,24 +269,77 @@ public class EcosystemGame extends ApplicationAdapter {
 					// LibGDX is STUPID why does lerping a color edit the color??!?!??!?!?!?
 					dumpColor.set(colNoHumidity);
 					batch.setColor(dumpColor.lerp(colMaxHumidity, tile.humidity));
-					batch.draw(texture, x, y, 1, 1);
+					batch.draw(texture, x * 16f, y * 16f);
 				}
 			}
 		}
 
+		// Draw seeds
+		batch.setColor(Color.WHITE);
+		for (Seed seed : seeds) {
+			batch.draw(seed.type.seedTexture, seed.x, seed.y);
+		}
 		// Draw droplets
 		batch.setColor(Color.WHITE);
 		for (Droplet droplet : droplets) {
-			batch.draw(texDroplet, droplet.x, droplet.y, 0.5f, 0.5f);
+			batch.draw(texDroplet, droplet.x, droplet.y);
+		}
+
+		// UI!
+		uiMousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0f);
+		uiCamera.unproject(uiMousePos);
+		batch.setProjectionMatrix(uiCamera.combined);
+		int buttonSize = 48;
+		int buttonX = 0;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texCloud, interactionMode == Water)) {
+			interactionMode = Water;
+		}
+		buttonX += buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, PlantType.Leafy.seedTexture, interactionMode == InteractionMode.PlantSeed)) {
+			interactionMode = InteractionMode.PlantSeed;
 		}
 
 		batch.end();
+
+		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	private boolean drawButton(int x, int y, int w, int h, Texture image, boolean selected) {
+
+		boolean activated = false;
+
+		boolean over = (uiMousePos.x >= x) && (uiMousePos.x < x + w)
+					&& (uiMousePos.y >= y) && (uiMousePos.y < y + h);
+		boolean hit = false;
+
+		if (over) {
+			if (Gdx.input.isTouched()) {
+				hit = true;
+			} else if (mouseWasDown) {
+				activated = true;
+			}
+		}
+
+		if (hit) {
+			buttonHitBackground.draw(batch, x, y, w, h);
+		} else if (over || selected || activated) {
+			buttonOverBackground.draw(batch, x, y, w, h);
+		} else {
+			buttonBackground.draw(batch, x, y, w, h);
+		}
+		batch.draw(image,
+			x + (w - image.getWidth()) / 2,
+			y + (h - image.getHeight()) / 2
+		);
+
+		return activated;
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
 		viewport.update(width, height);
+		uiCamera.setToOrtho(false, width, height);
 	}
 
 	private void transferHumidity(Tile source, Tile dest) {
