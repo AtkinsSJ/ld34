@@ -434,34 +434,36 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
 		log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
-		if (humidityDifference < 0.1f) {
+		if (humidityDifference < 0.15f) {
 			// Happy
 			plant.health = Math.min(1.0f, plant.health + dt);
 
-			plant.growthTimer -= dt;
+			if (plant.health >= 0.99f) {
+				plant.growthTimer -= dt;
 
-			if (plant.growthTimer <= 0f) {
-				plant.growthTimer = randomFloat(random, plant.type.minGrowthTime, plant.type.maxGrowthTime);
+				if (plant.growthTimer <= 0f) {
+					plant.growthTimer = randomFloat(random, plant.type.minGrowthTime, plant.type.maxGrowthTime);
 
-				plant.water -= 0.1f;
-				if (plant.isMature) {
-					// Spawn seeds!
-					Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
-					seed.dx = (random.nextFloat() - 0.5f) * 50f;
-					seed.dy = 20f + (random.nextFloat() * 20f);
-					seeds.add(seed);
+					plant.water -= 0.1f;
+					if (plant.isMature) {
+						// Spawn seeds!
+						Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
+						seed.dx = (random.nextFloat() - 0.5f) * 50f;
+						seed.dy = 20f + (random.nextFloat() * 20f);
+						seeds.add(seed);
 
-				} else if (plant.size >= plant.matureHeight) {
-					plant.isMature = true;
-					plant.size = plant.matureHeight;
-				} else {
-					plant.size++;
-
-					// Slightly hacky!
-					// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
-					if (plant.size >= plant.matureHeight) {
+					} else if (plant.size >= plant.matureHeight) {
 						plant.isMature = true;
 						plant.size = plant.matureHeight;
+					} else {
+						plant.size++;
+
+						// Slightly hacky!
+						// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
+						if (plant.size >= plant.matureHeight) {
+							plant.isMature = true;
+							plant.size = plant.matureHeight;
+						}
 					}
 				}
 			}
