@@ -83,10 +83,14 @@ public class EcosystemGame extends ApplicationAdapter {
 		PlantType type;
 		int x, y;
 
+		float water;
+
 		public Plant(PlantType type, int x, int y) {
 			this.type = type;
 			this.x = x;
 			this.y = y;
+
+			this.water = 0.5f;
 		}
 	}
 
@@ -112,6 +116,8 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	final Color colNoHumidity = new Color(1,1,1,1),
 				colMaxHumidity = new Color(0,0,1,1);
+	final Color colPlantDry = new Color(207f/255f, 74f/255f, 45f/255f,1),
+				colPlantWet = new Color(1,1,1,1);
 	final Color dumpColor = new Color();
 
 	public static int randomInt(Random random, int minInclusive, int maxExclusive) {
@@ -135,8 +141,8 @@ public class EcosystemGame extends ApplicationAdapter {
 		plants.clear();
 
 		// Really crummy terrain generation
-		worldWidth = 40;
-		worldHeight = 30;
+		worldWidth = 80;
+		worldHeight = 40;
 		tiles = new Tile[worldWidth][worldHeight];
 		random = new Random();
 
@@ -274,6 +280,25 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 		}
 
+		// Update plants
+		for (int i=0; i<plants.size; i++) {
+			Plant plant = plants.get(i);
+			Tile groundTile = tiles[plant.x][plant.y-1];
+
+			// Water
+			plant.water -= 0.001f;
+			float waterWanted = 1.0f - plant.water;
+			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
+				float water = Math.min(waterWanted, groundTile.humidity) * 0.2f;
+				groundTile.humidity -= water;
+				plant.water += water;
+			}
+
+			if (plant.water <= 0) {
+				plants.removeIndex(i);
+			}
+		}
+
 		Gdx.gl.glClearColor((113f/255f), (149f/255f), (255f/255f), 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
@@ -295,20 +320,21 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 
 		// Draw plants
-		batch.setColor(Color.WHITE);
 		for (Plant plant : plants) {
+			dumpColor.set(colPlantDry);
+			batch.setColor(dumpColor.lerp(colPlantWet, plant.water));
 			batch.draw(plant.type.plantTexture, plant.x * 16f, plant.y * 16f);
 		}
 
 		// Draw seeds
 		batch.setColor(Color.WHITE);
 		for (Seed seed : seeds) {
-			batch.draw(seed.type.seedTexture, seed.x, seed.y);
+			batch.draw(seed.type.seedTexture, seed.x - 4f, seed.y - 4f);
 		}
 		// Draw droplets
 		batch.setColor(Color.WHITE);
 		for (Droplet droplet : droplets) {
-			batch.draw(texDroplet, droplet.x, droplet.y);
+			batch.draw(texDroplet, droplet.x - 4f, droplet.y - 4f);
 		}
 
 		// UI!
