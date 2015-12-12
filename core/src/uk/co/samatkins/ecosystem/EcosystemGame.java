@@ -74,17 +74,26 @@ public class EcosystemGame extends ApplicationAdapter {
 		for (int x = 0; x < worldWidth; x++) {
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = tiles[x][y];
+
 				if (tile.terrain != Terrain.Air) { // TODO: Air humidity???
+
+					Tile above = (y < (worldHeight-1)) ? tiles[x][y + 1] : null;
+					Tile below = (y > 0) ? tiles[x][y - 1] : null;
+					Tile left = (x > 0) ? tiles[x-1][y] : null;
+					Tile right = (x < (worldWidth - 1)) ? tiles[x+1][y] : null;
+
 					// Evaporation
-					if (y < (worldHeight-1)) {
-						Tile above = tiles[x][y + 1];
+					if (above != null) {
 						if (above.terrain == Terrain.Air) {
 							tile.humidity *= 0.999f;
 						}
 					}
 
 					// Osmosis
-
+					transferHumidity(tile, above);
+					transferHumidity(tile, below);
+					transferHumidity(tile, left);
+					transferHumidity(tile, right);
 				}
 			}
 		}
@@ -109,5 +118,18 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 
 		batch.end();
+	}
+
+	private void transferHumidity(Tile source, Tile dest) {
+		if ((dest != null)
+			&& (dest.terrain != Terrain.Air)) {
+
+			float difference = source.humidity - dest.humidity;
+			if (difference > 0) {
+				float exchange = difference * 0.01f;
+				source.humidity -= exchange;
+				dest.humidity += exchange;
+			}
+		}
 	}
 }
