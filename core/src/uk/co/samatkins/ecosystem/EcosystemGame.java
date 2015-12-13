@@ -86,7 +86,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum PlantType {
 		Leafy(
-			false, 0.05f, 0.6f,
+			false, 0.1f, 0.6f,
 			3f, 3.5f, // Growth time range
 			3, 5, // Min/max mature height
 			new Texture("plant1_top.png"),
@@ -95,16 +95,16 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_2.png"),
 			},
 			new Texture("plant1_flower.png"),
-			new Texture("seed1.png"), 30f
+			new Texture("seed1.png"), 10f
 		),
 		Lilypad(
-			true, 0.1f, 0.7f,
+			true, 0.2f, 0.7f,
 			4f, 5f,
 			1, 1,
 			new Texture("plant2_top.png"),
 			new Texture[]{},
 			new Texture("plant2_flower.png"),
-			new Texture("plant2_seed.png"), 30f
+			new Texture("plant2_seed.png"), 10f
 		);
 
 		final boolean isAquatic;
@@ -460,7 +460,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				Tile tile = tiles[x][y];
 
 				if (tile.terrain == Terrain.Spring) {
-					modifyHumidity(tile, 1f * dt);
+					modifyHumidity(tile, 1f * dt); // Spring strength
 				}
 
 				if (tile.terrain != Terrain.Air) { // TODO: Air humidity???
@@ -509,7 +509,11 @@ public class EcosystemGame extends ApplicationAdapter {
 				if (tile.terrain.isWater) {
 //					batch.setColor(Color.RED);
 //					batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, 16f);
-					batch.setColor(1f, 1f, 1f, 0.5f);
+					if (tile.terrain == Terrain.Spring) {
+						batch.setColor(0f, 0f, 1f, 0.8f);
+					} else {
+						batch.setColor(1f, 1f, 1f, 0.8f);
+					}
 					batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, tile.humidity * 16f);
 				} else {
 					Texture texture = tile.terrain.texture;
@@ -646,9 +650,6 @@ public class EcosystemGame extends ApplicationAdapter {
 						if (direction == Direction.Down) {
 							exchange = Math.min(source.humidity, 1.0f - dest.humidity) * dest.terrain.porosity;
 						} else {
-							if (dest.terrain == Terrain.Air) {
-								log("Transferring from water to air!");
-							}
 							exchange = difference * 0.5f * 0.2f * dest.terrain.porosity;
 						}
 					}
@@ -701,11 +702,9 @@ public class EcosystemGame extends ApplicationAdapter {
 		if (!plantDied) {
 
 			// Water
-			//plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
-			//log("Plant water is " + plant.water);
-			float waterWanted = plant.type.desiredSoilHumidity - plant.water;
+			plant.water -= dt * (plant.type.thirst * plant.size);
+			float waterWanted = plant.water - plant.type.desiredSoilHumidity;
 			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-				log("Plant drank " + waterWanted);
 				float water = Math.min(waterWanted, groundTile.humidity) * dt;
 				modifyHumidity(groundTile, water);
 				plant.water += water;
@@ -719,7 +718,6 @@ public class EcosystemGame extends ApplicationAdapter {
 					: 0.8f;
 			}
 
-			log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
 			if (humidityDifference < 0.15f) {
 				// Happy
 				plant.health = Math.min(1.0f, plant.health + dt);
@@ -759,7 +757,6 @@ public class EcosystemGame extends ApplicationAdapter {
 			} else {
 				// Dying
 				plant.health -= (dt * 0.1f);
-				log("Dying, health = " + plant.health);
 			}
 
 			if (plant.health <= 0f) {
