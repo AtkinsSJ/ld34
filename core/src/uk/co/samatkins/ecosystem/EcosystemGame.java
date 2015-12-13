@@ -641,7 +641,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		int tx = (int)plant.x,
 			ty = (int)plant.y;
 
-		Tile groundTile = tiles[tx][ty-1];
+		Tile groundTile;
 
 		if (plant.type.isAquatic) {
 
@@ -652,9 +652,11 @@ public class EcosystemGame extends ApplicationAdapter {
 				tiles[tx][ty].plant = null;
 				tiles[tx][newTY].plant = plant;
 			}
-
 			plant.y = newY;
+			groundTile = tiles[tx][newTY];
+
 		} else {
+			groundTile = tiles[tx][ty-1];
 			if (!groundTile.terrain.isSolid) {
 				plantDied = true;
 			}
@@ -674,6 +676,13 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 
 			float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
+
+			if (plant.type.isAquatic) {
+				humidityDifference = (groundTile.terrain == Terrain.Water)
+					? 0f
+					: 0.8f;
+			}
+
 			log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
 			if (humidityDifference < 0.15f) {
 				// Happy
