@@ -92,7 +92,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum PlantType {
 		Leafy(
-			false, 0.1f, 0.6f,
+			false, 0.1f, 0.4f,
 			3f, 3.5f, // Growth time range
 			3, 5, // Min/max mature height
 			new Texture("plant1_top.png"),
@@ -104,7 +104,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			new Texture("seed1.png"), 10f
 		),
 		Lilypad(
-			true, 0.2f, 0.7f,
+			true, 0.1f, 0.7f,
 			10f, 15f,
 			1, 1,
 			new Texture("plant2_top.png"),
@@ -113,7 +113,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			new Texture("plant2_seed.png"), 10f
 		),
 		Cactus(
-			false, 0.05f, 0.1f,
+			false, 0.01f, 0.1f,
 			10f, 15f,
 			1, 3,
 			new Texture("plant3_top.png"),
@@ -724,7 +724,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				float waterWanted = plant.type.desiredSoilHumidity - plant.water;
 				if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
 					float water = Math.min(waterWanted, groundTile.humidity) * dt;
-					modifyHumidity(groundTile, water);
+					modifyHumidity(groundTile, -water);
 					plant.water += water;
 				}
 			}
