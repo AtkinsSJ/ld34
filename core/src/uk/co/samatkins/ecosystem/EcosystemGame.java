@@ -107,7 +107,8 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_2.png"),
 			},
 			new Texture("plant1_flower.png"),
-			new Texture("seed1.png"), 10f
+			new Texture("seed1.png"), 10f,
+			1f
 		),
 		Lilypad(
 			true, 0.1f, 0.7f,
@@ -116,7 +117,8 @@ public class EcosystemGame extends ApplicationAdapter {
 			new Texture("plant2_top.png"),
 			new Texture[]{},
 			new Texture("plant2_flower.png"),
-			new Texture("plant2_seed.png"), 10f
+			new Texture("plant2_seed.png"), 10f,
+			1.25f
 		),
 		Cactus(
 			false, 0.01f, 0.1f,
@@ -127,7 +129,8 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant3_1.png"),
 			},
 			new Texture("plant3_flower.png"),
-			new Texture("plant3_seed.png"), 10f
+			new Texture("plant3_seed.png"), 10f,
+			0.75f
 		);
 
 		final boolean isAquatic;
@@ -140,11 +143,13 @@ public class EcosystemGame extends ApplicationAdapter {
 		final Texture texFlower;
 		final Texture texSeed;
 		final float seedLife;
+		final float audioPitch;
 
 		PlantType(boolean isAquatic, float thirst, float desiredSoilHumidity,
 		          float minGrowthTime, float maxGrowthTime, int minMatureHeight, int maxMatureHeight,
 		          Texture texPlantTop, Texture[] texPlant, Texture texFlower,
-		          Texture texSeed, float seedLife) {
+		          Texture texSeed, float seedLife,
+		          float audioPitch) {
 			this.isAquatic = isAquatic;
 			this.thirst = thirst;
 			this.desiredSoilHumidity = desiredSoilHumidity;
@@ -157,6 +162,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			this.seedLife = seedLife;
 			this.minGrowthTime = minGrowthTime;
 			this.maxGrowthTime = maxGrowthTime;
+			this.audioPitch = audioPitch;
 		}
 	}
 
@@ -218,8 +224,8 @@ public class EcosystemGame extends ApplicationAdapter {
 	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
-	Texture texCloud, texSpade, texSpring, texSave, texLoad, texSound;
-	Sound sndGrow, sndWater, sndSeed;
+	Texture texCloud, texSpade, texSpring, texSave, texLoad, texSound, texRegenerate;
+	Sound sndDie, sndDroplet, sndGrow, sndSeed, sndWater;
 	private boolean audioEnabled = true;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
@@ -260,19 +266,33 @@ public class EcosystemGame extends ApplicationAdapter {
 		texSave = new Texture("save.png");
 		texLoad = new Texture("load.png");
 		texSound = new Texture("sound.png");
+		texRegenerate = new Texture("regenerate.png");
 		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
 		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
 
+		sndDie = Gdx.audio.newSound(Gdx.files.internal("die.mp3"));
+		sndDroplet = Gdx.audio.newSound(Gdx.files.internal("droplet.mp3"));
 		sndGrow = Gdx.audio.newSound(Gdx.files.internal("grow.mp3"));
 		sndSeed = Gdx.audio.newSound(Gdx.files.internal("seed.mp3"));
 		sndWater = Gdx.audio.newSound(Gdx.files.internal("water.mp3"));
 
+		generateWorld();
+
+		camera.position.set(
+			((worldWidth * 16f) - camera.viewportWidth) / 2f,
+			((worldHeight * 16f) - camera.viewportHeight) / 2f,
+			0f
+		);
+		camera.update();
+	}
+
+	private void generateWorld() {
+		// Really crummy terrain generation
 		droplets.clear();
 		seeds.clear();
 		plants.clear();
 
-		// Really crummy terrain generation
 		worldWidth = 80;
 		worldHeight = 40;
 		tiles = new Tile[worldWidth][worldHeight];
@@ -303,12 +323,20 @@ public class EcosystemGame extends ApplicationAdapter {
 				tiles[x][y] = tile;
 			}
 		}
-		camera.position.set(
-			((worldWidth * 16f) - camera.viewportWidth) / 2f,
-			((worldHeight * 16f) - camera.viewportHeight) / 2f,
-			0f
-		);
-		camera.update();
+
+		// Scatter some random seeds
+		for (PlantType plantType : PlantType.values()) {
+			int count = randomInt(random, 3, 10);
+			for (int i = 0; i < count; i++) {
+				newSeed(
+					plantType,
+					randomFloat(random, 0.5f, worldWidth - 0.5f),
+					randomFloat(random, 0.5f, worldHeight - 0.5f),
+					randomFloat(random, -25f, 25f),
+					randomFloat(random, 20f, 40f)
+				);
+			}
+		}
 	}
 
 	@Override
@@ -421,6 +449,7 @@ public class EcosystemGame extends ApplicationAdapter {
 						modifyHumidity(waterTile, water);
 					}
 
+					playSound(sndDroplet);
 					droplets.removeIndex(i);
 				}
 			}
@@ -447,6 +476,9 @@ public class EcosystemGame extends ApplicationAdapter {
 					if (seed.dy < -98f) seed.dy = -98f;
 				} else if (tile.terrain.isWater) {
 					// Seeds float on water
+					if (seed.dy < -1f) {
+						playSound(sndWater);
+					}
 					seed.dy = 0;
 					seed.y = getTopOfWater(tx, ty) * 16f;
 				} else {
@@ -484,7 +516,7 @@ public class EcosystemGame extends ApplicationAdapter {
 							plants.add(newPlant);
 							targetTile.plant = newPlant;
 							seeds.removeIndex(i);
-							playSound(sndGrow);
+							playSound(sndGrow, newPlant.type.audioPitch);
 						}
 					}
 				}
@@ -629,6 +661,10 @@ public class EcosystemGame extends ApplicationAdapter {
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSave, false)) {
 			// Save!
 			saveGame();
+		}
+		buttonX -= buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texRegenerate, false)) {
+			generateWorld();
 		}
 		buttonX -= buttonSize;
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSound, audioEnabled)) {
@@ -950,18 +986,20 @@ public class EcosystemGame extends ApplicationAdapter {
 						plant.water -= 0.1f;
 						if (plant.isMature) {
 							// Spawn seeds!
-							Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
-							seed.dx = (random.nextFloat() - 0.5f) * 50f;
-							seed.dy = 20f + (random.nextFloat() * 20f);
-							seeds.add(seed);
-							playSound(sndSeed);
+							newSeed(plant.type,
+								(plant.x + 0.5f),
+								(plant.y + plant.size + 0.5f),
+								randomFloat(random, -25f, 25f),
+								randomFloat(random, 20f, 40f)
+							);
+							playSound(sndSeed, plant.type.audioPitch);
 
 						} else if (plant.size >= plant.matureHeight) {
 							plant.isMature = true;
 							plant.size = plant.matureHeight;
 						} else {
 							plant.size++;
-							playSound(sndGrow);
+							playSound(sndGrow, plant.type.audioPitch);
 
 							// Slightly hacky!
 							// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
@@ -986,15 +1024,26 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 
 		if (plantDied) {
+			playSound(sndDie, plant.type.audioPitch);
 			tiles[(int) plant.x][(int) plant.y].plant = null;
 		}
 
 		return plantDied;
 	}
 
+	private void newSeed(PlantType type, float x, float y, float dx, float dy) {
+		Seed seed = new Seed(x * 16f, y * 16f, type);
+		seed.dx = dx;
+		seed.dy = dy;
+		seeds.add(seed);
+	}
+
 	private void playSound(Sound sound) {
+		playSound(sound, 1f);
+	}
+	private void playSound(Sound sound, float pitch) {
 		if (audioEnabled) {
-			sound.play();
+			sound.play(1f, pitch, 0f);
 		}
 	}
 
