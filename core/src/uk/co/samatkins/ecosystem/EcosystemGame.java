@@ -64,12 +64,18 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum InteractionMode {
-		Water,
-		MakeSpring,
-		PlantSeed,
-		MakeSoil,
-		MakeRock,
-		Dig,
+		Water(0.1f),
+		MakeSpring(0f),
+		PlantSeed(0.2f),
+		MakeSoil(0f),
+		MakeRock(0f),
+		Dig(0f);
+
+		final float delay;
+
+		InteractionMode(float delay) {
+			this.delay = delay;
+		}
 	}
 
 	class Droplet {
@@ -105,6 +111,17 @@ public class EcosystemGame extends ApplicationAdapter {
 			new Texture[]{},
 			new Texture("plant2_flower.png"),
 			new Texture("plant2_seed.png"), 10f
+		),
+		Cactus(
+			false, 0.05f, 0.1f,
+			10f, 15f,
+			1, 3,
+			new Texture("plant3_top.png"),
+			new Texture[]{
+				new Texture("plant3_1.png"),
+			},
+			new Texture("plant3_flower.png"),
+			new Texture("plant3_seed.png"), 10f
 		);
 
 		final boolean isAquatic;
@@ -190,6 +207,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	int worldWidth, worldHeight;
 	Tile[][] tiles;
 	InteractionMode interactionMode = Water;
+	float interactionCooldown = 0f;
 	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
@@ -299,58 +317,56 @@ public class EcosystemGame extends ApplicationAdapter {
 		camera.unproject(mousePos);
 
 		// Interactions!
-		switch (interactionMode) {
-			case Water: {
-				if (Gdx.input.isTouched()) {
-					droplets.add(new Droplet(mousePos.x, mousePos.y, 0f, -100f));
-				}
-			} break;
-			case MakeSpring: {
-				if (Gdx.input.isTouched()) {
-					int tx = (int) (mousePos.x / 16f),
-						ty = (int) (mousePos.y / 16f);
-					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
-						tiles[tx][ty].terrain = Terrain.Spring;
-					}
-				}
-			} break;
-			case PlantSeed: {
-				if (Gdx.input.justTouched()) {
-					seeds.add(new Seed(mousePos.x, mousePos.y, seedType));
-				}
-			} break;
-			case MakeSoil: {
-				if (Gdx.input.isTouched()) {
-					int tx = (int) (mousePos.x / 16f),
-						ty = (int) (mousePos.y / 16f);
-					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
-						tiles[tx][ty].terrain = Terrain.Soil;
-					}
-				}
-			} break;
-			case MakeRock: {
-				if (Gdx.input.isTouched()) {
-					int tx = (int) (mousePos.x / 16f),
-						ty = (int) (mousePos.y / 16f);
-					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
-						tiles[tx][ty].terrain = Terrain.Rock;
-					}
-				}
-			} break;
-			case Dig: {
-				if (Gdx.input.isTouched()) {
-					int tx = (int) (mousePos.x / 16f),
-						ty = (int) (mousePos.y / 16f);
-					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
-						Tile tile = tiles[tx][ty];
-						if (tile.humidity > 0f) {
-							tile.terrain = Terrain.Water;
-						} else {
-							tile.terrain = Terrain.Air;
+		if (Gdx.input.isTouched()) {
+			interactionCooldown -= dt;
+
+			if (interactionCooldown <= 0) {
+				interactionCooldown = interactionMode.delay;
+
+				switch (interactionMode) {
+					case Water: {
+						droplets.add(new Droplet(mousePos.x, mousePos.y, 0f, -100f));
+					} break;
+					case PlantSeed: {
+						seeds.add(new Seed(mousePos.x, mousePos.y, seedType));
+					} break;
+					case MakeSpring: {
+						int tx = (int) (mousePos.x / 16f),
+							ty = (int) (mousePos.y / 16f);
+						if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+							tiles[tx][ty].terrain = Terrain.Spring;
 						}
-					}
+					} break;
+					case MakeSoil: {
+						int tx = (int) (mousePos.x / 16f),
+							ty = (int) (mousePos.y / 16f);
+						if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+							tiles[tx][ty].terrain = Terrain.Soil;
+						}
+					} break;
+					case MakeRock: {
+						int tx = (int) (mousePos.x / 16f),
+							ty = (int) (mousePos.y / 16f);
+						if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+							tiles[tx][ty].terrain = Terrain.Rock;
+						}
+					} break;
+					case Dig: {
+						int tx = (int) (mousePos.x / 16f),
+							ty = (int) (mousePos.y / 16f);
+						if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+							Tile tile = tiles[tx][ty];
+							if (tile.humidity > 0f) {
+								tile.terrain = Terrain.Water;
+							} else {
+								tile.terrain = Terrain.Air;
+							}
+						}
+					} break;
 				}
-			} break;
+			}
+		} else {
+			interactionCooldown = 0;
 		}
 
 		// Update droplets
@@ -704,11 +720,13 @@ public class EcosystemGame extends ApplicationAdapter {
 
 			// Water
 			plant.water -= dt * (plant.type.thirst * plant.size);
-			float waterWanted = plant.water - plant.type.desiredSoilHumidity;
-			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-				float water = Math.min(waterWanted, groundTile.humidity) * dt;
-				modifyHumidity(groundTile, water);
-				plant.water += water;
+			if (plant.water < plant.type.desiredSoilHumidity) {
+				float waterWanted = plant.type.desiredSoilHumidity - plant.water;
+				if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
+					float water = Math.min(waterWanted, groundTile.humidity) * dt;
+					modifyHumidity(groundTile, water);
+					plant.water += water;
+				}
 			}
 
 			float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
