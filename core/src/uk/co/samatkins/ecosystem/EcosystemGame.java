@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -217,7 +218,9 @@ public class EcosystemGame extends ApplicationAdapter {
 	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
-	Texture texCloud, texSpade, texSpring, texSave, texLoad;
+	Texture texCloud, texSpade, texSpring, texSave, texLoad, texSound;
+	Sound sndGrow, sndWater, sndSeed;
+	private boolean audioEnabled = true;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
 	final Array<Plant> plants = new Array<Plant>(false, 128);
@@ -256,9 +259,15 @@ public class EcosystemGame extends ApplicationAdapter {
 		texSpring = new Texture("spring.png");
 		texSave = new Texture("save.png");
 		texLoad = new Texture("load.png");
+		texSound = new Texture("sound.png");
 		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
 		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
+
+		sndGrow = Gdx.audio.newSound(Gdx.files.internal("grow.mp3"));
+		sndSeed = Gdx.audio.newSound(Gdx.files.internal("seed.mp3"));
+		sndWater = Gdx.audio.newSound(Gdx.files.internal("water.mp3"));
+
 		droplets.clear();
 		seeds.clear();
 		plants.clear();
@@ -475,6 +484,7 @@ public class EcosystemGame extends ApplicationAdapter {
 							plants.add(newPlant);
 							targetTile.plant = newPlant;
 							seeds.removeIndex(i);
+							playSound(sndGrow);
 						}
 					}
 				}
@@ -609,18 +619,20 @@ public class EcosystemGame extends ApplicationAdapter {
 			interactionMode = InteractionMode.Dig;
 		}
 
-		if (Gdx.files.isLocalStorageAvailable()) {
-			buttonX = (int) uiCamera.viewportWidth;
-			buttonX -= buttonSize;
-			if (drawButton(buttonX, 0, buttonSize, buttonSize, texLoad, false)) {
-				// Load!
-				loadGame();
-			}
-			buttonX -= buttonSize;
-			if (drawButton(buttonX, 0, buttonSize, buttonSize, texSave, false)) {
-				// Save!
-				saveGame();
-			}
+		buttonX = (int) uiCamera.viewportWidth;
+		buttonX -= buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texLoad, false)) {
+			// Load!
+			loadGame();
+		}
+		buttonX -= buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSave, false)) {
+			// Save!
+			saveGame();
+		}
+		buttonX -= buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSound, audioEnabled)) {
+			audioEnabled = !audioEnabled;
 		}
 
 		batch.end();
@@ -942,12 +954,14 @@ public class EcosystemGame extends ApplicationAdapter {
 							seed.dx = (random.nextFloat() - 0.5f) * 50f;
 							seed.dy = 20f + (random.nextFloat() * 20f);
 							seeds.add(seed);
+							playSound(sndSeed);
 
 						} else if (plant.size >= plant.matureHeight) {
 							plant.isMature = true;
 							plant.size = plant.matureHeight;
 						} else {
 							plant.size++;
+							playSound(sndGrow);
 
 							// Slightly hacky!
 							// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
@@ -976,6 +990,12 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 
 		return plantDied;
+	}
+
+	private void playSound(Sound sound) {
+		if (audioEnabled) {
+			sound.play();
+		}
 	}
 
 	private void setBatchColourLerped(final Color minColour, final Color maxColour, float ratio) {

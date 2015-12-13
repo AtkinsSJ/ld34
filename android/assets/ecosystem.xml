@@ -1,463 +1,463 @@
 <ecosystem width="80" height="40">
 	<tiles>
-		<t x="0" y="0" terrain="Soil" humidity="0.60349774"/>
-		<t x="1" y="0" terrain="Soil" humidity="0.6036943"/>
-		<t x="2" y="0" terrain="Soil" humidity="0.6037893"/>
-		<t x="3" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="4" y="0" terrain="Soil" humidity="0.59541094"/>
-		<t x="5" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="6" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="7" y="0" terrain="Soil" humidity="0.5842063"/>
-		<t x="8" y="0" terrain="Soil" humidity="0.58412874"/>
+		<t x="0" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="1" y="0" terrain="Soil" humidity="0.14797269"/>
+		<t x="2" y="0" terrain="Soil" humidity="0.14682597"/>
+		<t x="3" y="0" terrain="Soil" humidity="0.14570221"/>
+		<t x="4" y="0" terrain="Soil" humidity="0.14345878"/>
+		<t x="5" y="0" terrain="Soil" humidity="0.14011107"/>
+		<t x="6" y="0" terrain="Soil" humidity="0.1389971"/>
+		<t x="7" y="0" terrain="Soil" humidity="0.14006785"/>
+		<t x="8" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="9" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="10" y="0" terrain="Soil" humidity="0.91136646"/>
-		<t x="11" y="0" terrain="Soil" humidity="0.9200188"/>
-		<t x="12" y="0" terrain="Soil" humidity="0.85711586"/>
-		<t x="13" y="0" terrain="Soil" humidity="0.7416899"/>
-		<t x="14" y="0" terrain="Soil" humidity="0.6550817"/>
-		<t x="15" y="0" terrain="Soil" humidity="0.5974589"/>
-		<t x="16" y="0" terrain="Soil" humidity="0.56565595"/>
-		<t x="17" y="0" terrain="Soil" humidity="0.55466175"/>
-		<t x="18" y="0" terrain="Soil" humidity="0.5514901"/>
+		<t x="10" y="0" terrain="Soil" humidity="0.09033766"/>
+		<t x="11" y="0" terrain="Soil" humidity="0.089430846"/>
+		<t x="12" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="13" y="0" terrain="Soil" humidity="0.082335345"/>
+		<t x="14" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="15" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="16" y="0" terrain="Soil" humidity="0.28734246"/>
+		<t x="17" y="0" terrain="Soil" humidity="0.28725582"/>
+		<t x="18" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="19" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="20" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="21" y="0" terrain="Soil" humidity="0.48726302"/>
-		<t x="22" y="0" terrain="Soil" humidity="0.47186446"/>
-		<t x="23" y="0" terrain="Soil" humidity="0.4597747"/>
-		<t x="24" y="0" terrain="Soil" humidity="0.45451486"/>
+		<t x="20" y="0" terrain="Soil" humidity="0.3869412"/>
+		<t x="21" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="22" y="0" terrain="Soil" humidity="0.4441409"/>
+		<t x="23" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="24" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="25" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="26" y="0" terrain="Soil" humidity="0.27669847"/>
-		<t x="27" y="0" terrain="Soil" humidity="0.22640683"/>
-		<t x="28" y="0" terrain="Soil" humidity="0.15762739"/>
+		<t x="26" y="0" terrain="Soil" humidity="0.14771849"/>
+		<t x="27" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="28" y="0" terrain="Soil" humidity="0.23512076"/>
 		<t x="29" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="30" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="31" y="0" terrain="Soil" humidity="0.5050884"/>
-		<t x="32" y="0" terrain="Soil" humidity="0.5075673"/>
+		<t x="30" y="0" terrain="Soil" humidity="0.72775704"/>
+		<t x="31" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="32" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="33" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="34" y="0" terrain="Soil" humidity="0.40893054"/>
-		<t x="35" y="0" terrain="Soil" humidity="0.39355814"/>
-		<t x="36" y="0" terrain="Soil" humidity="0.38490677"/>
-		<t x="37" y="0" terrain="Soil" humidity="0.3892363"/>
-		<t x="38" y="0" terrain="Soil" humidity="0.41184306"/>
-		<t x="39" y="0" terrain="Soil" humidity="0.43687925"/>
-		<t x="40" y="0" terrain="Soil" humidity="0.4420001"/>
-		<t x="41" y="0" terrain="Soil" humidity="0.46904978"/>
-		<t x="42" y="0" terrain="Soil" humidity="0.49386334"/>
-		<t x="43" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="44" y="0" terrain="Soil" humidity="0.5216429"/>
-		<t x="45" y="0" terrain="Soil" humidity="0.50939333"/>
-		<t x="46" y="0" terrain="Soil" humidity="0.4848056"/>
-		<t x="47" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="48" y="0" terrain="Soil" humidity="0.21844596"/>
-		<t x="49" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="50" y="0" terrain="Soil" humidity="0.4363708"/>
-		<t x="51" y="0" terrain="Soil" humidity="0.43539572"/>
-		<t x="52" y="0" terrain="Soil" humidity="0.43647707"/>
-		<t x="53" y="0" terrain="Soil" humidity="0.44016632"/>
-		<t x="54" y="0" terrain="Soil" humidity="0.4456797"/>
-		<t x="55" y="0" terrain="Soil" humidity="0.45106164"/>
-		<t x="56" y="0" terrain="Soil" humidity="0.45469666"/>
-		<t x="57" y="0" terrain="Soil" humidity="0.45824218"/>
-		<t x="58" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="59" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="60" y="0" terrain="Soil" humidity="0.5695766"/>
-		<t x="61" y="0" terrain="Soil" humidity="0.5647893"/>
+		<t x="34" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="35" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="36" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="37" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="38" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="39" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="40" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="41" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="42" y="0" terrain="Soil" humidity="0.9999993"/>
+		<t x="43" y="0" terrain="Soil" humidity="0.9999334"/>
+		<t x="44" y="0" terrain="Soil" humidity="0.99321896"/>
+		<t x="45" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="46" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="47" y="0" terrain="Soil" humidity="0.4978569"/>
+		<t x="48" y="0" terrain="Soil" humidity="0.4684305"/>
+		<t x="49" y="0" terrain="Soil" humidity="0.42588192"/>
+		<t x="50" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="51" y="0" terrain="Soil" humidity="0.54386497"/>
+		<t x="52" y="0" terrain="Soil" humidity="0.5657892"/>
+		<t x="53" y="0" terrain="Soil" humidity="0.60623354"/>
+		<t x="54" y="0" terrain="Soil" humidity="0.679221"/>
+		<t x="55" y="0" terrain="Soil" humidity="0.7984857"/>
+		<t x="56" y="0" terrain="Soil" humidity="0.9195022"/>
+		<t x="57" y="0" terrain="Soil" humidity="0.99920243"/>
+		<t x="58" y="0" terrain="Soil" humidity="0.99957126"/>
+		<t x="59" y="0" terrain="Soil" humidity="0.99972767"/>
+		<t x="60" y="0" terrain="Soil" humidity="0.99988407"/>
+		<t x="61" y="0" terrain="Soil" humidity="0.99992836"/>
 		<t x="62" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="63" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="63" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="64" y="0" terrain="Rock" humidity="0.0"/>
 		<t x="65" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="66" y="0" terrain="Soil" humidity="0.29968733"/>
-		<t x="67" y="0" terrain="Soil" humidity="0.29968584"/>
-		<t x="68" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="69" y="0" terrain="Soil" humidity="0.19473886"/>
+		<t x="66" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="67" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="68" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="69" y="0" terrain="Soil" humidity="0.99999404"/>
 		<t x="70" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="71" y="0" terrain="Soil" humidity="0.5309632"/>
-		<t x="72" y="0" terrain="Soil" humidity="0.511868"/>
-		<t x="73" y="0" terrain="Soil" humidity="0.4882236"/>
-		<t x="74" y="0" terrain="Soil" humidity="0.45738307"/>
-		<t x="75" y="0" terrain="Soil" humidity="0.45575958"/>
-		<t x="76" y="0" terrain="Soil" humidity="0.48368555"/>
-		<t x="77" y="0" terrain="Soil" humidity="0.5016407"/>
-		<t x="78" y="0" terrain="Rock" humidity="0.0"/>
-		<t x="79" y="0" terrain="Soil" humidity="0.5277526"/>
-		<t x="0" y="1" terrain="Soil" humidity="0.6035652"/>
-		<t x="1" y="1" terrain="Soil" humidity="0.6035029"/>
-		<t x="2" y="1" terrain="Soil" humidity="0.60331655"/>
-		<t x="3" y="1" terrain="Soil" humidity="0.6008722"/>
-		<t x="4" y="1" terrain="Soil" humidity="0.59438163"/>
-		<t x="5" y="1" terrain="Soil" humidity="0.58564085"/>
-		<t x="6" y="1" terrain="Soil" humidity="0.5842573"/>
-		<t x="7" y="1" terrain="Soil" humidity="0.5839974"/>
+		<t x="71" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="72" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="73" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="74" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="75" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="76" y="0" terrain="Soil" humidity="0.999997"/>
+		<t x="77" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="78" y="0" terrain="Soil" humidity="1.0"/>
+		<t x="79" y="0" terrain="Rock" humidity="0.0"/>
+		<t x="0" y="1" terrain="Soil" humidity="0.15025115"/>
+		<t x="1" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="1" terrain="Soil" humidity="0.145676"/>
+		<t x="3" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="4" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="5" y="1" terrain="Soil" humidity="0.13679673"/>
+		<t x="6" y="1" terrain="Soil" humidity="0.13570626"/>
+		<t x="7" y="1" terrain="Rock" humidity="0.0"/>
 		<t x="8" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="9" y="1" terrain="Soil" humidity="0.96778744"/>
+		<t x="9" y="1" terrain="Soil" humidity="0.10968965"/>
 		<t x="10" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="11" y="1" terrain="Soil" humidity="0.9984609"/>
-		<t x="12" y="1" terrain="Soil" humidity="0.92321074"/>
-		<t x="13" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="14" y="1" terrain="Soil" humidity="0.6698101"/>
-		<t x="15" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="16" y="1" terrain="Soil" humidity="0.5555604"/>
-		<t x="17" y="1" terrain="Soil" humidity="0.55001915"/>
-		<t x="18" y="1" terrain="Soil" humidity="0.5484186"/>
-		<t x="19" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="20" y="1" terrain="Soil" humidity="0.51638883"/>
-		<t x="21" y="1" terrain="Soil" humidity="0.49020112"/>
-		<t x="22" y="1" terrain="Soil" humidity="0.4560885"/>
-		<t x="23" y="1" terrain="Soil" humidity="0.4401149"/>
-		<t x="24" y="1" terrain="Soil" humidity="0.43610728"/>
-		<t x="25" y="1" terrain="Soil" humidity="0.44382834"/>
+		<t x="11" y="1" terrain="Soil" humidity="0.08763792"/>
+		<t x="12" y="1" terrain="Soil" humidity="0.08498159"/>
+		<t x="13" y="1" terrain="Soil" humidity="0.08149536"/>
+		<t x="14" y="1" terrain="Soil" humidity="0.08128055"/>
+		<t x="15" y="1" terrain="Soil" humidity="0.08161482"/>
+		<t x="16" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="17" y="1" terrain="Soil" humidity="0.28715166"/>
+		<t x="18" y="1" terrain="Soil" humidity="0.3088297"/>
+		<t x="19" y="1" terrain="Soil" humidity="0.34623262"/>
+		<t x="20" y="1" terrain="Soil" humidity="0.3868362"/>
+		<t x="21" y="1" terrain="Soil" humidity="0.42383644"/>
+		<t x="22" y="1" terrain="Soil" humidity="0.44405115"/>
+		<t x="23" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="24" y="1" terrain="Soil" humidity="0.52669203"/>
+		<t x="25" y="1" terrain="Soil" humidity="0.5266949"/>
 		<t x="26" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="27" y="1" terrain="Air" humidity="9.306947E-4"/>
-		<t x="28" y="1" terrain="Soil" humidity="0.05981622"/>
-		<t x="29" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="30" y="1" terrain="Soil" humidity="0.48658523"/>
-		<t x="31" y="1" terrain="Soil" humidity="0.48407823"/>
-		<t x="32" y="1" terrain="Soil" humidity="0.49119407"/>
-		<t x="33" y="1" terrain="Soil" humidity="0.46365806"/>
+		<t x="27" y="1" terrain="Soil" humidity="0.24615297"/>
+		<t x="28" y="1" terrain="Soil" humidity="0.2349342"/>
+		<t x="29" y="1" terrain="Soil" humidity="0.22381581"/>
+		<t x="30" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="31" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="32" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="33" y="1" terrain="Soil" humidity="0.14219803"/>
 		<t x="34" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="35" y="1" terrain="Soil" humidity="0.37137714"/>
-		<t x="36" y="1" terrain="Soil" humidity="0.3563948"/>
-		<t x="37" y="1" terrain="Soil" humidity="0.3542073"/>
-		<t x="38" y="1" terrain="Soil" humidity="0.39103425"/>
-		<t x="39" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="40" y="1" terrain="Air" humidity="9.771809E-4"/>
-		<t x="41" y="1" terrain="Soil" humidity="0.44722942"/>
-		<t x="42" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="43" y="1" terrain="Soil" humidity="0.24260443"/>
-		<t x="44" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="45" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="46" y="1" terrain="Soil" humidity="0.44790187"/>
-		<t x="47" y="1" terrain="Soil" humidity="0.44388652"/>
-		<t x="48" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="49" y="1" terrain="Soil" humidity="0.43717334"/>
-		<t x="50" y="1" terrain="Soil" humidity="0.43747434"/>
-		<t x="51" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="52" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="53" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="54" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="55" y="1" terrain="Soil" humidity="0.4498903"/>
-		<t x="56" y="1" terrain="Soil" humidity="0.450816"/>
-		<t x="57" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="58" y="1" terrain="Soil" humidity="0.5570231"/>
-		<t x="59" y="1" terrain="Soil" humidity="0.5385919"/>
-		<t x="60" y="1" terrain="Soil" humidity="0.5558724"/>
-		<t x="61" y="1" terrain="Soil" humidity="0.5418843"/>
-		<t x="62" y="1" terrain="Water" humidity="0.25183764"/>
-		<t x="63" y="1" terrain="Water" humidity="0.25183776"/>
-		<t x="64" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="65" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="66" y="1" terrain="Soil" humidity="0.2996888"/>
-		<t x="67" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="68" y="1" terrain="Soil" humidity="0.5334537"/>
-		<t x="69" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="70" y="1" terrain="Soil" humidity="0.64358556"/>
-		<t x="71" y="1" terrain="Rock" humidity="0.0"/>
-		<t x="72" y="1" terrain="Soil" humidity="0.49821144"/>
-		<t x="73" y="1" terrain="Soil" humidity="0.4779652"/>
-		<t x="74" y="1" terrain="Air" humidity="5.046732E-4"/>
-		<t x="75" y="1" terrain="Air" humidity="7.937601E-4"/>
-		<t x="76" y="1" terrain="Soil" humidity="0.4776461"/>
-		<t x="77" y="1" terrain="Soil" humidity="0.50363517"/>
-		<t x="78" y="1" terrain="Soil" humidity="0.51654744"/>
-		<t x="79" y="1" terrain="Soil" humidity="0.5156446"/>
-		<t x="0" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="1" y="2" terrain="Soil" humidity="0.60199416"/>
-		<t x="2" y="2" terrain="Soil" humidity="0.603493"/>
-		<t x="3" y="2" terrain="Soil" humidity="0.6032967"/>
-		<t x="4" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="5" y="2" terrain="Soil" humidity="0.57655674"/>
-		<t x="6" y="2" terrain="Soil" humidity="0.5816896"/>
-		<t x="7" y="2" terrain="Soil" humidity="0.58263874"/>
-		<t x="8" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="9" y="2" terrain="Soil" humidity="0.9759082"/>
-		<t x="10" y="2" terrain="Soil" humidity="0.9997587"/>
-		<t x="11" y="2" terrain="Spring" humidity="1.0"/>
+		<t x="35" y="1" terrain="Spring" humidity="1.0"/>
+		<t x="36" y="1" terrain="Water" humidity="1.0"/>
+		<t x="37" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="38" y="1" terrain="Water" humidity="1.0"/>
+		<t x="39" y="1" terrain="Soil" humidity="1.0"/>
+		<t x="40" y="1" terrain="Water" humidity="1.0"/>
+		<t x="41" y="1" terrain="Water" humidity="1.0"/>
+		<t x="42" y="1" terrain="Water" humidity="1.0"/>
+		<t x="43" y="1" terrain="Water" humidity="1.0"/>
+		<t x="44" y="1" terrain="Soil" humidity="0.9861896"/>
+		<t x="45" y="1" terrain="Soil" humidity="0.7897203"/>
+		<t x="46" y="1" terrain="Soil" humidity="0.6605644"/>
+		<t x="47" y="1" terrain="Soil" humidity="0.52645993"/>
+		<t x="48" y="1" terrain="Soil" humidity="0.48195538"/>
+		<t x="49" y="1" terrain="Air" humidity="9.958855E-4"/>
+		<t x="50" y="1" terrain="Soil" humidity="0.47508982"/>
+		<t x="51" y="1" terrain="Soil" humidity="0.5219095"/>
+		<t x="52" y="1" terrain="Soil" humidity="0.54721755"/>
+		<t x="53" y="1" terrain="Soil" humidity="0.5734899"/>
+		<t x="54" y="1" terrain="Soil" humidity="0.6319977"/>
+		<t x="55" y="1" terrain="Soil" humidity="0.79668385"/>
+		<t x="56" y="1" terrain="Soil" humidity="0.9600061"/>
+		<t x="57" y="1" terrain="Spring" humidity="1.0"/>
+		<t x="58" y="1" terrain="Soil" humidity="0.99978244"/>
+		<t x="59" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="60" y="1" terrain="Soil" humidity="0.99999857"/>
+		<t x="61" y="1" terrain="Soil" humidity="0.99997234"/>
+		<t x="62" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="63" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="64" y="1" terrain="Water" humidity="1.0"/>
+		<t x="65" y="1" terrain="Water" humidity="1.0"/>
+		<t x="66" y="1" terrain="Water" humidity="1.0"/>
+		<t x="67" y="1" terrain="Water" humidity="1.0"/>
+		<t x="68" y="1" terrain="Soil" humidity="1.0"/>
+		<t x="69" y="1" terrain="Soil" humidity="0.999997"/>
+		<t x="70" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="71" y="1" terrain="Water" humidity="1.0"/>
+		<t x="72" y="1" terrain="Water" humidity="1.0"/>
+		<t x="73" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="74" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="75" y="1" terrain="Water" humidity="1.0"/>
+		<t x="76" y="1" terrain="Soil" humidity="1.0"/>
+		<t x="77" y="1" terrain="Water" humidity="1.0"/>
+		<t x="78" y="1" terrain="Water" humidity="1.0"/>
+		<t x="79" y="1" terrain="Rock" humidity="0.0"/>
+		<t x="0" y="2" terrain="Soil" humidity="0.14909029"/>
+		<t x="1" y="2" terrain="Soil" humidity="0.14678867"/>
+		<t x="2" y="2" terrain="Soil" humidity="0.14336273"/>
+		<t x="3" y="2" terrain="Soil" humidity="0.13934797"/>
+		<t x="4" y="2" terrain="Soil" humidity="0.13587211"/>
+		<t x="5" y="2" terrain="Soil" humidity="0.13348104"/>
+		<t x="6" y="2" terrain="Soil" humidity="0.1302754"/>
+		<t x="7" y="2" terrain="Soil" humidity="0.12317474"/>
+		<t x="8" y="2" terrain="Soil" humidity="0.11510758"/>
+		<t x="9" y="2" terrain="Soil" humidity="0.10873579"/>
+		<t x="10" y="2" terrain="Soil" humidity="0.10228109"/>
+		<t x="11" y="2" terrain="Rock" humidity="0.0"/>
 		<t x="12" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="13" y="2" terrain="Water" humidity="0.94709945"/>
-		<t x="14" y="2" terrain="Soil" humidity="0.75231403"/>
-		<t x="15" y="2" terrain="Soil" humidity="0.58551776"/>
+		<t x="13" y="2" terrain="Soil" humidity="0.07663493"/>
+		<t x="14" y="2" terrain="Soil" humidity="0.07994114"/>
+		<t x="15" y="2" terrain="Soil" humidity="0.08116049"/>
 		<t x="16" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="17" y="2" terrain="Soil" humidity="0.5417478"/>
-		<t x="18" y="2" terrain="Soil" humidity="0.5418874"/>
-		<t x="19" y="2" terrain="Soil" humidity="0.53844786"/>
-		<t x="20" y="2" terrain="Soil" humidity="0.53181857"/>
-		<t x="21" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="22" y="2" terrain="Air" humidity="9.957035E-4"/>
-		<t x="23" y="2" terrain="Air" humidity="5.5013114E-4"/>
-		<t x="24" y="2" terrain="Air" humidity="7.5350073E-4"/>
-		<t x="25" y="2" terrain="Soil" humidity="0.43613085"/>
+		<t x="17" y="2" terrain="Soil" humidity="0.2654066"/>
+		<t x="18" y="2" terrain="Soil" humidity="0.2929079"/>
+		<t x="19" y="2" terrain="Soil" humidity="0.3429655"/>
+		<t x="20" y="2" terrain="Soil" humidity="0.3898908"/>
+		<t x="21" y="2" terrain="Soil" humidity="0.44032705"/>
+		<t x="22" y="2" terrain="Soil" humidity="0.46408752"/>
+		<t x="23" y="2" terrain="Soil" humidity="0.47805846"/>
+		<t x="24" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="25" y="2" terrain="Rock" humidity="0.0"/>
 		<t x="26" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="27" y="2" terrain="Air" humidity="2.83751E-4"/>
-		<t x="28" y="2" terrain="Air" humidity="9.228196E-4"/>
-		<t x="29" y="2" terrain="Soil" humidity="0.4428777"/>
-		<t x="30" y="2" terrain="Soil" humidity="0.47223818"/>
-		<t x="31" y="2" terrain="Air" humidity="9.1633364E-4"/>
-		<t x="32" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="33" y="2" terrain="Soil" humidity="0.4170862"/>
-		<t x="34" y="2" terrain="Soil" humidity="0.393406"/>
-		<t x="35" y="2" terrain="Soil" humidity="0.3483619"/>
-		<t x="36" y="2" terrain="Soil" humidity="0.30012044"/>
-		<t x="37" y="2" terrain="Soil" humidity="0.26457816"/>
-		<t x="38" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="39" y="2" terrain="Air" humidity="9.314696E-4"/>
-		<t x="40" y="2" terrain="Air" humidity="2.0416483E-4"/>
-		<t x="41" y="2" terrain="Air" humidity="9.077157E-4"/>
-		<t x="42" y="2" terrain="Soil" humidity="0.07963221"/>
-		<t x="43" y="2" terrain="Soil" humidity="0.21670948"/>
-		<t x="44" y="2" terrain="Soil" humidity="0.25922176"/>
-		<t x="45" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="46" y="2" terrain="Air" humidity="9.441954E-4"/>
-		<t x="47" y="2" terrain="Soil" humidity="0.42917725"/>
-		<t x="48" y="2" terrain="Soil" humidity="0.42843008"/>
-		<t x="49" y="2" terrain="Soil" humidity="0.4327597"/>
-		<t x="50" y="2" terrain="Soil" humidity="0.4360841"/>
-		<t x="51" y="2" terrain="Soil" humidity="0.44282442"/>
-		<t x="52" y="2" terrain="Soil" humidity="0.44365734"/>
-		<t x="53" y="2" terrain="Soil" humidity="0.43771127"/>
-		<t x="54" y="2" terrain="Soil" humidity="0.4383605"/>
-		<t x="55" y="2" terrain="Soil" humidity="0.44261345"/>
-		<t x="56" y="2" terrain="Soil" humidity="0.4424303"/>
-		<t x="57" y="2" terrain="Soil" humidity="0.43737298"/>
-		<t x="58" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="59" y="2" terrain="Air" humidity="5.8316893E-4"/>
-		<t x="60" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="61" y="2" terrain="Air" humidity="9.7456935E-4"/>
-		<t x="62" y="2" terrain="Air" humidity="4.8810802E-4"/>
-		<t x="63" y="2" terrain="Air" humidity="4.87582E-4"/>
-		<t x="64" y="2" terrain="Air" humidity="9.6382806E-4"/>
-		<t x="65" y="2" terrain="Soil" humidity="0.29505002"/>
-		<t x="66" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="67" y="2" terrain="Soil" humidity="0.442792"/>
-		<t x="68" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="69" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="70" y="2" terrain="Soil" humidity="0.6435884"/>
-		<t x="71" y="2" terrain="Water" humidity="0.20866957"/>
-		<t x="72" y="2" terrain="Soil" humidity="0.48676568"/>
-		<t x="73" y="2" terrain="Air" humidity="9.719481E-4"/>
-		<t x="74" y="2" terrain="Air" humidity="2.9638605E-4"/>
-		<t x="75" y="2" terrain="Air" humidity="8.707738E-4"/>
-		<t x="76" y="2" terrain="Air" humidity="9.859675E-4"/>
-		<t x="77" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="78" y="2" terrain="Rock" humidity="0.0"/>
-		<t x="79" y="2" terrain="Soil" humidity="0.49063474"/>
+		<t x="27" y="2" terrain="Soil" humidity="0.25723517"/>
+		<t x="28" y="2" terrain="Soil" humidity="0.23472986"/>
+		<t x="29" y="2" terrain="Soil" humidity="0.21252388"/>
+		<t x="30" y="2" terrain="Soil" humidity="0.1827413"/>
+		<t x="31" y="2" terrain="Soil" humidity="0.1567498"/>
+		<t x="32" y="2" terrain="Soil" humidity="0.14197025"/>
+		<t x="33" y="2" terrain="Soil" humidity="0.14211844"/>
+		<t x="34" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="35" y="2" terrain="Water" humidity="1.0"/>
+		<t x="36" y="2" terrain="Water" humidity="1.0"/>
+		<t x="37" y="2" terrain="Soil" humidity="1.0"/>
+		<t x="38" y="2" terrain="Water" humidity="0.21320984"/>
+		<t x="39" y="2" terrain="Water" humidity="0.13974062"/>
+		<t x="40" y="2" terrain="Water" humidity="0.091344826"/>
+		<t x="41" y="2" terrain="Water" humidity="0.057552055"/>
+		<t x="42" y="2" terrain="Water" humidity="0.032589577"/>
+		<t x="43" y="2" terrain="Water" humidity="0.012588386"/>
+		<t x="44" y="2" terrain="Water" humidity="0.0011675124"/>
+		<t x="45" y="2" terrain="Water" humidity="8.5961935E-4"/>
+		<t x="46" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="47" y="2" terrain="Soil" humidity="0.4660422"/>
+		<t x="48" y="2" terrain="Soil" humidity="0.45135543"/>
+		<t x="49" y="2" terrain="Air" humidity="2.0282491E-4"/>
+		<t x="50" y="2" terrain="Air" humidity="9.906605E-4"/>
+		<t x="51" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="52" y="2" terrain="Soil" humidity="0.5281541"/>
+		<t x="53" y="2" terrain="Soil" humidity="0.50906956"/>
+		<t x="54" y="2" terrain="Soil" humidity="0.47652915"/>
+		<t x="55" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="56" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="57" y="2" terrain="Water" humidity="1.0"/>
+		<t x="58" y="2" terrain="Soil" humidity="0.99999785"/>
+		<t x="59" y="2" terrain="Soil" humidity="1.0"/>
+		<t x="60" y="2" terrain="Water" humidity="1.0"/>
+		<t x="61" y="2" terrain="Soil" humidity="0.99999714"/>
+		<t x="62" y="2" terrain="Water" humidity="1.0"/>
+		<t x="63" y="2" terrain="Rock" humidity="0.0"/>
+		<t x="64" y="2" terrain="Water" humidity="1.0"/>
+		<t x="65" y="2" terrain="Water" humidity="1.0"/>
+		<t x="66" y="2" terrain="Water" humidity="1.0"/>
+		<t x="67" y="2" terrain="Water" humidity="1.0"/>
+		<t x="68" y="2" terrain="Water" humidity="1.0"/>
+		<t x="69" y="2" terrain="Soil" humidity="1.0"/>
+		<t x="70" y="2" terrain="Water" humidity="1.0"/>
+		<t x="71" y="2" terrain="Water" humidity="1.0"/>
+		<t x="72" y="2" terrain="Water" humidity="1.0"/>
+		<t x="73" y="2" terrain="Water" humidity="1.0"/>
+		<t x="74" y="2" terrain="Water" humidity="1.0"/>
+		<t x="75" y="2" terrain="Water" humidity="1.0"/>
+		<t x="76" y="2" terrain="Water" humidity="1.0"/>
+		<t x="77" y="2" terrain="Water" humidity="1.0"/>
+		<t x="78" y="2" terrain="Water" humidity="1.0"/>
+		<t x="79" y="2" terrain="Soil" humidity="1.0"/>
 		<t x="0" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="1" y="3" terrain="Soil" humidity="0.5946443"/>
-		<t x="2" y="3" terrain="Soil" humidity="0.60192704"/>
-		<t x="3" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="4" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="5" y="3" terrain="Soil" humidity="0.55985487"/>
-		<t x="6" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="7" y="3" terrain="Soil" humidity="0.5811615"/>
-		<t x="8" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="9" y="3" terrain="Soil" humidity="0.96347624"/>
-		<t x="10" y="3" terrain="Water" humidity="1.0"/>
-		<t x="11" y="3" terrain="Water" humidity="1.0"/>
-		<t x="12" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="13" y="3" terrain="Water" humidity="0.010995595"/>
-		<t x="14" y="3" terrain="Air" humidity="5.1526516E-4"/>
-		<t x="15" y="3" terrain="Soil" humidity="0.4918442"/>
-		<t x="16" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="17" y="3" terrain="Soil" humidity="0.52986264"/>
-		<t x="18" y="3" terrain="Soil" humidity="0.53393275"/>
-		<t x="19" y="3" terrain="Soil" humidity="0.5341772"/>
+		<t x="1" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="3" terrain="Soil" humidity="0.14061393"/>
+		<t x="3" y="3" terrain="Soil" humidity="0.1377334"/>
+		<t x="4" y="3" terrain="Soil" humidity="0.13371356"/>
+		<t x="5" y="3" terrain="Soil" humidity="0.12995595"/>
+		<t x="6" y="3" terrain="Soil" humidity="0.12781075"/>
+		<t x="7" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="8" y="3" terrain="Soil" humidity="0.11255309"/>
+		<t x="9" y="3" terrain="Soil" humidity="0.10706676"/>
+		<t x="10" y="3" terrain="Soil" humidity="0.094875075"/>
+		<t x="11" y="3" terrain="Soil" humidity="0.074673444"/>
+		<t x="12" y="3" terrain="Soil" humidity="0.06837017"/>
+		<t x="13" y="3" terrain="Soil" humidity="0.06767769"/>
+		<t x="14" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="15" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="16" y="3" terrain="Soil" humidity="0.17779753"/>
+		<t x="17" y="3" terrain="Soil" humidity="0.21646206"/>
+		<t x="18" y="3" terrain="Soil" humidity="0.25426707"/>
+		<t x="19" y="3" terrain="Rock" humidity="0.0"/>
 		<t x="20" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="21" y="3" terrain="Air" humidity="9.959756E-4"/>
-		<t x="22" y="3" terrain="Air" humidity="5.816703E-4"/>
-		<t x="23" y="3" terrain="Air" humidity="0.0"/>
-		<t x="24" y="3" terrain="Air" humidity="0.0"/>
-		<t x="25" y="3" terrain="Soil" humidity="0.41170573"/>
-		<t x="26" y="3" terrain="Air" humidity="9.806285E-4"/>
-		<t x="27" y="3" terrain="Air" humidity="7.477945E-4"/>
-		<t x="28" y="3" terrain="Air" humidity="7.0401933E-4"/>
-		<t x="29" y="3" terrain="Air" humidity="9.913249E-4"/>
-		<t x="30" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="31" y="3" terrain="Air" humidity="0.0"/>
-		<t x="32" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="33" y="3" terrain="Air" humidity="9.9283E-4"/>
-		<t x="34" y="3" terrain="Soil" humidity="0.39627966"/>
-		<t x="35" y="3" terrain="Air" humidity="5.020482E-4"/>
-		<t x="36" y="3" terrain="Soil" humidity="0.21907777"/>
-		<t x="37" y="3" terrain="Soil" humidity="0.1276978"/>
-		<t x="38" y="3" terrain="Air" humidity="9.995324E-4"/>
-		<t x="39" y="3" terrain="Air" humidity="9.878016E-4"/>
-		<t x="40" y="3" terrain="Air" humidity="0.0"/>
-		<t x="41" y="3" terrain="Air" humidity="9.5022214E-4"/>
-		<t x="42" y="3" terrain="Air" humidity="6.6882954E-4"/>
-		<t x="43" y="3" terrain="Soil" humidity="0.26037484"/>
-		<t x="44" y="3" terrain="Soil" humidity="0.27417493"/>
-		<t x="45" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="46" y="3" terrain="Air" humidity="0.0"/>
-		<t x="47" y="3" terrain="Soil" humidity="0.4063397"/>
-		<t x="48" y="3" terrain="Soil" humidity="0.41600809"/>
-		<t x="49" y="3" terrain="Soil" humidity="0.4237042"/>
-		<t x="50" y="3" terrain="Soil" humidity="0.42603707"/>
-		<t x="51" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="21" y="3" terrain="Soil" humidity="0.4834129"/>
+		<t x="22" y="3" terrain="Soil" humidity="0.4934838"/>
+		<t x="23" y="3" terrain="Soil" humidity="0.49193415"/>
+		<t x="24" y="3" terrain="Soil" humidity="0.5046008"/>
+		<t x="25" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="26" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="27" y="3" terrain="Soil" humidity="0.2905328"/>
+		<t x="28" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="29" y="3" terrain="Soil" humidity="0.20950936"/>
+		<t x="30" y="3" terrain="Soil" humidity="0.1790298"/>
+		<t x="31" y="3" terrain="Soil" humidity="0.14536683"/>
+		<t x="32" y="3" terrain="Soil" humidity="0.12681368"/>
+		<t x="33" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="34" y="3" terrain="Water" humidity="0.2770831"/>
+		<t x="35" y="3" terrain="Water" humidity="0.27784634"/>
+		<t x="36" y="3" terrain="Water" humidity="0.17147298"/>
+		<t x="37" y="3" terrain="Water" humidity="0.079677634"/>
+		<t x="38" y="3" terrain="Air" humidity="0.0"/>
+		<t x="39" y="3" terrain="Air" humidity="7.5975043E-4"/>
+		<t x="40" y="3" terrain="Air" humidity="3.1508034E-4"/>
+		<t x="41" y="3" terrain="Air" humidity="1.6548358E-4"/>
+		<t x="42" y="3" terrain="Air" humidity="1.3270059E-4"/>
+		<t x="43" y="3" terrain="Air" humidity="8.170061E-4"/>
+		<t x="44" y="3" terrain="Air" humidity="4.155511E-4"/>
+		<t x="45" y="3" terrain="Air" humidity="7.887237E-4"/>
+		<t x="46" y="3" terrain="Soil" humidity="7.2970295E-8"/>
+		<t x="47" y="3" terrain="Air" humidity="8.2742446E-4"/>
+		<t x="48" y="3" terrain="Air" humidity="7.969877E-4"/>
+		<t x="49" y="3" terrain="Air" humidity="1.2361567E-4"/>
+		<t x="50" y="3" terrain="Air" humidity="7.4399135E-4"/>
+		<t x="51" y="3" terrain="Air" humidity="9.7564125E-4"/>
 		<t x="52" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="53" y="3" terrain="Soil" humidity="0.4236094"/>
-		<t x="54" y="3" terrain="Soil" humidity="0.42692256"/>
-		<t x="55" y="3" terrain="Soil" humidity="0.43271333"/>
-		<t x="56" y="3" terrain="Soil" humidity="0.4316596"/>
-		<t x="57" y="3" terrain="Soil" humidity="0.4241566"/>
-		<t x="58" y="3" terrain="Soil" humidity="0.3932515"/>
-		<t x="59" y="3" terrain="Air" humidity="0.0"/>
-		<t x="60" y="3" terrain="Soil" humidity="0.22388227"/>
-		<t x="61" y="3" terrain="Air" humidity="0.0"/>
-		<t x="62" y="3" terrain="Air" humidity="0.0"/>
-		<t x="63" y="3" terrain="Air" humidity="0.0"/>
-		<t x="64" y="3" terrain="Air" humidity="7.489518E-4"/>
-		<t x="65" y="3" terrain="Air" humidity="9.821462E-4"/>
-		<t x="66" y="3" terrain="Soil" humidity="0.41938144"/>
-		<t x="67" y="3" terrain="Soil" humidity="0.426719"/>
-		<t x="68" y="3" terrain="Soil" humidity="0.43031222"/>
-		<t x="69" y="3" terrain="Soil" humidity="0.4188644"/>
-		<t x="70" y="3" terrain="Rock" humidity="0.0"/>
-		<t x="71" y="3" terrain="Air" humidity="0.0"/>
-		<t x="72" y="3" terrain="Soil" humidity="0.45767227"/>
-		<t x="73" y="3" terrain="Air" humidity="0.0"/>
-		<t x="74" y="3" terrain="Air" humidity="0.0"/>
-		<t x="75" y="3" terrain="Air" humidity="0.0"/>
-		<t x="76" y="3" terrain="Air" humidity="4.869685E-4"/>
-		<t x="77" y="3" terrain="Air" humidity="9.796969E-4"/>
-		<t x="78" y="3" terrain="Air" humidity="9.982412E-4"/>
-		<t x="79" y="3" terrain="Soil" humidity="0.4549353"/>
-		<t x="0" y="4" terrain="Soil" humidity="0.57500684"/>
-		<t x="1" y="4" terrain="Soil" humidity="0.5716295"/>
-		<t x="2" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="3" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="4" y="4" terrain="Soil" humidity="0.54470426"/>
-		<t x="5" y="4" terrain="Soil" humidity="0.53975755"/>
-		<t x="6" y="4" terrain="Soil" humidity="0.5461413"/>
-		<t x="7" y="4" terrain="Soil" humidity="0.57885957"/>
-		<t x="8" y="4" terrain="Soil" humidity="0.63882107"/>
-		<t x="9" y="4" terrain="Soil" humidity="0.76105523"/>
-		<t x="10" y="4" terrain="Water" humidity="0.19100276"/>
-		<t x="11" y="4" terrain="Water" humidity="0.19671321"/>
-		<t x="12" y="4" terrain="Water" humidity="0.09905941"/>
-		<t x="13" y="4" terrain="Air" humidity="0.0"/>
-		<t x="14" y="4" terrain="Air" humidity="0.0"/>
-		<t x="15" y="4" terrain="Soil" humidity="0.44792116"/>
-		<t x="16" y="4" terrain="Soil" humidity="0.4740261"/>
-		<t x="17" y="4" terrain="Soil" humidity="0.50958407"/>
-		<t x="18" y="4" terrain="Soil" humidity="0.5236536"/>
-		<t x="19" y="4" terrain="Soil" humidity="0.522522"/>
-		<t x="20" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="21" y="4" terrain="Air" humidity="0.0"/>
-		<t x="22" y="4" terrain="Air" humidity="0.0"/>
-		<t x="23" y="4" terrain="Air" humidity="0.0"/>
-		<t x="24" y="4" terrain="Air" humidity="9.317313E-4"/>
-		<t x="25" y="4" terrain="Air" humidity="5.840823E-4"/>
-		<t x="26" y="4" terrain="Air" humidity="8.535863E-4"/>
-		<t x="27" y="4" terrain="Air" humidity="0.0"/>
-		<t x="28" y="4" terrain="Air" humidity="0.0"/>
-		<t x="29" y="4" terrain="Air" humidity="6.6970254E-4"/>
-		<t x="30" y="4" terrain="Air" humidity="9.850916E-4"/>
-		<t x="31" y="4" terrain="Air" humidity="5.828697E-4"/>
-		<t x="32" y="4" terrain="Air" humidity="9.626816E-4"/>
-		<t x="33" y="4" terrain="Air" humidity="1.0685766E-4"/>
-		<t x="34" y="4" terrain="Soil" humidity="0.37876618"/>
+		<t x="53" y="3" terrain="Air" humidity="6.791766E-4"/>
+		<t x="54" y="3" terrain="Soil" humidity="0.28997898"/>
+		<t x="55" y="3" terrain="Rock" humidity="0.0"/>
+		<t x="56" y="3" terrain="Water" humidity="1.0"/>
+		<t x="57" y="3" terrain="Water" humidity="1.0"/>
+		<t x="58" y="3" terrain="Water" humidity="1.0"/>
+		<t x="59" y="3" terrain="Water" humidity="1.0"/>
+		<t x="60" y="3" terrain="Water" humidity="1.0"/>
+		<t x="61" y="3" terrain="Soil" humidity="0.99999994"/>
+		<t x="62" y="3" terrain="Water" humidity="1.0"/>
+		<t x="63" y="3" terrain="Water" humidity="1.0"/>
+		<t x="64" y="3" terrain="Water" humidity="1.0"/>
+		<t x="65" y="3" terrain="Water" humidity="1.0"/>
+		<t x="66" y="3" terrain="Water" humidity="1.0"/>
+		<t x="67" y="3" terrain="Water" humidity="1.0"/>
+		<t x="68" y="3" terrain="Water" humidity="0.977141"/>
+		<t x="69" y="3" terrain="Water" humidity="0.90111035"/>
+		<t x="70" y="3" terrain="Water" humidity="0.8389741"/>
+		<t x="71" y="3" terrain="Water" humidity="0.78459257"/>
+		<t x="72" y="3" terrain="Water" humidity="0.737461"/>
+		<t x="73" y="3" terrain="Water" humidity="0.6971419"/>
+		<t x="74" y="3" terrain="Water" humidity="0.66326016"/>
+		<t x="75" y="3" terrain="Water" humidity="0.6355005"/>
+		<t x="76" y="3" terrain="Water" humidity="0.6136037"/>
+		<t x="77" y="3" terrain="Water" humidity="0.59736437"/>
+		<t x="78" y="3" terrain="Water" humidity="0.586629"/>
+		<t x="79" y="3" terrain="Water" humidity="0.5812945"/>
+		<t x="0" y="4" terrain="Soil" humidity="0.89870137"/>
+		<t x="1" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="4" terrain="Soil" humidity="0.13964452"/>
+		<t x="3" y="4" terrain="Soil" humidity="0.1361999"/>
+		<t x="4" y="4" terrain="Soil" humidity="0.13025744"/>
+		<t x="5" y="4" terrain="Soil" humidity="0.12377622"/>
+		<t x="6" y="4" terrain="Soil" humidity="0.12215406"/>
+		<t x="7" y="4" terrain="Soil" humidity="0.11876871"/>
+		<t x="8" y="4" terrain="Soil" humidity="0.11445151"/>
+		<t x="9" y="4" terrain="Soil" humidity="0.11117754"/>
+		<t x="10" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="11" y="4" terrain="Soil" humidity="0.060195364"/>
+		<t x="12" y="4" terrain="Soil" humidity="0.062154602"/>
+		<t x="13" y="4" terrain="Soil" humidity="0.057407226"/>
+		<t x="14" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="15" y="4" terrain="Soil" humidity="0.08001567"/>
+		<t x="16" y="4" terrain="Soil" humidity="0.13837808"/>
+		<t x="17" y="4" terrain="Soil" humidity="0.1679798"/>
+		<t x="18" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="19" y="4" terrain="Soil" humidity="0.4795962"/>
+		<t x="20" y="4" terrain="Soil" humidity="0.4996044"/>
+		<t x="21" y="4" terrain="Soil" humidity="0.5167891"/>
+		<t x="22" y="4" terrain="Soil" humidity="0.53386277"/>
+		<t x="23" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="24" y="4" terrain="Soil" humidity="0.5172013"/>
+		<t x="25" y="4" terrain="Soil" humidity="0.46334136"/>
+		<t x="26" y="4" terrain="Soil" humidity="0.39339933"/>
+		<t x="27" y="4" terrain="Soil" humidity="0.32332063"/>
+		<t x="28" y="4" terrain="Soil" humidity="0.2790714"/>
+		<t x="29" y="4" terrain="Soil" humidity="0.2366332"/>
+		<t x="30" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="31" y="4" terrain="Soil" humidity="0.119288"/>
+		<t x="32" y="4" terrain="Soil" humidity="0.093022965"/>
+		<t x="33" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="34" y="4" terrain="Air" humidity="0.0"/>
 		<t x="35" y="4" terrain="Air" humidity="0.0"/>
-		<t x="36" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="37" y="4" terrain="Air" humidity="9.997771E-4"/>
-		<t x="38" y="4" terrain="Air" humidity="5.3546246E-4"/>
+		<t x="36" y="4" terrain="Air" humidity="0.0"/>
+		<t x="37" y="4" terrain="Air" humidity="0.0"/>
+		<t x="38" y="4" terrain="Air" humidity="0.0"/>
 		<t x="39" y="4" terrain="Air" humidity="0.0"/>
 		<t x="40" y="4" terrain="Air" humidity="0.0"/>
 		<t x="41" y="4" terrain="Air" humidity="0.0"/>
 		<t x="42" y="4" terrain="Air" humidity="0.0"/>
-		<t x="43" y="4" terrain="Soil" humidity="0.2626788"/>
-		<t x="44" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="45" y="4" terrain="Air" humidity="9.953979E-4"/>
-		<t x="46" y="4" terrain="Air" humidity="7.590572E-4"/>
-		<t x="47" y="4" terrain="Air" humidity="8.652135E-4"/>
-		<t x="48" y="4" terrain="Soil" humidity="0.39848787"/>
-		<t x="49" y="4" terrain="Soil" humidity="0.41367576"/>
-		<t x="50" y="4" terrain="Soil" humidity="0.41230094"/>
-		<t x="51" y="4" terrain="Soil" humidity="0.3905368"/>
-		<t x="52" y="4" terrain="Water" humidity="0.1931708"/>
-		<t x="53" y="4" terrain="Soil" humidity="0.39831147"/>
-		<t x="54" y="4" terrain="Soil" humidity="0.4049611"/>
-		<t x="55" y="4" terrain="Soil" humidity="0.4216756"/>
-		<t x="56" y="4" terrain="Soil" humidity="0.41916913"/>
-		<t x="57" y="4" terrain="Soil" humidity="0.4259657"/>
-		<t x="58" y="4" terrain="Air" humidity="6.056469E-4"/>
-		<t x="59" y="4" terrain="Air" humidity="8.604572E-4"/>
-		<t x="60" y="4" terrain="Air" humidity="7.991885E-4"/>
-		<t x="61" y="4" terrain="Air" humidity="5.569779E-4"/>
-		<t x="62" y="4" terrain="Air" humidity="0.0"/>
-		<t x="63" y="4" terrain="Air" humidity="0.0"/>
-		<t x="64" y="4" terrain="Air" humidity="0.0"/>
-		<t x="65" y="4" terrain="Air" humidity="0.0"/>
-		<t x="66" y="4" terrain="Soil" humidity="0.39664567"/>
-		<t x="67" y="4" terrain="Soil" humidity="0.39904475"/>
-		<t x="68" y="4" terrain="Rock" humidity="0.0"/>
-		<t x="69" y="4" terrain="Soil" humidity="0.39307714"/>
-		<t x="70" y="4" terrain="Air" humidity="9.864046E-4"/>
-		<t x="71" y="4" terrain="Air" humidity="7.943202E-4"/>
-		<t x="72" y="4" terrain="Air" humidity="7.149897E-4"/>
-		<t x="73" y="4" terrain="Air" humidity="1.5888661E-4"/>
+		<t x="43" y="4" terrain="Air" humidity="0.0"/>
+		<t x="44" y="4" terrain="Air" humidity="0.0"/>
+		<t x="45" y="4" terrain="Air" humidity="1.0361216E-4"/>
+		<t x="46" y="4" terrain="Air" humidity="9.334429E-4"/>
+		<t x="47" y="4" terrain="Air" humidity="7.165415E-4"/>
+		<t x="48" y="4" terrain="Air" humidity="0.0"/>
+		<t x="49" y="4" terrain="Air" humidity="0.0"/>
+		<t x="50" y="4" terrain="Air" humidity="0.0"/>
+		<t x="51" y="4" terrain="Air" humidity="2.3230945E-4"/>
+		<t x="52" y="4" terrain="Air" humidity="9.044659E-4"/>
+		<t x="53" y="4" terrain="Air" humidity="0.0"/>
+		<t x="54" y="4" terrain="Soil" humidity="0.10401623"/>
+		<t x="55" y="4" terrain="Rock" humidity="0.0"/>
+		<t x="56" y="4" terrain="Water" humidity="0.9097159"/>
+		<t x="57" y="4" terrain="Water" humidity="0.90565926"/>
+		<t x="58" y="4" terrain="Water" humidity="0.79810196"/>
+		<t x="59" y="4" terrain="Water" humidity="0.6967592"/>
+		<t x="60" y="4" terrain="Water" humidity="0.60157526"/>
+		<t x="61" y="4" terrain="Water" humidity="0.5119572"/>
+		<t x="62" y="4" terrain="Water" humidity="0.42713374"/>
+		<t x="63" y="4" terrain="Water" humidity="0.34637263"/>
+		<t x="64" y="4" terrain="Water" humidity="0.26896936"/>
+		<t x="65" y="4" terrain="Water" humidity="0.19423877"/>
+		<t x="66" y="4" terrain="Water" humidity="0.12150974"/>
+		<t x="67" y="4" terrain="Water" humidity="0.05012269"/>
+		<t x="68" y="4" terrain="Air" humidity="0.0"/>
+		<t x="69" y="4" terrain="Air" humidity="0.0"/>
+		<t x="70" y="4" terrain="Air" humidity="0.0"/>
+		<t x="71" y="4" terrain="Air" humidity="0.0"/>
+		<t x="72" y="4" terrain="Air" humidity="0.0"/>
+		<t x="73" y="4" terrain="Air" humidity="0.0"/>
 		<t x="74" y="4" terrain="Air" humidity="0.0"/>
 		<t x="75" y="4" terrain="Air" humidity="0.0"/>
 		<t x="76" y="4" terrain="Air" humidity="0.0"/>
 		<t x="77" y="4" terrain="Air" humidity="0.0"/>
-		<t x="78" y="4" terrain="Air" humidity="1.6785302E-4"/>
-		<t x="79" y="4" terrain="Air" humidity="7.553385E-4"/>
-		<t x="0" y="5" terrain="Soil" humidity="0.5616745"/>
-		<t x="1" y="5" terrain="Soil" humidity="0.53123575"/>
-		<t x="2" y="5" terrain="Soil" humidity="0.49778938"/>
-		<t x="3" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="4" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="5" y="5" terrain="Soil" humidity="0.50490505"/>
-		<t x="6" y="5" terrain="Soil" humidity="0.51703775"/>
-		<t x="7" y="5" terrain="Soil" humidity="0.54850394"/>
-		<t x="8" y="5" terrain="Air" humidity="5.442545E-4"/>
-		<t x="9" y="5" terrain="Air" humidity="5.1398744E-4"/>
-		<t x="10" y="5" terrain="Air" humidity="6.49059E-4"/>
-		<t x="11" y="5" terrain="Air" humidity="0.0"/>
-		<t x="12" y="5" terrain="Air" humidity="0.0"/>
-		<t x="13" y="5" terrain="Air" humidity="0.0"/>
-		<t x="14" y="5" terrain="Air" humidity="8.4137596E-4"/>
-		<t x="15" y="5" terrain="Air" humidity="9.1616897E-4"/>
-		<t x="16" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="17" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="18" y="5" terrain="Soil" humidity="0.52220124"/>
-		<t x="19" y="5" terrain="Soil" humidity="0.5015815"/>
-		<t x="20" y="5" terrain="Air" humidity="9.730937E-4"/>
-		<t x="21" y="5" terrain="Air" humidity="4.922693E-4"/>
-		<t x="22" y="5" terrain="Air" humidity="0.0"/>
-		<t x="23" y="5" terrain="Air" humidity="0.0"/>
-		<t x="24" y="5" terrain="Air" humidity="0.0"/>
-		<t x="25" y="5" terrain="Air" humidity="0.0"/>
-		<t x="26" y="5" terrain="Air" humidity="0.0"/>
-		<t x="27" y="5" terrain="Air" humidity="0.0"/>
-		<t x="28" y="5" terrain="Air" humidity="0.0"/>
-		<t x="29" y="5" terrain="Air" humidity="0.0"/>
-		<t x="30" y="5" terrain="Air" humidity="0.0"/>
-		<t x="31" y="5" terrain="Air" humidity="0.0"/>
-		<t x="32" y="5" terrain="Air" humidity="0.0"/>
-		<t x="33" y="5" terrain="Air" humidity="1.9733458E-4"/>
-		<t x="34" y="5" terrain="Air" humidity="8.8800554E-4"/>
-		<t x="35" y="5" terrain="Air" humidity="6.701614E-4"/>
-		<t x="36" y="5" terrain="Air" humidity="9.857665E-4"/>
-		<t x="37" y="5" terrain="Air" humidity="5.8326905E-4"/>
+		<t x="78" y="4" terrain="Air" humidity="0.0"/>
+		<t x="79" y="4" terrain="Air" humidity="0.0"/>
+		<t x="0" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="1" y="5" terrain="Soil" humidity="0.14423133"/>
+		<t x="2" y="5" terrain="Soil" humidity="0.14096273"/>
+		<t x="3" y="5" terrain="Soil" humidity="0.13613798"/>
+		<t x="4" y="5" terrain="Soil" humidity="0.12632616"/>
+		<t x="5" y="5" terrain="Soil" humidity="0.11169349"/>
+		<t x="6" y="5" terrain="Soil" humidity="0.11736225"/>
+		<t x="7" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="8" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="9" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="10" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="11" y="5" terrain="Soil" humidity="0.04308224"/>
+		<t x="12" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="13" y="5" terrain="Soil" humidity="0.04192306"/>
+		<t x="14" y="5" terrain="Soil" humidity="0.042310257"/>
+		<t x="15" y="5" terrain="Air" humidity="5.0632196E-4"/>
+		<t x="16" y="5" terrain="Soil" humidity="0.12717187"/>
+		<t x="17" y="5" terrain="Soil" humidity="0.14796115"/>
+		<t x="18" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="19" y="5" terrain="Soil" humidity="0.4593149"/>
+		<t x="20" y="5" terrain="Soil" humidity="0.5025614"/>
+		<t x="21" y="5" terrain="Soil" humidity="0.55023205"/>
+		<t x="22" y="5" terrain="Soil" humidity="0.59085864"/>
+		<t x="23" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="24" y="5" terrain="Soil" humidity="0.58296525"/>
+		<t x="25" y="5" terrain="Soil" humidity="0.47892854"/>
+		<t x="26" y="5" terrain="Soil" humidity="0.39324787"/>
+		<t x="27" y="5" terrain="Soil" humidity="0.33071655"/>
+		<t x="28" y="5" terrain="Soil" humidity="0.27811438"/>
+		<t x="29" y="5" terrain="Soil" humidity="0.22242191"/>
+		<t x="30" y="5" terrain="Soil" humidity="0.15465643"/>
+		<t x="31" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="32" y="5" terrain="Soil" humidity="0.033372544"/>
+		<t x="33" y="5" terrain="Air" humidity="9.827546E-4"/>
+		<t x="34" y="5" terrain="Air" humidity="6.413736E-4"/>
+		<t x="35" y="5" terrain="Air" humidity="0.0"/>
+		<t x="36" y="5" terrain="Air" humidity="0.0"/>
+		<t x="37" y="5" terrain="Air" humidity="0.0"/>
 		<t x="38" y="5" terrain="Air" humidity="0.0"/>
 		<t x="39" y="5" terrain="Air" humidity="0.0"/>
 		<t x="40" y="5" terrain="Air" humidity="0.0"/>
 		<t x="41" y="5" terrain="Air" humidity="0.0"/>
-		<t x="42" y="5" terrain="Air" humidity="6.1409513E-4"/>
-		<t x="43" y="5" terrain="Air" humidity="6.210919E-4"/>
-		<t x="44" y="5" terrain="Air" humidity="9.990862E-4"/>
-		<t x="45" y="5" terrain="Air" humidity="7.33423E-4"/>
+		<t x="42" y="5" terrain="Air" humidity="0.0"/>
+		<t x="43" y="5" terrain="Air" humidity="0.0"/>
+		<t x="44" y="5" terrain="Air" humidity="0.0"/>
+		<t x="45" y="5" terrain="Air" humidity="0.0"/>
 		<t x="46" y="5" terrain="Air" humidity="0.0"/>
-		<t x="47" y="5" terrain="Air" humidity="3.0721896E-4"/>
-		<t x="48" y="5" terrain="Air" humidity="9.5342443E-4"/>
-		<t x="49" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="50" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="51" y="5" terrain="Soil" humidity="0.3616538"/>
+		<t x="47" y="5" terrain="Air" humidity="0.0"/>
+		<t x="48" y="5" terrain="Air" humidity="0.0"/>
+		<t x="49" y="5" terrain="Air" humidity="0.0"/>
+		<t x="50" y="5" terrain="Air" humidity="0.0"/>
+		<t x="51" y="5" terrain="Air" humidity="0.0"/>
 		<t x="52" y="5" terrain="Air" humidity="0.0"/>
-		<t x="53" y="5" terrain="Air" humidity="7.9602766E-4"/>
-		<t x="54" y="5" terrain="Air" humidity="7.826823E-4"/>
-		<t x="55" y="5" terrain="Rock" humidity="0.0"/>
-		<t x="56" y="5" terrain="Soil" humidity="0.38875782"/>
-		<t x="57" y="5" terrain="Rock" humidity="0.0"/>
+		<t x="53" y="5" terrain="Air" humidity="5.694069E-4"/>
+		<t x="54" y="5" terrain="Air" humidity="8.3891256E-4"/>
+		<t x="55" y="5" terrain="Air" humidity="9.824815E-4"/>
+		<t x="56" y="5" terrain="Air" humidity="7.2393013E-4"/>
+		<t x="57" y="5" terrain="Air" humidity="0.0"/>
 		<t x="58" y="5" terrain="Air" humidity="0.0"/>
 		<t x="59" y="5" terrain="Air" humidity="0.0"/>
 		<t x="60" y="5" terrain="Air" humidity="0.0"/>
@@ -465,12 +465,12 @@
 		<t x="62" y="5" terrain="Air" humidity="0.0"/>
 		<t x="63" y="5" terrain="Air" humidity="0.0"/>
 		<t x="64" y="5" terrain="Air" humidity="0.0"/>
-		<t x="65" y="5" terrain="Air" humidity="5.6325615E-4"/>
-		<t x="66" y="5" terrain="Air" humidity="8.805581E-4"/>
-		<t x="67" y="5" terrain="Air" humidity="9.736245E-4"/>
-		<t x="68" y="5" terrain="Soil" humidity="0.26662624"/>
-		<t x="69" y="5" terrain="Air" humidity="7.648138E-4"/>
-		<t x="70" y="5" terrain="Air" humidity="1.6995863E-4"/>
+		<t x="65" y="5" terrain="Air" humidity="0.0"/>
+		<t x="66" y="5" terrain="Air" humidity="0.0"/>
+		<t x="67" y="5" terrain="Air" humidity="0.0"/>
+		<t x="68" y="5" terrain="Air" humidity="0.0"/>
+		<t x="69" y="5" terrain="Air" humidity="0.0"/>
+		<t x="70" y="5" terrain="Air" humidity="0.0"/>
 		<t x="71" y="5" terrain="Air" humidity="0.0"/>
 		<t x="72" y="5" terrain="Air" humidity="0.0"/>
 		<t x="73" y="5" terrain="Air" humidity="0.0"/>
@@ -480,40 +480,40 @@
 		<t x="77" y="5" terrain="Air" humidity="0.0"/>
 		<t x="78" y="5" terrain="Air" humidity="0.0"/>
 		<t x="79" y="5" terrain="Air" humidity="0.0"/>
-		<t x="0" y="6" terrain="Rock" humidity="0.0"/>
-		<t x="1" y="6" terrain="Air" humidity="6.811105E-4"/>
-		<t x="2" y="6" terrain="Air" humidity="8.823925E-4"/>
-		<t x="3" y="6" terrain="Soil" humidity="0.90870833"/>
+		<t x="0" y="6" terrain="Soil" humidity="0.14862904"/>
+		<t x="1" y="6" terrain="Soil" humidity="0.14633101"/>
+		<t x="2" y="6" terrain="Soil" humidity="0.1427581"/>
+		<t x="3" y="6" terrain="Soil" humidity="0.1399589"/>
 		<t x="4" y="6" terrain="Rock" humidity="0.0"/>
-		<t x="5" y="6" terrain="Air" humidity="7.801702E-4"/>
-		<t x="6" y="6" terrain="Air" humidity="5.6431274E-4"/>
-		<t x="7" y="6" terrain="Rock" humidity="0.0"/>
-		<t x="8" y="6" terrain="Air" humidity="0.0"/>
-		<t x="9" y="6" terrain="Air" humidity="0.0"/>
-		<t x="10" y="6" terrain="Air" humidity="0.0"/>
-		<t x="11" y="6" terrain="Air" humidity="0.0"/>
-		<t x="12" y="6" terrain="Air" humidity="0.0"/>
-		<t x="13" y="6" terrain="Air" humidity="0.0"/>
-		<t x="14" y="6" terrain="Air" humidity="0.0"/>
+		<t x="5" y="6" terrain="Soil" humidity="0.078471854"/>
+		<t x="6" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="7" y="6" terrain="Soil" humidity="0.021524807"/>
+		<t x="8" y="6" terrain="Soil" humidity="0.021340014"/>
+		<t x="9" y="6" terrain="Soil" humidity="0.022972837"/>
+		<t x="10" y="6" terrain="Soil" humidity="0.024405636"/>
+		<t x="11" y="6" terrain="Soil" humidity="0.025620589"/>
+		<t x="12" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="13" y="6" terrain="Soil" humidity="0.025667721"/>
+		<t x="14" y="6" terrain="Rock" humidity="0.0"/>
 		<t x="15" y="6" terrain="Air" humidity="0.0"/>
-		<t x="16" y="6" terrain="Rock" humidity="0.0"/>
-		<t x="17" y="6" terrain="Water" humidity="0.2814334"/>
-		<t x="18" y="6" terrain="Soil" humidity="0.5321481"/>
-		<t x="19" y="6" terrain="Air" humidity="9.153923E-4"/>
-		<t x="20" y="6" terrain="Air" humidity="2.1452231E-4"/>
-		<t x="21" y="6" terrain="Air" humidity="0.0"/>
-		<t x="22" y="6" terrain="Air" humidity="0.0"/>
-		<t x="23" y="6" terrain="Air" humidity="0.0"/>
-		<t x="24" y="6" terrain="Air" humidity="0.0"/>
-		<t x="25" y="6" terrain="Air" humidity="0.0"/>
-		<t x="26" y="6" terrain="Air" humidity="0.0"/>
-		<t x="27" y="6" terrain="Air" humidity="0.0"/>
-		<t x="28" y="6" terrain="Air" humidity="0.0"/>
-		<t x="29" y="6" terrain="Air" humidity="0.0"/>
-		<t x="30" y="6" terrain="Air" humidity="0.0"/>
-		<t x="31" y="6" terrain="Air" humidity="0.0"/>
-		<t x="32" y="6" terrain="Air" humidity="0.0"/>
-		<t x="33" y="6" terrain="Air" humidity="0.0"/>
+		<t x="16" y="6" terrain="Soil" humidity="0.09608703"/>
+		<t x="17" y="6" terrain="Soil" humidity="0.14657718"/>
+		<t x="18" y="6" terrain="Soil" humidity="0.22593968"/>
+		<t x="19" y="6" terrain="Soil" humidity="0.3954057"/>
+		<t x="20" y="6" terrain="Soil" humidity="0.50148773"/>
+		<t x="21" y="6" terrain="Soil" humidity="0.590719"/>
+		<t x="22" y="6" terrain="Soil" humidity="0.6879032"/>
+		<t x="23" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="24" y="6" terrain="Soil" humidity="0.7510481"/>
+		<t x="25" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="26" y="6" terrain="Soil" humidity="0.37139645"/>
+		<t x="27" y="6" terrain="Soil" humidity="0.32945436"/>
+		<t x="28" y="6" terrain="Soil" humidity="0.28111216"/>
+		<t x="29" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="30" y="6" terrain="Air" humidity="8.2125387E-4"/>
+		<t x="31" y="6" terrain="Rock" humidity="0.0"/>
+		<t x="32" y="6" terrain="Air" humidity="6.208449E-4"/>
+		<t x="33" y="6" terrain="Air" humidity="8.820493E-4"/>
 		<t x="34" y="6" terrain="Air" humidity="0.0"/>
 		<t x="35" y="6" terrain="Air" humidity="0.0"/>
 		<t x="36" y="6" terrain="Air" humidity="0.0"/>
@@ -529,16 +529,16 @@
 		<t x="46" y="6" terrain="Air" humidity="0.0"/>
 		<t x="47" y="6" terrain="Air" humidity="0.0"/>
 		<t x="48" y="6" terrain="Air" humidity="0.0"/>
-		<t x="49" y="6" terrain="Soil" humidity="0.28747386"/>
-		<t x="50" y="6" terrain="Soil" humidity="0.28718638"/>
-		<t x="51" y="6" terrain="Air" humidity="9.5667766E-4"/>
-		<t x="52" y="6" terrain="Air" humidity="3.9117385E-4"/>
+		<t x="49" y="6" terrain="Air" humidity="0.0"/>
+		<t x="50" y="6" terrain="Air" humidity="0.0"/>
+		<t x="51" y="6" terrain="Air" humidity="0.0"/>
+		<t x="52" y="6" terrain="Air" humidity="0.0"/>
 		<t x="53" y="6" terrain="Air" humidity="0.0"/>
-		<t x="54" y="6" terrain="Air" humidity="9.924669E-4"/>
-		<t x="55" y="6" terrain="Air" humidity="9.99996E-4"/>
-		<t x="56" y="6" terrain="Air" humidity="5.5700913E-4"/>
-		<t x="57" y="6" terrain="Air" humidity="9.964637E-4"/>
-		<t x="58" y="6" terrain="Air" humidity="7.880946E-4"/>
+		<t x="54" y="6" terrain="Air" humidity="0.0"/>
+		<t x="55" y="6" terrain="Air" humidity="0.0"/>
+		<t x="56" y="6" terrain="Air" humidity="0.0"/>
+		<t x="57" y="6" terrain="Air" humidity="0.0"/>
+		<t x="58" y="6" terrain="Air" humidity="0.0"/>
 		<t x="59" y="6" terrain="Air" humidity="0.0"/>
 		<t x="60" y="6" terrain="Air" humidity="0.0"/>
 		<t x="61" y="6" terrain="Air" humidity="0.0"/>
@@ -548,7 +548,7 @@
 		<t x="65" y="6" terrain="Air" humidity="0.0"/>
 		<t x="66" y="6" terrain="Air" humidity="0.0"/>
 		<t x="67" y="6" terrain="Air" humidity="0.0"/>
-		<t x="68" y="6" terrain="Soil" humidity="0.2536215"/>
+		<t x="68" y="6" terrain="Air" humidity="0.0"/>
 		<t x="69" y="6" terrain="Air" humidity="0.0"/>
 		<t x="70" y="6" terrain="Air" humidity="0.0"/>
 		<t x="71" y="6" terrain="Air" humidity="0.0"/>
@@ -560,39 +560,39 @@
 		<t x="77" y="6" terrain="Air" humidity="0.0"/>
 		<t x="78" y="6" terrain="Air" humidity="0.0"/>
 		<t x="79" y="6" terrain="Air" humidity="0.0"/>
-		<t x="0" y="7" terrain="Soil" humidity="0.13975672"/>
-		<t x="1" y="7" terrain="Air" humidity="0.0"/>
-		<t x="2" y="7" terrain="Air" humidity="0.0"/>
+		<t x="0" y="7" terrain="Soil" humidity="0.1497597"/>
+		<t x="1" y="7" terrain="Soil" humidity="0.14858867"/>
+		<t x="2" y="7" terrain="Rock" humidity="0.0"/>
 		<t x="3" y="7" terrain="Rock" humidity="0.0"/>
-		<t x="4" y="7" terrain="Air" humidity="9.7633316E-4"/>
-		<t x="5" y="7" terrain="Air" humidity="7.8621006E-4"/>
-		<t x="6" y="7" terrain="Air" humidity="7.3979056E-4"/>
-		<t x="7" y="7" terrain="Air" humidity="9.917142E-4"/>
-		<t x="8" y="7" terrain="Air" humidity="9.965254E-4"/>
-		<t x="9" y="7" terrain="Air" humidity="0.0"/>
-		<t x="10" y="7" terrain="Air" humidity="0.0"/>
-		<t x="11" y="7" terrain="Air" humidity="0.0"/>
-		<t x="12" y="7" terrain="Air" humidity="0.0"/>
-		<t x="13" y="7" terrain="Air" humidity="0.0"/>
-		<t x="14" y="7" terrain="Air" humidity="0.0"/>
-		<t x="15" y="7" terrain="Air" humidity="5.895279E-4"/>
-		<t x="16" y="7" terrain="Air" humidity="9.973417E-4"/>
-		<t x="17" y="7" terrain="Air" humidity="0.0"/>
-		<t x="18" y="7" terrain="Rock" humidity="0.0"/>
-		<t x="19" y="7" terrain="Air" humidity="0.0"/>
-		<t x="20" y="7" terrain="Air" humidity="0.0"/>
-		<t x="21" y="7" terrain="Air" humidity="0.0"/>
-		<t x="22" y="7" terrain="Air" humidity="0.0"/>
-		<t x="23" y="7" terrain="Air" humidity="0.0"/>
-		<t x="24" y="7" terrain="Air" humidity="0.0"/>
-		<t x="25" y="7" terrain="Air" humidity="0.0"/>
-		<t x="26" y="7" terrain="Air" humidity="0.0"/>
-		<t x="27" y="7" terrain="Air" humidity="0.0"/>
-		<t x="28" y="7" terrain="Air" humidity="0.0"/>
-		<t x="29" y="7" terrain="Air" humidity="0.0"/>
-		<t x="30" y="7" terrain="Air" humidity="0.0"/>
-		<t x="31" y="7" terrain="Air" humidity="0.0"/>
-		<t x="32" y="7" terrain="Air" humidity="0.0"/>
+		<t x="4" y="7" terrain="Rock" humidity="0.0"/>
+		<t x="5" y="7" terrain="Soil" humidity="0.04469969"/>
+		<t x="6" y="7" terrain="Soil" humidity="0.033238836"/>
+		<t x="7" y="7" terrain="Rock" humidity="0.0"/>
+		<t x="8" y="7" terrain="Soil" humidity="0.019321285"/>
+		<t x="9" y="7" terrain="Rock" humidity="0.0"/>
+		<t x="10" y="7" terrain="Rock" humidity="0.0"/>
+		<t x="11" y="7" terrain="Soil" humidity="0.009223057"/>
+		<t x="12" y="7" terrain="Air" humidity="9.994424E-4"/>
+		<t x="13" y="7" terrain="Soil" humidity="0.009236718"/>
+		<t x="14" y="7" terrain="Air" humidity="9.587036E-4"/>
+		<t x="15" y="7" terrain="Air" humidity="5.3941953E-4"/>
+		<t x="16" y="7" terrain="Air" humidity="9.797184E-4"/>
+		<t x="17" y="7" terrain="Soil" humidity="0.11766994"/>
+		<t x="18" y="7" terrain="Soil" humidity="0.1324548"/>
+		<t x="19" y="7" terrain="Rock" humidity="0.0"/>
+		<t x="20" y="7" terrain="Soil" humidity="0.5176421"/>
+		<t x="21" y="7" terrain="Soil" humidity="0.62449664"/>
+		<t x="22" y="7" terrain="Soil" humidity="0.88283265"/>
+		<t x="23" y="7" terrain="Spring" humidity="0.9899001"/>
+		<t x="24" y="7" terrain="Soil" humidity="0.9151688"/>
+		<t x="25" y="7" terrain="Soil" humidity="0.65241593"/>
+		<t x="26" y="7" terrain="Soil" humidity="0.3900565"/>
+		<t x="27" y="7" terrain="Soil" humidity="0.33468935"/>
+		<t x="28" y="7" terrain="Air" humidity="5.021712E-4"/>
+		<t x="29" y="7" terrain="Air" humidity="9.777565E-4"/>
+		<t x="30" y="7" terrain="Air" humidity="4.1533445E-4"/>
+		<t x="31" y="7" terrain="Air" humidity="9.92838E-4"/>
+		<t x="32" y="7" terrain="Air" humidity="4.8336355E-4"/>
 		<t x="33" y="7" terrain="Air" humidity="0.0"/>
 		<t x="34" y="7" terrain="Air" humidity="0.0"/>
 		<t x="35" y="7" terrain="Air" humidity="0.0"/>
@@ -608,10 +608,10 @@
 		<t x="45" y="7" terrain="Air" humidity="0.0"/>
 		<t x="46" y="7" terrain="Air" humidity="0.0"/>
 		<t x="47" y="7" terrain="Air" humidity="0.0"/>
-		<t x="48" y="7" terrain="Air" humidity="7.917639E-4"/>
-		<t x="49" y="7" terrain="Air" humidity="9.832269E-4"/>
-		<t x="50" y="7" terrain="Air" humidity="9.832211E-4"/>
-		<t x="51" y="7" terrain="Air" humidity="7.917541E-4"/>
+		<t x="48" y="7" terrain="Air" humidity="0.0"/>
+		<t x="49" y="7" terrain="Air" humidity="0.0"/>
+		<t x="50" y="7" terrain="Air" humidity="0.0"/>
+		<t x="51" y="7" terrain="Air" humidity="0.0"/>
 		<t x="52" y="7" terrain="Air" humidity="0.0"/>
 		<t x="53" y="7" terrain="Air" humidity="0.0"/>
 		<t x="54" y="7" terrain="Air" humidity="0.0"/>
@@ -627,9 +627,9 @@
 		<t x="64" y="7" terrain="Air" humidity="0.0"/>
 		<t x="65" y="7" terrain="Air" humidity="0.0"/>
 		<t x="66" y="7" terrain="Air" humidity="0.0"/>
-		<t x="67" y="7" terrain="Air" humidity="9.1628736E-4"/>
-		<t x="68" y="7" terrain="Air" humidity="5.566987E-4"/>
-		<t x="69" y="7" terrain="Air" humidity="8.396521E-4"/>
+		<t x="67" y="7" terrain="Air" humidity="0.0"/>
+		<t x="68" y="7" terrain="Air" humidity="0.0"/>
+		<t x="69" y="7" terrain="Air" humidity="0.0"/>
 		<t x="70" y="7" terrain="Air" humidity="0.0"/>
 		<t x="71" y="7" terrain="Air" humidity="0.0"/>
 		<t x="72" y="7" terrain="Air" humidity="0.0"/>
@@ -640,35 +640,35 @@
 		<t x="77" y="7" terrain="Air" humidity="0.0"/>
 		<t x="78" y="7" terrain="Air" humidity="0.0"/>
 		<t x="79" y="7" terrain="Air" humidity="0.0"/>
-		<t x="0" y="8" terrain="Air" humidity="7.982707E-4"/>
-		<t x="1" y="8" terrain="Air" humidity="1.773935E-4"/>
-		<t x="2" y="8" terrain="Air" humidity="6.854679E-4"/>
-		<t x="3" y="8" terrain="Air" humidity="9.368231E-4"/>
-		<t x="4" y="8" terrain="Air" humidity="2.0959949E-4"/>
-		<t x="5" y="8" terrain="Air" humidity="0.0"/>
-		<t x="6" y="8" terrain="Air" humidity="0.0"/>
-		<t x="7" y="8" terrain="Air" humidity="0.0"/>
-		<t x="8" y="8" terrain="Air" humidity="0.0"/>
-		<t x="9" y="8" terrain="Air" humidity="0.0"/>
-		<t x="10" y="8" terrain="Air" humidity="0.0"/>
-		<t x="11" y="8" terrain="Air" humidity="0.0"/>
+		<t x="0" y="8" terrain="Soil" humidity="0.15089712"/>
+		<t x="1" y="8" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="8" terrain="Soil" humidity="0.788328"/>
+		<t x="3" y="8" terrain="Rock" humidity="0.0"/>
+		<t x="4" y="8" terrain="Soil" humidity="0.01414666"/>
+		<t x="5" y="8" terrain="Soil" humidity="0.02215504"/>
+		<t x="6" y="8" terrain="Soil" humidity="0.021507926"/>
+		<t x="7" y="8" terrain="Soil" humidity="0.019399831"/>
+		<t x="8" y="8" terrain="Soil" humidity="0.017133104"/>
+		<t x="9" y="8" terrain="Soil" humidity="0.012415414"/>
+		<t x="10" y="8" terrain="Soil" humidity="0.0075979135"/>
+		<t x="11" y="8" terrain="Air" humidity="9.493128E-4"/>
 		<t x="12" y="8" terrain="Air" humidity="0.0"/>
-		<t x="13" y="8" terrain="Air" humidity="0.0"/>
-		<t x="14" y="8" terrain="Air" humidity="0.0"/>
+		<t x="13" y="8" terrain="Air" humidity="6.9344946E-4"/>
+		<t x="14" y="8" terrain="Air" humidity="7.0600555E-4"/>
 		<t x="15" y="8" terrain="Air" humidity="0.0"/>
 		<t x="16" y="8" terrain="Air" humidity="0.0"/>
-		<t x="17" y="8" terrain="Air" humidity="6.693916E-4"/>
-		<t x="18" y="8" terrain="Air" humidity="9.846342E-4"/>
-		<t x="19" y="8" terrain="Air" humidity="5.8259914E-4"/>
-		<t x="20" y="8" terrain="Air" humidity="0.0"/>
-		<t x="21" y="8" terrain="Air" humidity="0.0"/>
-		<t x="22" y="8" terrain="Air" humidity="0.0"/>
-		<t x="23" y="8" terrain="Air" humidity="0.0"/>
-		<t x="24" y="8" terrain="Air" humidity="0.0"/>
-		<t x="25" y="8" terrain="Air" humidity="0.0"/>
-		<t x="26" y="8" terrain="Air" humidity="0.0"/>
-		<t x="27" y="8" terrain="Air" humidity="0.0"/>
-		<t x="28" y="8" terrain="Air" humidity="0.0"/>
+		<t x="17" y="8" terrain="Soil" humidity="0.07363273"/>
+		<t x="18" y="8" terrain="Soil" humidity="0.05445934"/>
+		<t x="19" y="8" terrain="Rock" humidity="0.0"/>
+		<t x="20" y="8" terrain="Soil" humidity="0.42782184"/>
+		<t x="21" y="8" terrain="Soil" humidity="0.50777155"/>
+		<t x="22" y="8" terrain="Soil" humidity="0.718648"/>
+		<t x="23" y="8" terrain="Soil" humidity="0.99837196"/>
+		<t x="24" y="8" terrain="Soil" humidity="0.9557416"/>
+		<t x="25" y="8" terrain="Rock" humidity="0.0"/>
+		<t x="26" y="8" terrain="Soil" humidity="0.20376892"/>
+		<t x="27" y="8" terrain="Air" humidity="7.6118147E-4"/>
+		<t x="28" y="8" terrain="Air" humidity="8.3454454E-4"/>
 		<t x="29" y="8" terrain="Air" humidity="0.0"/>
 		<t x="30" y="8" terrain="Air" humidity="0.0"/>
 		<t x="31" y="8" terrain="Air" humidity="0.0"/>
@@ -720,34 +720,34 @@
 		<t x="77" y="8" terrain="Air" humidity="0.0"/>
 		<t x="78" y="8" terrain="Air" humidity="0.0"/>
 		<t x="79" y="8" terrain="Air" humidity="0.0"/>
-		<t x="0" y="9" terrain="Air" humidity="0.0"/>
-		<t x="1" y="9" terrain="Air" humidity="0.0"/>
-		<t x="2" y="9" terrain="Air" humidity="0.0"/>
-		<t x="3" y="9" terrain="Air" humidity="0.0"/>
-		<t x="4" y="9" terrain="Air" humidity="0.0"/>
-		<t x="5" y="9" terrain="Air" humidity="0.0"/>
-		<t x="6" y="9" terrain="Air" humidity="0.0"/>
-		<t x="7" y="9" terrain="Air" humidity="0.0"/>
-		<t x="8" y="9" terrain="Air" humidity="0.0"/>
-		<t x="9" y="9" terrain="Air" humidity="0.0"/>
-		<t x="10" y="9" terrain="Air" humidity="0.0"/>
+		<t x="0" y="9" terrain="Rock" humidity="0.0"/>
+		<t x="1" y="9" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="9" terrain="Soil" humidity="0.7883251"/>
+		<t x="3" y="9" terrain="Rock" humidity="0.0"/>
+		<t x="4" y="9" terrain="Soil" humidity="0.0058947266"/>
+		<t x="5" y="9" terrain="Soil" humidity="0.0081871"/>
+		<t x="6" y="9" terrain="Soil" humidity="0.011103604"/>
+		<t x="7" y="9" terrain="Rock" humidity="0.0"/>
+		<t x="8" y="9" terrain="Soil" humidity="0.017274996"/>
+		<t x="9" y="9" terrain="Rock" humidity="0.0"/>
+		<t x="10" y="9" terrain="Soil" humidity="0.0027333677"/>
 		<t x="11" y="9" terrain="Air" humidity="0.0"/>
 		<t x="12" y="9" terrain="Air" humidity="0.0"/>
 		<t x="13" y="9" terrain="Air" humidity="0.0"/>
 		<t x="14" y="9" terrain="Air" humidity="0.0"/>
 		<t x="15" y="9" terrain="Air" humidity="0.0"/>
-		<t x="16" y="9" terrain="Air" humidity="0.0"/>
-		<t x="17" y="9" terrain="Air" humidity="0.0"/>
-		<t x="18" y="9" terrain="Air" humidity="0.0"/>
-		<t x="19" y="9" terrain="Air" humidity="0.0"/>
-		<t x="20" y="9" terrain="Air" humidity="0.0"/>
-		<t x="21" y="9" terrain="Air" humidity="0.0"/>
-		<t x="22" y="9" terrain="Air" humidity="0.0"/>
-		<t x="23" y="9" terrain="Air" humidity="0.0"/>
-		<t x="24" y="9" terrain="Air" humidity="0.0"/>
-		<t x="25" y="9" terrain="Air" humidity="0.0"/>
-		<t x="26" y="9" terrain="Air" humidity="0.0"/>
-		<t x="27" y="9" terrain="Air" humidity="0.0"/>
+		<t x="16" y="9" terrain="Air" humidity="3.648728E-4"/>
+		<t x="17" y="9" terrain="Air" humidity="5.727494E-4"/>
+		<t x="18" y="9" terrain="Air" humidity="5.2517554E-4"/>
+		<t x="19" y="9" terrain="Soil" humidity="0.093296304"/>
+		<t x="20" y="9" terrain="Soil" humidity="0.26019245"/>
+		<t x="21" y="9" terrain="Soil" humidity="0.26021746"/>
+		<t x="22" y="9" terrain="Soil" humidity="0.48313695"/>
+		<t x="23" y="9" terrain="Water" humidity="0.53375816"/>
+		<t x="24" y="9" terrain="Rock" humidity="2.1E-44"/>
+		<t x="25" y="9" terrain="Air" humidity="9.793539E-4"/>
+		<t x="26" y="9" terrain="Air" humidity="7.4601104E-4"/>
+		<t x="27" y="9" terrain="Air" humidity="8.864665E-4"/>
 		<t x="28" y="9" terrain="Air" humidity="0.0"/>
 		<t x="29" y="9" terrain="Air" humidity="0.0"/>
 		<t x="30" y="9" terrain="Air" humidity="0.0"/>
@@ -800,32 +800,32 @@
 		<t x="77" y="9" terrain="Air" humidity="0.0"/>
 		<t x="78" y="9" terrain="Air" humidity="0.0"/>
 		<t x="79" y="9" terrain="Air" humidity="0.0"/>
-		<t x="0" y="10" terrain="Air" humidity="0.0"/>
-		<t x="1" y="10" terrain="Air" humidity="0.0"/>
-		<t x="2" y="10" terrain="Air" humidity="0.0"/>
-		<t x="3" y="10" terrain="Air" humidity="0.0"/>
-		<t x="4" y="10" terrain="Air" humidity="0.0"/>
-		<t x="5" y="10" terrain="Air" humidity="0.0"/>
-		<t x="6" y="10" terrain="Air" humidity="0.0"/>
-		<t x="7" y="10" terrain="Air" humidity="0.0"/>
-		<t x="8" y="10" terrain="Air" humidity="0.0"/>
-		<t x="9" y="10" terrain="Air" humidity="0.0"/>
-		<t x="10" y="10" terrain="Air" humidity="0.0"/>
-		<t x="11" y="10" terrain="Air" humidity="0.0"/>
+		<t x="0" y="10" terrain="Soil" humidity="0.5772989"/>
+		<t x="1" y="10" terrain="Soil" humidity="0.57730186"/>
+		<t x="2" y="10" terrain="Rock" humidity="0.0"/>
+		<t x="3" y="10" terrain="Rock" humidity="0.0"/>
+		<t x="4" y="10" terrain="Air" humidity="8.996986E-4"/>
+		<t x="5" y="10" terrain="Air" humidity="9.1014564E-4"/>
+		<t x="6" y="10" terrain="Soil" humidity="0.0034763191"/>
+		<t x="7" y="10" terrain="Soil" humidity="0.002059441"/>
+		<t x="8" y="10" terrain="Rock" humidity="0.0"/>
+		<t x="9" y="10" terrain="Soil" humidity="6.4953834E-5"/>
+		<t x="10" y="10" terrain="Air" humidity="9.331208E-4"/>
+		<t x="11" y="10" terrain="Air" humidity="6.0709065E-4"/>
 		<t x="12" y="10" terrain="Air" humidity="0.0"/>
 		<t x="13" y="10" terrain="Air" humidity="0.0"/>
 		<t x="14" y="10" terrain="Air" humidity="0.0"/>
 		<t x="15" y="10" terrain="Air" humidity="0.0"/>
 		<t x="16" y="10" terrain="Air" humidity="0.0"/>
 		<t x="17" y="10" terrain="Air" humidity="0.0"/>
-		<t x="18" y="10" terrain="Air" humidity="0.0"/>
-		<t x="19" y="10" terrain="Air" humidity="0.0"/>
-		<t x="20" y="10" terrain="Air" humidity="0.0"/>
-		<t x="21" y="10" terrain="Soil" humidity="0.0"/>
-		<t x="22" y="10" terrain="Soil" humidity="0.0"/>
-		<t x="23" y="10" terrain="Soil" humidity="0.0"/>
-		<t x="24" y="10" terrain="Soil" humidity="0.0"/>
-		<t x="25" y="10" terrain="Air" humidity="0.0"/>
+		<t x="18" y="10" terrain="Air" humidity="9.407388E-4"/>
+		<t x="19" y="10" terrain="Air" humidity="9.969308E-4"/>
+		<t x="20" y="10" terrain="Rock" humidity="0.0"/>
+		<t x="21" y="10" terrain="Air" humidity="9.213657E-4"/>
+		<t x="22" y="10" terrain="Soil" humidity="0.17358439"/>
+		<t x="23" y="10" terrain="Air" humidity="6.763188E-4"/>
+		<t x="24" y="10" terrain="Air" humidity="9.948236E-4"/>
+		<t x="25" y="10" terrain="Air" humidity="5.886281E-4"/>
 		<t x="26" y="10" terrain="Air" humidity="0.0"/>
 		<t x="27" y="10" terrain="Air" humidity="0.0"/>
 		<t x="28" y="10" terrain="Air" humidity="0.0"/>
@@ -880,16 +880,16 @@
 		<t x="77" y="10" terrain="Air" humidity="0.0"/>
 		<t x="78" y="10" terrain="Air" humidity="0.0"/>
 		<t x="79" y="10" terrain="Air" humidity="0.0"/>
-		<t x="0" y="11" terrain="Air" humidity="0.0"/>
-		<t x="1" y="11" terrain="Air" humidity="0.0"/>
-		<t x="2" y="11" terrain="Air" humidity="0.0"/>
-		<t x="3" y="11" terrain="Air" humidity="0.0"/>
+		<t x="0" y="11" terrain="Rock" humidity="0.0"/>
+		<t x="1" y="11" terrain="Soil" humidity="0.5773047"/>
+		<t x="2" y="11" terrain="Rock" humidity="0.0"/>
+		<t x="3" y="11" terrain="Rock" humidity="0.0"/>
 		<t x="4" y="11" terrain="Air" humidity="0.0"/>
-		<t x="5" y="11" terrain="Air" humidity="0.0"/>
-		<t x="6" y="11" terrain="Air" humidity="0.0"/>
-		<t x="7" y="11" terrain="Air" humidity="0.0"/>
-		<t x="8" y="11" terrain="Air" humidity="0.0"/>
-		<t x="9" y="11" terrain="Air" humidity="0.0"/>
+		<t x="5" y="11" terrain="Air" humidity="9.626192E-4"/>
+		<t x="6" y="11" terrain="Air" humidity="7.527888E-4"/>
+		<t x="7" y="11" terrain="Soil" humidity="5.879513E-4"/>
+		<t x="8" y="11" terrain="Soil" humidity="1.7364822E-4"/>
+		<t x="9" y="11" terrain="Soil" humidity="6.345206E-5"/>
 		<t x="10" y="11" terrain="Air" humidity="0.0"/>
 		<t x="11" y="11" terrain="Air" humidity="0.0"/>
 		<t x="12" y="11" terrain="Air" humidity="0.0"/>
@@ -899,18 +899,18 @@
 		<t x="16" y="11" terrain="Air" humidity="0.0"/>
 		<t x="17" y="11" terrain="Air" humidity="0.0"/>
 		<t x="18" y="11" terrain="Air" humidity="0.0"/>
-		<t x="19" y="11" terrain="Air" humidity="0.0"/>
-		<t x="20" y="11" terrain="Air" humidity="0.0"/>
-		<t x="21" y="11" terrain="Air" humidity="0.0"/>
-		<t x="22" y="11" terrain="Air" humidity="0.0"/>
-		<t x="23" y="11" terrain="Air" humidity="0.0"/>
+		<t x="19" y="11" terrain="Air" humidity="6.700536E-4"/>
+		<t x="20" y="11" terrain="Air" humidity="9.85608E-4"/>
+		<t x="21" y="11" terrain="Air" humidity="5.8317534E-4"/>
+		<t x="22" y="11" terrain="Air" humidity="5.285784E-4"/>
+		<t x="23" y="11" terrain="Air" humidity="8.6192717E-4"/>
 		<t x="24" y="11" terrain="Air" humidity="0.0"/>
-		<t x="25" y="11" terrain="Soil" humidity="0.0"/>
+		<t x="25" y="11" terrain="Air" humidity="0.0"/>
 		<t x="26" y="11" terrain="Air" humidity="0.0"/>
-		<t x="27" y="11" terrain="Soil" humidity="0.0"/>
-		<t x="28" y="11" terrain="Soil" humidity="0.0"/>
-		<t x="29" y="11" terrain="Soil" humidity="0.0"/>
-		<t x="30" y="11" terrain="Soil" humidity="0.0"/>
+		<t x="27" y="11" terrain="Air" humidity="0.0"/>
+		<t x="28" y="11" terrain="Air" humidity="0.0"/>
+		<t x="29" y="11" terrain="Air" humidity="0.0"/>
+		<t x="30" y="11" terrain="Air" humidity="0.0"/>
 		<t x="31" y="11" terrain="Air" humidity="0.0"/>
 		<t x="32" y="11" terrain="Air" humidity="0.0"/>
 		<t x="33" y="11" terrain="Air" humidity="0.0"/>
@@ -960,17 +960,17 @@
 		<t x="77" y="11" terrain="Air" humidity="0.0"/>
 		<t x="78" y="11" terrain="Air" humidity="0.0"/>
 		<t x="79" y="11" terrain="Air" humidity="0.0"/>
-		<t x="0" y="12" terrain="Air" humidity="0.0"/>
-		<t x="1" y="12" terrain="Air" humidity="0.0"/>
-		<t x="2" y="12" terrain="Air" humidity="0.0"/>
-		<t x="3" y="12" terrain="Air" humidity="0.0"/>
-		<t x="4" y="12" terrain="Air" humidity="0.0"/>
+		<t x="0" y="12" terrain="Air" humidity="9.993E-4"/>
+		<t x="1" y="12" terrain="Rock" humidity="0.0"/>
+		<t x="2" y="12" terrain="Soil" humidity="1.35E-43"/>
+		<t x="3" y="12" terrain="Air" humidity="9.994989E-4"/>
+		<t x="4" y="12" terrain="Air" humidity="9.946771E-4"/>
 		<t x="5" y="12" terrain="Air" humidity="0.0"/>
-		<t x="6" y="12" terrain="Air" humidity="0.0"/>
-		<t x="7" y="12" terrain="Air" humidity="0.0"/>
-		<t x="8" y="12" terrain="Air" humidity="0.0"/>
-		<t x="9" y="12" terrain="Air" humidity="0.0"/>
-		<t x="10" y="12" terrain="Air" humidity="0.0"/>
+		<t x="6" y="12" terrain="Air" humidity="2.0368316E-4"/>
+		<t x="7" y="12" terrain="Air" humidity="9.1657427E-4"/>
+		<t x="8" y="12" terrain="Air" humidity="9.44591E-4"/>
+		<t x="9" y="12" terrain="Air" humidity="5.2189187E-4"/>
+		<t x="10" y="12" terrain="Air" humidity="2.818074E-4"/>
 		<t x="11" y="12" terrain="Air" humidity="0.0"/>
 		<t x="12" y="12" terrain="Air" humidity="0.0"/>
 		<t x="13" y="12" terrain="Air" humidity="0.0"/>
@@ -991,9 +991,9 @@
 		<t x="28" y="12" terrain="Air" humidity="0.0"/>
 		<t x="29" y="12" terrain="Air" humidity="0.0"/>
 		<t x="30" y="12" terrain="Air" humidity="0.0"/>
-		<t x="31" y="12" terrain="Soil" humidity="0.0"/>
-		<t x="32" y="12" terrain="Soil" humidity="0.0"/>
-		<t x="33" y="12" terrain="Soil" humidity="0.0"/>
+		<t x="31" y="12" terrain="Air" humidity="0.0"/>
+		<t x="32" y="12" terrain="Air" humidity="0.0"/>
+		<t x="33" y="12" terrain="Air" humidity="0.0"/>
 		<t x="34" y="12" terrain="Air" humidity="0.0"/>
 		<t x="35" y="12" terrain="Air" humidity="0.0"/>
 		<t x="36" y="12" terrain="Air" humidity="0.0"/>
@@ -1040,9 +1040,9 @@
 		<t x="77" y="12" terrain="Air" humidity="0.0"/>
 		<t x="78" y="12" terrain="Air" humidity="0.0"/>
 		<t x="79" y="12" terrain="Air" humidity="0.0"/>
-		<t x="0" y="13" terrain="Air" humidity="0.0"/>
-		<t x="1" y="13" terrain="Air" humidity="0.0"/>
-		<t x="2" y="13" terrain="Air" humidity="0.0"/>
+		<t x="0" y="13" terrain="Air" humidity="9.99935E-4"/>
+		<t x="1" y="13" terrain="Air" humidity="9.962743E-4"/>
+		<t x="2" y="13" terrain="Soil" humidity="3.1E-44"/>
 		<t x="3" y="13" terrain="Air" humidity="0.0"/>
 		<t x="4" y="13" terrain="Air" humidity="0.0"/>
 		<t x="5" y="13" terrain="Air" humidity="0.0"/>
@@ -1074,9 +1074,9 @@
 		<t x="31" y="13" terrain="Air" humidity="0.0"/>
 		<t x="32" y="13" terrain="Air" humidity="0.0"/>
 		<t x="33" y="13" terrain="Air" humidity="0.0"/>
-		<t x="34" y="13" terrain="Soil" humidity="0.0"/>
-		<t x="35" y="13" terrain="Soil" humidity="0.0"/>
-		<t x="36" y="13" terrain="Soil" humidity="0.0"/>
+		<t x="34" y="13" terrain="Air" humidity="0.0"/>
+		<t x="35" y="13" terrain="Air" humidity="0.0"/>
+		<t x="36" y="13" terrain="Air" humidity="0.0"/>
 		<t x="37" y="13" terrain="Air" humidity="0.0"/>
 		<t x="38" y="13" terrain="Air" humidity="0.0"/>
 		<t x="39" y="13" terrain="Air" humidity="0.0"/>
@@ -1121,9 +1121,9 @@
 		<t x="78" y="13" terrain="Air" humidity="0.0"/>
 		<t x="79" y="13" terrain="Air" humidity="0.0"/>
 		<t x="0" y="14" terrain="Air" humidity="0.0"/>
-		<t x="1" y="14" terrain="Air" humidity="0.0"/>
-		<t x="2" y="14" terrain="Air" humidity="0.0"/>
-		<t x="3" y="14" terrain="Air" humidity="0.0"/>
+		<t x="1" y="14" terrain="Air" humidity="3.6857763E-4"/>
+		<t x="2" y="14" terrain="Air" humidity="9.908859E-4"/>
+		<t x="3" y="14" terrain="Air" humidity="3.3406785E-4"/>
 		<t x="4" y="14" terrain="Air" humidity="0.0"/>
 		<t x="5" y="14" terrain="Air" humidity="0.0"/>
 		<t x="6" y="14" terrain="Air" humidity="0.0"/>
@@ -1157,8 +1157,8 @@
 		<t x="34" y="14" terrain="Air" humidity="0.0"/>
 		<t x="35" y="14" terrain="Air" humidity="0.0"/>
 		<t x="36" y="14" terrain="Air" humidity="0.0"/>
-		<t x="37" y="14" terrain="Soil" humidity="0.0"/>
-		<t x="38" y="14" terrain="Soil" humidity="0.0"/>
+		<t x="37" y="14" terrain="Air" humidity="0.0"/>
+		<t x="38" y="14" terrain="Air" humidity="0.0"/>
 		<t x="39" y="14" terrain="Air" humidity="0.0"/>
 		<t x="40" y="14" terrain="Air" humidity="0.0"/>
 		<t x="41" y="14" terrain="Air" humidity="0.0"/>
@@ -1239,9 +1239,9 @@
 		<t x="36" y="15" terrain="Air" humidity="0.0"/>
 		<t x="37" y="15" terrain="Air" humidity="0.0"/>
 		<t x="38" y="15" terrain="Air" humidity="0.0"/>
-		<t x="39" y="15" terrain="Soil" humidity="0.0"/>
-		<t x="40" y="15" terrain="Soil" humidity="0.0"/>
-		<t x="41" y="15" terrain="Soil" humidity="0.0"/>
+		<t x="39" y="15" terrain="Air" humidity="0.0"/>
+		<t x="40" y="15" terrain="Air" humidity="0.0"/>
+		<t x="41" y="15" terrain="Air" humidity="0.0"/>
 		<t x="42" y="15" terrain="Air" humidity="0.0"/>
 		<t x="43" y="15" terrain="Air" humidity="0.0"/>
 		<t x="44" y="15" terrain="Air" humidity="0.0"/>
@@ -1322,13 +1322,13 @@
 		<t x="39" y="16" terrain="Air" humidity="0.0"/>
 		<t x="40" y="16" terrain="Air" humidity="0.0"/>
 		<t x="41" y="16" terrain="Air" humidity="0.0"/>
-		<t x="42" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="43" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="44" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="45" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="46" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="47" y="16" terrain="Soil" humidity="0.0"/>
-		<t x="48" y="16" terrain="Soil" humidity="0.0"/>
+		<t x="42" y="16" terrain="Air" humidity="0.0"/>
+		<t x="43" y="16" terrain="Air" humidity="0.0"/>
+		<t x="44" y="16" terrain="Air" humidity="0.0"/>
+		<t x="45" y="16" terrain="Air" humidity="0.0"/>
+		<t x="46" y="16" terrain="Air" humidity="0.0"/>
+		<t x="47" y="16" terrain="Air" humidity="0.0"/>
+		<t x="48" y="16" terrain="Air" humidity="0.0"/>
 		<t x="49" y="16" terrain="Air" humidity="0.0"/>
 		<t x="50" y="16" terrain="Air" humidity="0.0"/>
 		<t x="51" y="16" terrain="Air" humidity="0.0"/>
@@ -3202,18 +3202,79 @@
 		<t x="79" y="39" terrain="Air" humidity="0.0"/>
 	</tiles>
 	<plants>
-		<plant type="Leafy" x="28.0" y="2.0" health="1.0" water="-0.5253885" size="2" matureHeight="3" isMature="false" growthTimer="2.3703878"/>
-		<plant type="Leafy" x="37.0" y="4.0" health="1.0" water="-0.29011917" size="2" matureHeight="5" isMature="false" growthTimer="2.1894586"/>
-		<plant type="Leafy" x="14.0" y="3.0" health="1.0" water="0.10180844" size="3" matureHeight="3" isMature="true" growthTimer="2.8395605"/>
-		<plant type="Lilypad" x="11.0" y="4.198374" health="1.0" water="0.601427" size="1" matureHeight="1" isMature="false" growthTimer="2.8813682"/>
-		<plant type="Leafy" x="42.0" y="3.0" health="1.0" water="-0.65153855" size="2" matureHeight="5" isMature="false" growthTimer="1.9925889"/>
-		<plant type="Cactus" x="53.0" y="5.0" health="1.0" water="0.47832635" size="1" matureHeight="2" isMature="false" growthTimer="14.346916"/>
-		<plant type="Cactus" x="58.0" y="4.0" health="1.0" water="0.45329264" size="1" matureHeight="1" isMature="false" growthTimer="14.445568"/>
-		<plant type="Cactus" x="50.0" y="7.0" health="1.0" water="0.45531064" size="1" matureHeight="3" isMature="false" growthTimer="12.161295"/>
-		<plant type="Cactus" x="56.0" y="6.0" health="1.0" water="0.45929226" size="1" matureHeight="3" isMature="false" growthTimer="11.327921"/>
+		<plant type="Leafy" x="10.0" y="10.0" health="1.0" water="-66.75815" size="2" matureHeight="3" isMature="false" growthTimer="2.1138444"/>
+		<plant type="Cactus" x="7.0" y="12.0" health="1.0" water="-7.2021956" size="2" matureHeight="2" isMature="true" growthTimer="5.288354"/>
+		<plant type="Cactus" x="16.0" y="7.0" health="1.0" water="0.06852726" size="2" matureHeight="2" isMature="true" growthTimer="9.1116905"/>
+		<plant type="Leafy" x="32.0" y="6.0" health="1.0" water="-56.57849" size="2" matureHeight="3" isMature="false" growthTimer="2.169202"/>
+		<plant type="Leafy" x="22.0" y="11.0" health="1.0" water="-90.99789" size="5" matureHeight="5" isMature="true" growthTimer="3.0846055"/>
+		<plant type="Cactus" x="30.0" y="6.0" health="1.0" water="0.07051225" size="3" matureHeight="3" isMature="true" growthTimer="4.393291"/>
+		<plant type="Lilypad" x="35.0" y="3.2802567" health="1.0" water="0.5600359" size="1" matureHeight="1" isMature="true" growthTimer="11.862238"/>
+		<plant type="Leafy" x="18.0" y="9.0" health="1.0" water="-48.62315" size="2" matureHeight="4" isMature="false" growthTimer="1.9521885"/>
+		<plant type="Cactus" x="2.0" y="14.0" health="1.0" water="-5.238201" size="1" matureHeight="1" isMature="true" growthTimer="1.6256331"/>
+		<plant type="Leafy" x="54.0" y="5.0" health="1.0" water="-1.4317751" size="1" matureHeight="3" isMature="false" growthTimer="0.7480293"/>
+		<plant type="Lilypad" x="45.0" y="2.0" health="1.0" water="-22.33499" size="1" matureHeight="1" isMature="true" growthTimer="12.168868"/>
+		<plant type="Leafy" x="26.0" y="9.0" health="1.0" water="0.30171743" size="1" matureHeight="4" isMature="false" growthTimer="0.834301"/>
+		<plant type="Lilypad" x="34.0" y="3.2787762" health="1.0" water="0.6016893" size="1" matureHeight="1" isMature="true" growthTimer="3.945625"/>
+		<plant type="Cactus" x="8.0" y="12.0" health="1.0" water="-10.596056" size="3" matureHeight="3" isMature="true" growthTimer="9.688068"/>
+		<plant type="Cactus" x="4.0" y="10.0" health="1.0" water="-3.8944857" size="2" matureHeight="2" isMature="true" growthTimer="3.162953"/>
+		<plant type="Lilypad" x="36.0" y="3.1731758" health="1.0" water="0.6011126" size="1" matureHeight="1" isMature="true" growthTimer="9.833239"/>
+		<plant type="Lilypad" x="37.0" y="3.0810497" health="1.0" water="-5.135714" size="1" matureHeight="1" isMature="true" growthTimer="11.090259"/>
+		<plant type="Cactus" x="15.0" y="5.0" health="1.0" water="0.07051102" size="3" matureHeight="3" isMature="true" growthTimer="0.22892985"/>
+		<plant type="Cactus" x="5.0" y="10.0" health="1.0" water="-2.8921566" size="2" matureHeight="2" isMature="true" growthTimer="8.294217"/>
+		<plant type="Cactus" x="31.0" y="7.0" health="1.0" water="-6.9699984" size="2" matureHeight="2" isMature="true" growthTimer="0.45811853"/>
+		<plant type="Leafy" x="21.0" y="10.0" health="1.0" water="-12.472595" size="3" matureHeight="3" isMature="true" growthTimer="0.16758487"/>
+		<plant type="Lilypad" x="39.0" y="2.1414332" health="1.0" water="0.6017071" size="1" matureHeight="1" isMature="true" growthTimer="0.17760321"/>
+		<plant type="Cactus" x="3.0" y="12.0" health="1.0" water="-6.3781734" size="2" matureHeight="2" isMature="true" growthTimer="10.25905"/>
+		<plant type="Lilypad" x="38.0" y="2.2149208" health="1.0" water="0.6006538" size="1" matureHeight="1" isMature="true" growthTimer="10.413377"/>
+		<plant type="Cactus" x="6.0" y="11.0" health="1.0" water="-5.0607276" size="2" matureHeight="2" isMature="true" growthTimer="7.9524407"/>
+		<plant type="Cactus" x="29.0" y="7.0" health="1.0" water="-4.020056" size="1" matureHeight="1" isMature="true" growthTimer="2.7299163"/>
+		<plant type="Cactus" x="11.0" y="8.0" health="1.0" water="-0.502942" size="1" matureHeight="1" isMature="true" growthTimer="4.880336"/>
+		<plant type="Lilypad" x="41.0" y="2.0585432" health="1.0" water="-10.091828" size="1" matureHeight="1" isMature="true" growthTimer="3.9403837"/>
+		<plant type="Cactus" x="28.0" y="7.0" health="1.0" water="0.09017174" size="1" matureHeight="3" isMature="false" growthTimer="11.130949"/>
+		<plant type="Lilypad" x="40.0" y="2.092918" health="1.0" water="-3.2442796" size="1" matureHeight="1" isMature="true" growthTimer="7.551392"/>
+		<plant type="Cactus" x="13.0" y="8.0" health="1.0" water="-3.8144312" size="3" matureHeight="3" isMature="true" growthTimer="13.43972"/>
+		<plant type="Lilypad" x="43.0" y="2.0128052" health="1.0" water="-19.16246" size="1" matureHeight="1" isMature="true" growthTimer="2.1238432"/>
+		<plant type="Cactus" x="17.0" y="9.0" health="1.0" water="0.09014472" size="1" matureHeight="1" isMature="true" growthTimer="5.992257"/>
+		<plant type="Cactus" x="9.0" y="12.0" health="1.0" water="-3.8332784" size="1" matureHeight="1" isMature="true" growthTimer="6.6052065"/>
+		<plant type="Lilypad" x="42.0" y="2.033151" health="1.0" water="-15.257642" size="1" matureHeight="1" isMature="true" growthTimer="13.23975"/>
+		<plant type="Leafy" x="19.0" y="10.0" health="1.0" water="-21.276194" size="2" matureHeight="4" isMature="false" growthTimer="0.799471"/>
+		<plant type="Cactus" x="14.0" y="7.0" health="1.0" water="-7.490616" size="3" matureHeight="3" isMature="true" growthTimer="9.5556345"/>
+		<plant type="Lilypad" x="44.0" y="2.0011876" health="1.0" water="-21.254665" size="1" matureHeight="1" isMature="true" growthTimer="3.101708"/>
+		<plant type="Cactus" x="1.0" y="13.0" health="1.0" water="-5.25703" size="2" matureHeight="2" isMature="true" growthTimer="6.090287"/>
+		<plant type="Cactus" x="12.0" y="7.0" health="1.0" water="-6.0252113" size="3" matureHeight="3" isMature="true" growthTimer="5.672027"/>
+		<plant type="Cactus" x="27.0" y="8.0" health="1.0" water="0.09017174" size="1" matureHeight="1" isMature="false" growthTimer="14.368727"/>
+		<plant type="Cactus" x="33.0" y="5.0" health="1.0" water="-2.5910807" size="1" matureHeight="1" isMature="true" growthTimer="8.084868"/>
+		<plant type="Cactus" x="0.0" y="12.0" health="1.0" water="-2.5925024" size="1" matureHeight="1" isMature="true" growthTimer="8.212154"/>
 	</plants>
 	<seeds>
-		<seed type="Leafy" x="234.60786" y="46.812862" dx="0.0" dy="0.0" life="6.6649528"/>
+		<seed type="Cactus" x="540.77014" y="79.16466" dx="0.0" dy="0.0" life="5.7479296"/>
+		<seed type="Cactus" x="281.4832" y="143.81526" dx="0.0" dy="0.0" life="1.4599562"/>
+		<seed type="Cactus" x="114.62276" y="190.83897" dx="0.0" dy="0.0" life="6.7635193"/>
+		<seed type="Cactus" x="109.7453" y="175.03625" dx="0.0" dy="0.0" life="2.9102147"/>
+		<seed type="Cactus" x="196.35123" y="111.285835" dx="0.0" dy="0.0" life="0.19170806"/>
+		<seed type="Cactus" x="198.362" y="111.55725" dx="0.0" dy="0.0" life="1.3262919"/>
+		<seed type="Lilypad" x="645.5869" y="33.462116" dx="11.566955" dy="0.0" life="1.9091045"/>
+		<seed type="Lilypad" x="577.0512" y="68.94096" dx="10.642582" dy="-51.67581" life="9.149535"/>
+		<seed type="Lilypad" x="684.2994" y="62.261314" dx="12.924465" dy="0.104557276" life="9.6673355"/>
+		<seed type="Lilypad" x="621.39624" y="35.41235" dx="-4.271907" dy="0.0" life="0.026745642"/>
+		<seed type="Leafy" x="339.60275" y="159.17317" dx="0.0" dy="0.0" life="0.15944242"/>
+		<seed type="Leafy" x="342.60718" y="159.09183" dx="0.0" dy="0.0" life="6.897373"/>
+		<seed type="Cactus" x="98.57428" y="174.83966" dx="0.0" dy="0.0" life="6.11295"/>
+		<seed type="Lilypad" x="607.80566" y="35.345695" dx="0.0" dy="0.0" life="0.19101855"/>
+		<seed type="Cactus" x="279.46005" y="143.2572" dx="0.0" dy="0.0" life="7.8998504"/>
+		<seed type="Lilypad" x="606.7034" y="49.276264" dx="2.5278897" dy="0.0" life="7.3482246"/>
+		<seed type="Cactus" x="79.51245" y="159.28064" dx="0.0" dy="0.0" life="6.980132"/>
+		<seed type="Lilypad" x="678.23535" y="32.521416" dx="7.2025924" dy="0.0" life="5.8021407"/>
+		<seed type="Lilypad" x="653.14777" y="33.462116" dx="8.276433" dy="0.0" life="5.5116687"/>
+		<seed type="Cactus" x="42.069653" y="222.99965" dx="0.0" dy="0.0" life="4.4806705"/>
+		<seed type="Leafy" x="362.87918" y="175.42221" dx="0.0" dy="0.0" life="3.5614622"/>
+		<seed type="Cactus" x="-12.196011" y="188.60141" dx="0.0" dy="0.0" life="5.698154"/>
+		<seed type="Cactus" x="152.57634" y="191.76991" dx="0.0" dy="0.0" life="4.7474885"/>
+		<seed type="Lilypad" x="634.09015" y="34.236702" dx="9.7815275" dy="0.0" life="4.879101"/>
+		<seed type="Cactus" x="171.65927" y="158.39684" dx="0.0" dy="0.0" life="5.280066"/>
+		<seed type="Cactus" x="203.331" y="111.45844" dx="0.0" dy="0.0" life="5.296303"/>
+		<seed type="Cactus" x="200.24026" y="168.69646" dx="-16.024107" dy="-64.577835" life="9.016498"/>
+		<seed type="Lilypad" x="727.76544" y="56.476997" dx="-13.854181" dy="26.516794" life="9.98307"/>
 	</seeds>
 	<droplets/>
 </ecosystem>
