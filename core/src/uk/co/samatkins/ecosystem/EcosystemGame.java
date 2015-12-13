@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,16 +13,20 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlWriter;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.Random;
-
-import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.MakeSpring;
-import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.Water;
 
 public class EcosystemGame extends ApplicationAdapter {
 
+	public static final String SAVE_FILENAME = "ecosystem.xml";
 	private Random random;
+	public static final int buttonSize = 48;
 
 	enum Direction {
 		Left,
@@ -64,7 +69,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum InteractionMode {
-		Water(0.1f),
+		Water(0.05f),
 		MakeSpring(0f),
 		PlantSeed(0.2f),
 		MakeSoil(0f),
@@ -174,12 +179,13 @@ public class EcosystemGame extends ApplicationAdapter {
 		PlantType type;
 		float x, y; // Base
 
+		float health;
+		float water;
+
 		int size;
 		int matureHeight;
-		float health;
 
 		float growthTimer;
-		float water;
 		boolean isMature;
 
 		public Plant(PlantType type, float x, float y) {
@@ -206,12 +212,12 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	int worldWidth, worldHeight;
 	Tile[][] tiles;
-	InteractionMode interactionMode = Water;
+	InteractionMode interactionMode = InteractionMode.Water;
 	float interactionCooldown = 0f;
 	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
-	Texture texCloud, texSpade, texSpring;
+	Texture texCloud, texSpade, texSpring, texSave, texLoad;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
 	final Array<Plant> plants = new Array<Plant>(false, 128);
@@ -248,6 +254,8 @@ public class EcosystemGame extends ApplicationAdapter {
 		texCloud = new Texture("cloud.png");
 		texSpade = new Texture("spade.png");
 		texSpring = new Texture("spring.png");
+		texSave = new Texture("save.png");
+		texLoad = new Texture("load.png");
 		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
 		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
@@ -315,9 +323,11 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0f);
 		camera.unproject(mousePos);
+		uiMousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0f);
+		uiCamera.unproject(uiMousePos);
 
 		// Interactions!
-		if (Gdx.input.isTouched()) {
+		if (Gdx.input.isTouched() && (uiMousePos.y > buttonSize)) {
 			interactionCooldown -= dt;
 
 			if (interactionCooldown <= 0) {
@@ -569,17 +579,14 @@ public class EcosystemGame extends ApplicationAdapter {
 		}
 
 		// UI!
-		uiMousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0f);
-		uiCamera.unproject(uiMousePos);
 		batch.setProjectionMatrix(uiCamera.combined);
-		int buttonSize = 48;
 		int buttonX = 0;
-		if (drawButton(buttonX, 0, buttonSize, buttonSize, texCloud, interactionMode == Water)) {
-			interactionMode = Water;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texCloud, interactionMode == InteractionMode.Water)) {
+			interactionMode = InteractionMode.Water;
 		}
 		buttonX += buttonSize;
-		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSpring, interactionMode == MakeSpring)) {
-			interactionMode = MakeSpring;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSpring, interactionMode == InteractionMode.MakeSpring)) {
+			interactionMode = InteractionMode.MakeSpring;
 		}
 		for (PlantType plantType : PlantType.values()) {
 			buttonX += buttonSize;
@@ -602,9 +609,190 @@ public class EcosystemGame extends ApplicationAdapter {
 			interactionMode = InteractionMode.Dig;
 		}
 
+		if (Gdx.files.isLocalStorageAvailable()) {
+			buttonX = (int) uiCamera.viewportWidth;
+			buttonX -= buttonSize;
+			if (drawButton(buttonX, 0, buttonSize, buttonSize, texLoad, false)) {
+				// Load!
+				loadGame();
+			}
+			buttonX -= buttonSize;
+			if (drawButton(buttonX, 0, buttonSize, buttonSize, texSave, false)) {
+				// Save!
+				saveGame();
+			}
+		}
+
 		batch.end();
 
 		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	private void saveGame() {
+		if (!Gdx.files.isLocalStorageAvailable()) {
+			log("Couldn't access storage");
+			return;
+		}
+
+		try {
+			FileHandle saveFile = Gdx.files.local(SAVE_FILENAME);
+			Writer writer = saveFile.writer(false);
+			XmlWriter xml = new XmlWriter(writer);
+			xml.element("ecosystem")
+				.attribute("width", worldWidth)
+				.attribute("height", worldHeight);
+			{
+				xml.element("tiles");
+				for (int y=0; y<worldHeight; y++) {
+					for (int x = 0; x < worldWidth; x++) {
+						Tile t = tiles[x][y];
+						xml.element("t")
+							.attribute("x", x)
+							.attribute("y", y)
+							.attribute("terrain", t.terrain.name())
+							.attribute("humidity", t.humidity)
+							.pop();
+					}
+				}
+				xml.pop();
+
+				xml.element("plants");
+				{
+					for (Plant plant : plants) {
+						xml.element("plant")
+							.attribute("type", plant.type.name())
+							.attribute("x", plant.x)
+							.attribute("y", plant.y)
+							.attribute("health", plant.health)
+							.attribute("water", plant.water)
+							.attribute("size", plant.size)
+							.attribute("matureHeight", plant.matureHeight)
+							.attribute("isMature", plant.isMature)
+							.attribute("growthTimer", plant.growthTimer)
+							.pop();
+					}
+				}
+				xml.pop();
+
+				xml.element("seeds");
+				{
+					for (Seed seed : seeds) {
+						xml.element("seed")
+							.attribute("type", seed.type.name())
+							.attribute("x", seed.x)
+							.attribute("y", seed.y)
+							.attribute("dx", seed.dx)
+							.attribute("dy", seed.dy)
+							.attribute("life", seed.life)
+							.pop();
+					}
+				}
+				xml.pop();
+
+				xml.element("droplets");
+				{
+					for (Droplet droplet : droplets) {
+						xml.element("droplet")
+							.attribute("x", droplet.x)
+							.attribute("y", droplet.y)
+							.attribute("dx", droplet.dx)
+							.attribute("dy", droplet.dy)
+							.pop();
+					}
+				}
+				xml.pop();
+			}
+			xml.pop();
+			writer.close();
+
+			log("Game saved to " + saveFile.file().getAbsolutePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			log("Failed to save, with an error.");
+		}
+	}
+
+	private void loadGame() {
+		if (!Gdx.files.isLocalStorageAvailable()) {
+			log("Couldn't access storage");
+			return;
+		}
+		try {
+			FileHandle saveFile = Gdx.files.local(SAVE_FILENAME);
+			Reader reader = saveFile.reader();
+
+			XmlReader xmlReader = new XmlReader();
+			XmlReader.Element xml = xmlReader.parse(reader);
+
+			droplets.clear();
+			seeds.clear();
+			plants.clear();
+			worldWidth = xml.getIntAttribute("width", 80);
+			worldHeight = xml.getIntAttribute("height", 40);
+			tiles = new Tile[worldWidth][worldHeight];
+
+			XmlReader.Element xmlTiles = xml.getChildByName("tiles");
+			for (int i=0; i<xmlTiles.getChildCount(); i++) {
+				XmlReader.Element xmlTile = xmlTiles.getChild(i);
+				Tile tile = new Tile(xmlTile.getIntAttribute("x"), xmlTile.getIntAttribute("y"));
+				tile.terrain = Terrain.valueOf(xmlTile.getAttribute("terrain", Terrain.Air.name()));
+				tile.humidity = xmlTile.getFloatAttribute("humidity", 0f);
+
+				tiles[tile.x][tile.y] = tile;
+			}
+
+			XmlReader.Element xmlPlants = xml.getChildByName("plants");
+			for (int i=0; i<xmlPlants.getChildCount(); i++) {
+				XmlReader.Element xmlPlant = xmlPlants.getChild(i);
+				Plant plant = new Plant(
+					PlantType.valueOf(xmlPlant.getAttribute("type", PlantType.Leafy.name())),
+					xmlPlant.getFloatAttribute("x"),
+					xmlPlant.getFloatAttribute("y")
+				);
+				plant.health = xmlPlant.getFloatAttribute("health", 1f);
+				plant.water = xmlPlant.getFloatAttribute("water", 1f);
+				plant.size = xmlPlant.getIntAttribute("size", 1);
+				plant.matureHeight = xmlPlant.getIntAttribute("matureHeight", 1);
+				plant.isMature = xmlPlant.getBooleanAttribute("isMature", false);
+				plant.growthTimer = xmlPlant.getFloatAttribute("growthTimer", 1f);
+
+				plants.add(plant);
+			}
+
+			XmlReader.Element xmlSeeds = xml.getChildByName("seeds");
+			for (int i=0; i<xmlSeeds.getChildCount(); i++) {
+				XmlReader.Element x = xmlSeeds.getChild(i);
+				Seed seed = new Seed(
+					x.getFloatAttribute("x"),
+					x.getFloatAttribute("y"),
+					PlantType.valueOf(x.getAttribute("type", PlantType.Leafy.name()))
+				);
+				seed.dx = x.getFloatAttribute("dx", 0f);
+				seed.dy = x.getFloatAttribute("dy", 0f);
+				seed.life = x.getFloatAttribute("life", 1f);
+
+				seeds.add(seed);
+			}
+
+			XmlReader.Element xmlDroplets = xml.getChildByName("droplets");
+			for (int i=0; i<xmlDroplets.getChildCount(); i++) {
+				XmlReader.Element x = xmlDroplets.getChild(i);
+				Droplet droplet = new Droplet(
+					x.getFloatAttribute("x"),
+					x.getFloatAttribute("y"),
+					x.getFloatAttribute("dx", 0f),
+					x.getFloatAttribute("dy", 0f)
+				);
+
+				droplets.add(droplet);
+			}
+
+			reader.close();
+			log("Game loaded from " + saveFile.file().getAbsolutePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			log("Failed to load, with an error.");
+		}
 	}
 
 	// Calculates where the top of the water is, starting in the given tile and looking up and down
