@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
+		config.title = "Ecosystem, a game by @AtkinsSJ for LD34. http://samatkins.co.uk/";
 		new LwjglApplication(new EcosystemGame(), config);
 	}
 }
