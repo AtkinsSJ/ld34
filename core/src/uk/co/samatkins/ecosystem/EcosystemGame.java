@@ -23,13 +23,16 @@ public class EcosystemGame extends ApplicationAdapter {
 	private Random random;
 
 	enum Terrain {
-		Air(null),
-		Soil(new Texture("soil.png"));
+		Air(null, 0f),
+		Soil(new Texture("soil.png"), 0.5f),
+		Rock(new Texture("rock.png"), 0f);
 
-		public final Texture texture;
+		final Texture texture;
+		final float porosity;
 
-		Terrain(Texture texture) {
+		Terrain(Texture texture, float porosity) {
 			this.texture = texture;
+			this.porosity = porosity;
 		}
 	}
 
@@ -210,8 +213,13 @@ public class EcosystemGame extends ApplicationAdapter {
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = new Tile();
 				if (y < depth) {
-					tile.terrain = Terrain.Soil;
-					tile.humidity = random.nextFloat();
+					if (random.nextFloat() > 0.7f) {
+						tile.terrain = Terrain.Rock;
+					} else {
+						tile.terrain = Terrain.Soil;
+						tile.humidity = random.nextFloat();
+					}
+
 				} else {
 					tile.terrain = Terrain.Air;
 				}
@@ -273,7 +281,11 @@ public class EcosystemGame extends ApplicationAdapter {
 				Tile tile = tiles[tx][ty];
 				if (tile.terrain != Terrain.Air) {
 					// Raindrops keep falling on my head
-					tile.humidity += 0.1f;
+					if (tile.terrain.porosity > 0.0f) {
+						tile.humidity += 0.1f;
+					} else {
+						 // TODO: Create a puddle!
+					}
 					droplets.removeIndex(i);
 				}
 			}
@@ -422,8 +434,8 @@ public class EcosystemGame extends ApplicationAdapter {
 		Tile groundTile = tiles[plant.x][plant.y-1];
 
 		// Water
-		plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
-		log("Plant water is " + plant.water);
+		//plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
+		//log("Plant water is " + plant.water);
 		float waterWanted = plant.type.desiredSoilHumidity - plant.water;
 		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
 			log("Plant drank " + waterWanted);
@@ -530,12 +542,11 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	private void transferHumidity(Tile source, Tile dest) {
-		if ((dest != null)
-			&& (dest.terrain != Terrain.Air)) {
+		if (dest != null) {
 
 			float difference = source.humidity - dest.humidity;
 			if (difference > 0) {
-				float exchange = difference * 0.01f; // Tweak this to adjust speed of equalisation, bigger = faster
+				float exchange = difference * 0.02f * dest.terrain.porosity; // Tweak this to adjust speed of equalisation, bigger = faster
 				source.humidity -= exchange;
 				dest.humidity += exchange;
 			}
