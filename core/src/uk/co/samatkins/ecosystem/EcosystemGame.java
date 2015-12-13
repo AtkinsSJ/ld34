@@ -327,12 +327,11 @@ public class EcosystemGame extends ApplicationAdapter {
 					// Raindrops keep falling on my head
 
 					if (tile.terrain.porosity > 0.0f) {
-						tile.humidity += 0.1f;
+						modifyHumidity(tile, 0.1f);
 					} else {
 						 // Create a puddle!
 						Tile waterTile = tiles[tx][ty + 1];
-						waterTile.terrain = Terrain.Water;
-						waterTile.humidity = 0.1f;
+						modifyHumidity(waterTile, 0.1f);
 					}
 					droplets.removeIndex(i);
 				}
@@ -395,7 +394,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 					// Evaporation
 					if ((above != null) && (above.terrain == Terrain.Air)) {
-						tile.humidity *= 0.999f;
+						modifyHumidity(tile, -tile.humidity * 0.001f);
 					}
 
 					// Osmosis and puddle spread
@@ -403,13 +402,6 @@ public class EcosystemGame extends ApplicationAdapter {
 					transferHumidity(tile, below, Direction.Down);
 					transferHumidity(tile, left,  Direction.Left);
 					transferHumidity(tile, right, Direction.Right);
-
-					if (tile.humidity <= 0.01f) {
-						tile.humidity = 0f;
-						if (tile.terrain == Terrain.Water) {
-							tile.terrain = Terrain.Air;
-						}
-					}
 				}
 			}
 		}
@@ -505,6 +497,15 @@ public class EcosystemGame extends ApplicationAdapter {
 		mouseWasDown = Gdx.input.isTouched();
 	}
 
+	private void modifyHumidity(Tile tile, float dHumidity) {
+		tile.humidity += dHumidity;
+		if ((tile.terrain == Terrain.Air) && (tile.humidity > 0.0f)) {
+			tile.terrain = Terrain.Water;
+		} else if ((tile.terrain == Terrain.Water) && (tile.humidity < 0.001f)) {
+			tile.terrain = Terrain.Air;
+		}
+	}
+
 	private void transferHumidity(Tile source, Tile dest, Direction direction) {
 		if (dest != null) {
 
@@ -540,12 +541,8 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 
 			if (doExchange) {
-				source.humidity -= exchange;
-				dest.humidity += exchange;
-
-				if ((dest.terrain == Terrain.Air) && (dest.humidity > 0.0f)) {
-					dest.terrain = Terrain.Water;
-				}
+				modifyHumidity(source, -exchange);
+				modifyHumidity(dest, exchange);
 			}
 		}
 	}
@@ -562,7 +559,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
 			log("Plant drank " + waterWanted);
 			float water = Math.min(waterWanted, groundTile.humidity) * dt;
-			groundTile.humidity -= water;
+			modifyHumidity(groundTile, water);
 			plant.water += water;
 		}
 
