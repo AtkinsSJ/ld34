@@ -51,9 +51,16 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	class Tile {
+		final int x, y;
 		Terrain terrain = Terrain.Air;
 		float humidity = 0;
 		Plant plant = null;
+
+		public Tile(int x, int y) {
+
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 	enum InteractionMode {
@@ -88,7 +95,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_2.png"),
 			},
 			new Texture("plant1_flower.png"),
-			new Texture("seed1.png"), 500f
+			new Texture("seed1.png"), 30f
 		),
 		Lilypad(
 			true, 0.1f, 0.7f,
@@ -97,7 +104,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			new Texture("plant2_top.png"),
 			new Texture[]{},
 			new Texture("plant2_flower.png"),
-			new Texture("plant2_seed.png"), 5f
+			new Texture("plant2_seed.png"), 30f
 		);
 
 		final boolean isAquatic;
@@ -243,7 +250,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			depth = randomInt(random, Math.max(1, depth - 2), Math.min(15, depth + 3));
 
 			for (int y = 0; y < worldHeight; y++) {
-				Tile tile = new Tile();
+				Tile tile = new Tile(x, y);
 				if (y == depth) {
 					tile.terrain = Terrain.Water;
 					tile.humidity = random.nextFloat();
@@ -607,6 +614,15 @@ public class EcosystemGame extends ApplicationAdapter {
 			tile.terrain = Terrain.Water;
 		} else if ((tile.terrain == Terrain.Water) && (tile.humidity < 0.001f)) {
 			tile.terrain = Terrain.Air;
+		}
+
+		if (tile.humidity > 1.0f) {
+			// Move some humidity upwards
+			if (tile.y < worldHeight-1) {
+				float water = tile.humidity - 1.0f;
+				modifyHumidity(tiles[tile.x][tile.y+1], water);
+				tile.humidity = 1.0f;
+			}
 		}
 	}
 
