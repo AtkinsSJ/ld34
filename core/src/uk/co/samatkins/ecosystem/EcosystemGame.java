@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Random;
 
+import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.MakeSpring;
 import static uk.co.samatkins.ecosystem.EcosystemGame.InteractionMode.Water;
 
 public class EcosystemGame extends ApplicationAdapter {
@@ -30,19 +31,22 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum Terrain {
-		Air(null, 1f, false),
-		Soil(new Texture("soil.png"), 0.5f, true),
-		Rock(new Texture("rock.png"), 0f, true),
-		Water(new Texture("water.png"), 1f, false);
+		Air(null, 1f, false, false),
+		Soil(new Texture("soil.png"), 0.5f, true, false),
+		Rock(new Texture("rock.png"), 0f, true, false),
+		Water(new Texture("water.png"), 1f, false, true),
+		Spring(new Texture("water.png"), 1f, false, true);
 
 		final Texture texture;
 		final float porosity;
 		final boolean isSolid;
+		final boolean isWater;
 
-		Terrain(Texture texture, float porosity, boolean isSolid) {
+		Terrain(Texture texture, float porosity, boolean isSolid, boolean isWater) {
 			this.texture = texture;
 			this.porosity = porosity;
 			this.isSolid = isSolid;
+			this.isWater = isWater;
 		}
 	}
 
@@ -54,6 +58,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum InteractionMode {
 		Water,
+		MakeSpring,
 		PlantSeed,
 		MakeSoil,
 		MakeRock,
@@ -181,7 +186,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
-	Texture texCloud, texSpade;
+	Texture texCloud, texSpade, texSpring;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
 	final Array<Plant> plants = new Array<Plant>(false, 128);
@@ -217,6 +222,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		texDroplet = new Texture("raindrop.png");
 		texCloud = new Texture("cloud.png");
 		texSpade = new Texture("spade.png");
+		texSpring = new Texture("spring.png");
 		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
 		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
@@ -290,6 +296,15 @@ public class EcosystemGame extends ApplicationAdapter {
 			case Water: {
 				if (Gdx.input.isTouched()) {
 					droplets.add(new Droplet(mousePos.x, mousePos.y, 0f, -100f));
+				}
+			} break;
+			case MakeSpring: {
+				if (Gdx.input.isTouched()) {
+					int tx = (int) (mousePos.x / 16f),
+						ty = (int) (mousePos.y / 16f);
+					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+						tiles[tx][ty].terrain = Terrain.Spring;
+					}
 				}
 			} break;
 			case PlantSeed: {
@@ -388,7 +403,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				if (tile.terrain == Terrain.Air) {
 					seed.dy -= 98f * dt;
 					if (seed.dy < -98f) seed.dy = -98f;
-				} else if (tile.terrain == Terrain.Water) {
+				} else if (tile.terrain.isWater) {
 					// Seeds float on water
 					seed.dy = 0;
 					seed.y = getTopOfWater(tx, ty) * 16f;
@@ -411,7 +426,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 					Tile targetTile;
 					if (seed.type.isAquatic) {
-						canGrowHere = tile.terrain == Terrain.Water;
+						canGrowHere = tile.terrain.isWater;
 						targetTile = tiles[tx][ty];
 					} else {
 						canGrowHere = tile.terrain.isSolid;
@@ -436,6 +451,10 @@ public class EcosystemGame extends ApplicationAdapter {
 		for (int x = 0; x < worldWidth; x++) {
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = tiles[x][y];
+
+				if (tile.terrain == Terrain.Spring) {
+					modifyHumidity(tile, 1f * dt);
+				}
 
 				if (tile.terrain != Terrain.Air) { // TODO: Air humidity???
 
@@ -480,21 +499,17 @@ public class EcosystemGame extends ApplicationAdapter {
 //					batch.draw(Terrain.Water.texture, x*16f, y*16f, 16f, 16f);
 //				}
 
-				switch (tile.terrain) {
-					case Water: {
-//						batch.setColor(Color.RED);
-//						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, 16f);
-						batch.setColor(1f, 1f, 1f, 0.5f);
-						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, tile.humidity * 16f);
-					} break;
-
-					default: {
-						Texture texture = tile.terrain.texture;
-						if (texture != null) {
-							setBatchColourLerped(colNoHumidity, colMaxHumidity, tile.humidity);
-							batch.draw(texture, x * 16f, y * 16f);
-						}
-					} break;
+				if (tile.terrain.isWater) {
+//					batch.setColor(Color.RED);
+//					batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, 16f);
+					batch.setColor(1f, 1f, 1f, 0.5f);
+					batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, tile.humidity * 16f);
+				} else {
+					Texture texture = tile.terrain.texture;
+					if (texture != null) {
+						setBatchColourLerped(colNoHumidity, colMaxHumidity, tile.humidity);
+						batch.draw(texture, x * 16f, y * 16f);
+					}
 				}
 			}
 		}
@@ -534,6 +549,10 @@ public class EcosystemGame extends ApplicationAdapter {
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, texCloud, interactionMode == Water)) {
 			interactionMode = Water;
 		}
+		buttonX += buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSpring, interactionMode == MakeSpring)) {
+			interactionMode = MakeSpring;
+		}
 		for (PlantType plantType : PlantType.values()) {
 			buttonX += buttonSize;
 			if (drawButton(buttonX, 0, buttonSize, buttonSize, plantType.texSeed,
@@ -565,13 +584,13 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		// Find the bottom water tile
 		int y = tileY;
-		while ((y > 0) && (tiles[tileX][y-1].terrain == Terrain.Water)) {
+		while ((y > 0) && (tiles[tileX][y-1].terrain.isWater)) {
 			y--;
 		}
 
-		if (tiles[tileX][y].terrain == Terrain.Water) {
+		if (tiles[tileX][y].terrain.isWater) {
 			// Climb upwards until there's no more water
-			while ((y < worldHeight-1) && (tiles[tileX][y+1].terrain == Terrain.Water)) {
+			while ((y < worldHeight-1) && (tiles[tileX][y+1].terrain.isWater)) {
 				y++;
 			}
 			return y + tiles[tileX][y].humidity;
@@ -603,6 +622,7 @@ public class EcosystemGame extends ApplicationAdapter {
 					doExchange = false; // Air cannot transfer
 				} break;
 
+				case Spring:
 				case Water: {
 					doExchange = (direction != Direction.Up)
 						&& ((direction == Direction.Down) || (difference > 0f));
@@ -621,7 +641,7 @@ public class EcosystemGame extends ApplicationAdapter {
 				default: {
 					doExchange = (difference > 0.0f )
 						&& (dest.terrain != Terrain.Air)
-						&& (dest.terrain != Terrain.Water);
+						&& (!dest.terrain.isWater);
 					if (doExchange) {
 						exchange = difference * 0.02f * dest.terrain.porosity;
 					}
@@ -678,7 +698,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
 
 			if (plant.type.isAquatic) {
-				humidityDifference = (groundTile.terrain == Terrain.Water)
+				humidityDifference = (groundTile.terrain.isWater)
 					? 0f
 					: 0.8f;
 			}
