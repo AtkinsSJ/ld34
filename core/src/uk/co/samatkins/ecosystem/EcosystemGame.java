@@ -490,7 +490,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 				// Die if lain around too long, or 'suffocated'
 				if ((seed.life < 0f)
-					|| (tiles[tx][ty + 1].terrain.isSolid)) {
+					|| ((ty < (worldHeight-1)) && (tiles[tx][ty + 1].terrain.isSolid))) {
 					seeds.removeIndex(i);
 
 					// Randomly grow into a plant if there's room
@@ -498,26 +498,30 @@ public class EcosystemGame extends ApplicationAdapter {
 
 					boolean canGrowHere;
 
-					Tile targetTile;
+					Tile targetTile = null;
 					if (seed.type.isAquatic) {
 						canGrowHere = tile.terrain.isWater;
 						targetTile = tiles[tx][ty];
 					} else {
 						canGrowHere = tile.terrain.isSolid
 							|| (tile.terrain.isWater && tile.humidity < 0.2f);
-						targetTile = tiles[tx][ty + 1];
+
+						if (ty >= worldHeight - 1) {
+							targetTile = null;
+						} else {
+							targetTile = tiles[tx][ty + 1];
+						}
 					}
 
-					if (targetTile.plant == null) {
-
-						if (canGrowHere
-							&& (random.nextFloat() > 0.99f)) {
-							Plant newPlant = new Plant(seed.type, tx, ty + 1);
-							plants.add(newPlant);
-							targetTile.plant = newPlant;
-							seeds.removeIndex(i);
-							playSound(sndGrow, newPlant.type.audioPitch);
-						}
+					if (canGrowHere
+						&& (targetTile != null)
+						&& (targetTile.plant == null)
+						&& (random.nextFloat() > 0.99f)) {
+						Plant newPlant = new Plant(seed.type, tx, ty + 1);
+						plants.add(newPlant);
+						targetTile.plant = newPlant;
+						seeds.removeIndex(i);
+						playSound(sndGrow, newPlant.type.audioPitch);
 					}
 				}
 			}
