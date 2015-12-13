@@ -22,10 +22,18 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	private Random random;
 
+	enum Direction {
+		Left,
+		Right,
+		Up,
+		Down;
+	}
+
 	enum Terrain {
-		Air(null, 0f),
+		Air(null, 1f),
 		Soil(new Texture("soil.png"), 0.5f),
-		Rock(new Texture("rock.png"), 0f);
+		Rock(new Texture("rock.png"), 0f),
+		Water(new Texture("water.png"), 1f);
 
 		final Texture texture;
 		final float porosity;
@@ -281,10 +289,14 @@ public class EcosystemGame extends ApplicationAdapter {
 				Tile tile = tiles[tx][ty];
 				if (tile.terrain != Terrain.Air) {
 					// Raindrops keep falling on my head
+
 					if (tile.terrain.porosity > 0.0f) {
 						tile.humidity += 0.1f;
 					} else {
-						 // TODO: Create a puddle!
+						 // Create a puddle!
+						Tile waterTile = tiles[tx][ty + 1];
+						waterTile.terrain = Terrain.Water;
+						waterTile.humidity = 0.1f;
 					}
 					droplets.removeIndex(i);
 				}
@@ -346,17 +358,22 @@ public class EcosystemGame extends ApplicationAdapter {
 					Tile right = (x < (worldWidth - 1)) ? tiles[x+1][y] : null;
 
 					// Evaporation
-					if (above != null) {
-						if (above.terrain == Terrain.Air) {
-							tile.humidity *= 0.999f;
-						}
+					if ((above != null) && (above.terrain == Terrain.Air)) {
+						tile.humidity *= 0.999f;
 					}
 
-					// Osmosis
-					transferHumidity(tile, above);
-					transferHumidity(tile, below);
-					transferHumidity(tile, left);
-					transferHumidity(tile, right);
+					// Osmosis and puddle spread
+					transferHumidity(tile, above, Direction.Up);
+					transferHumidity(tile, below, Direction.Down);
+					transferHumidity(tile, left,  Direction.Left);
+					transferHumidity(tile, right, Direction.Right);
+
+					if (tile.humidity <= 0.01f) {
+						tile.humidity = 0f;
+						if (tile.terrain == Terrain.Water) {
+							tile.terrain = Terrain.Air;
+						}
+					}
 				}
 			}
 		}
@@ -377,10 +394,22 @@ public class EcosystemGame extends ApplicationAdapter {
 		for (int x = 0; x < worldWidth; x++) {
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = tiles[x][y];
-				Texture texture = tile.terrain.texture;
-				if (texture != null) {
-					setBatchColourLerped(colNoHumidity, colMaxHumidity, tile.humidity);
-					batch.draw(texture, x * 16f, y * 16f);
+
+				switch (tile.terrain) {
+					case Water: {
+//						batch.setColor(Color.RED);
+//						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, 16f);
+						batch.setColor(Color.WHITE);
+						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, tile.humidity * 16f);
+					} break;
+
+					default: {
+						Texture texture = tile.terrain.texture;
+						if (texture != null) {
+							setBatchColourLerped(colNoHumidity, colMaxHumidity, tile.humidity);
+							batch.draw(texture, x * 16f, y * 16f);
+						}
+					} break;
 				}
 			}
 		}
@@ -426,6 +455,51 @@ public class EcosystemGame extends ApplicationAdapter {
 		batch.end();
 
 		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	private void transferHumidity(Tile source, Tile dest, Direction direction) {
+		if (dest != null) {
+
+			float difference = source.humidity - dest.humidity;
+			boolean doExchange = true;
+			float exchange = 0f;
+
+			switch (source.terrain) {
+				case Air: {
+					doExchange = false; // Air cannot transfer
+				} break;
+
+				case Water: {
+					doExchange = (direction != Direction.Up)
+						&& ((direction == Direction.Down) || (difference > 0f));
+					if (doExchange) {
+						if (direction == Direction.Down) {
+							exchange = Math.min(source.humidity, 1.0f - dest.humidity) * dest.terrain.porosity;
+						} else {
+							exchange = difference * 0.5f * 0.2f * dest.terrain.porosity;
+						}
+					}
+				} break;
+
+				default: {
+					doExchange = (difference > 0.0f )
+						&& (dest.terrain != Terrain.Air)
+						&& (dest.terrain != Terrain.Water);
+					if (doExchange) {
+						exchange = difference * 0.02f * dest.terrain.porosity;
+					}
+				}
+			}
+
+			if (doExchange) {
+				source.humidity -= exchange;
+				dest.humidity += exchange;
+
+				if ((dest.terrain == Terrain.Air) && (dest.humidity > 0.0f)) {
+					dest.terrain = Terrain.Water;
+				}
+			}
+		}
 	}
 
 	private boolean updatePlant(Plant plant, float dt) {
@@ -539,17 +613,5 @@ public class EcosystemGame extends ApplicationAdapter {
 		super.resize(width, height);
 		viewport.update(width, height);
 		uiCamera.setToOrtho(false, width, height);
-	}
-
-	private void transferHumidity(Tile source, Tile dest) {
-		if (dest != null) {
-
-			float difference = source.humidity - dest.humidity;
-			if (difference > 0) {
-				float exchange = difference * 0.02f * dest.terrain.porosity; // Tweak this to adjust speed of equalisation, bigger = faster
-				source.humidity -= exchange;
-				dest.humidity += exchange;
-			}
-		}
 	}
 }
