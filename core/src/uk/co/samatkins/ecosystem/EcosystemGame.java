@@ -30,17 +30,19 @@ public class EcosystemGame extends ApplicationAdapter {
 	}
 
 	enum Terrain {
-		Air(null, 1f),
-		Soil(new Texture("soil.png"), 0.5f),
-		Rock(new Texture("rock.png"), 0f),
-		Water(new Texture("water.png"), 1f);
+		Air(null, 1f, false),
+		Soil(new Texture("soil.png"), 0.5f, true),
+		Rock(new Texture("rock.png"), 0f, true),
+		Water(new Texture("water.png"), 1f, false);
 
 		final Texture texture;
 		final float porosity;
+		final boolean isSolid;
 
-		Terrain(Texture texture, float porosity) {
+		Terrain(Texture texture, float porosity, boolean isSolid) {
 			this.texture = texture;
 			this.porosity = porosity;
+			this.isSolid = isSolid;
 		}
 	}
 
@@ -72,7 +74,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum PlantType {
 		Leafy(
-			0.05f, 0.6f,
+			false, 0.05f, 0.6f,
 			3f, 3.5f, // Growth time range
 			3, 5, // Min/max mature height
 			new Texture("plant1_top.png"),
@@ -81,9 +83,19 @@ public class EcosystemGame extends ApplicationAdapter {
 				new Texture("plant1_2.png"),
 			},
 			new Texture("plant1_flower.png"),
-			new Texture("seed1.png"), 5f
+			new Texture("seed1.png"), 500f
+		),
+		Lilypad(
+			true, 0.1f, 0.7f,
+			4f, 5f,
+			1, 1,
+			new Texture("plant2_top.png"),
+			new Texture[]{},
+			new Texture("plant2_flower.png"),
+			new Texture("plant2_seed.png"), 5f
 		);
 
+		final boolean isAquatic;
 		final float thirst; // Water consumed per second
 		final float desiredSoilHumidity;
 		final float minGrowthTime, maxGrowthTime;
@@ -94,10 +106,11 @@ public class EcosystemGame extends ApplicationAdapter {
 		final Texture texSeed;
 		final float seedLife;
 
-		PlantType(float thirst, float desiredSoilHumidity,
+		PlantType(boolean isAquatic, float thirst, float desiredSoilHumidity,
 		          float minGrowthTime, float maxGrowthTime, int minMatureHeight, int maxMatureHeight,
 		          Texture texPlantTop, Texture[] texPlant, Texture texFlower,
 		          Texture texSeed, float seedLife) {
+			this.isAquatic = isAquatic;
 			this.thirst = thirst;
 			this.desiredSoilHumidity = desiredSoilHumidity;
 			this.minMatureHeight = minMatureHeight;
@@ -130,7 +143,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	class Plant {
 		PlantType type;
-		int x, y; // Base
+		float x, y; // Base
 
 		int size;
 		int matureHeight;
@@ -140,7 +153,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		float water;
 		boolean isMature;
 
-		public Plant(PlantType type, int x, int y) {
+		public Plant(PlantType type, float x, float y) {
 			this.type = type;
 			this.x = x;
 			this.y = y;
@@ -165,6 +178,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	int worldWidth, worldHeight;
 	Tile[][] tiles;
 	InteractionMode interactionMode = Water;
+	PlantType seedType;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
 	Texture texCloud, texSpade;
@@ -196,7 +210,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport = new ScreenViewport(camera);
 		uiCamera = new OrthographicCamera();
 
@@ -216,15 +230,18 @@ public class EcosystemGame extends ApplicationAdapter {
 		tiles = new Tile[worldWidth][worldHeight];
 		random = new Random();
 
-		int depth = randomInt(random, 1, 10);
+		int depth = randomInt(random, 4, 15);
 
 		for (int x = 0; x < worldWidth; x++) {
 
-			depth = randomInt(random, Math.max(1, depth - 2), Math.min(10, depth + 3));
+			depth = randomInt(random, Math.max(1, depth - 2), Math.min(15, depth + 3));
 
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = new Tile();
-				if (y < depth) {
+				if (y == depth) {
+					tile.terrain = Terrain.Water;
+					tile.humidity = random.nextFloat();
+				} else if (y < depth) {
 					if (random.nextFloat() > 0.7f) {
 						tile.terrain = Terrain.Rock;
 					} else {
@@ -238,6 +255,12 @@ public class EcosystemGame extends ApplicationAdapter {
 				tiles[x][y] = tile;
 			}
 		}
+		camera.position.set(
+			((worldWidth * 16f) - camera.viewportWidth) / 2f,
+			((worldHeight * 16f) - camera.viewportHeight) / 2f,
+			0f
+		);
+		camera.update();
 	}
 
 	@Override
@@ -271,7 +294,7 @@ public class EcosystemGame extends ApplicationAdapter {
 			} break;
 			case PlantSeed: {
 				if (Gdx.input.justTouched()) {
-					seeds.add(new Seed(mousePos.x, mousePos.y, PlantType.Leafy));
+					seeds.add(new Seed(mousePos.x, mousePos.y, seedType));
 				}
 			} break;
 			case MakeSoil: {
@@ -326,13 +349,21 @@ public class EcosystemGame extends ApplicationAdapter {
 				if (tile.terrain != Terrain.Air) {
 					// Raindrops keep falling on my head
 
-					if (tile.terrain.porosity > 0.0f) {
-						modifyHumidity(tile, 0.1f);
-					} else {
+					float water = 0.1f;
+
+					if ((tile.terrain.porosity > 0.0f)
+					 && (tile.humidity < 1.0f)){
+						float waterAbsorbed = Math.min(1.0f - tile.humidity, water);
+						water -= waterAbsorbed;
+						modifyHumidity(tile, waterAbsorbed);
+					}
+
+					if (water > 0.0f) {
 						 // Create a puddle!
 						Tile waterTile = tiles[tx][ty + 1];
-						modifyHumidity(waterTile, 0.1f);
+						modifyHumidity(waterTile, water);
 					}
+
 					droplets.removeIndex(i);
 				}
 			}
@@ -357,22 +388,43 @@ public class EcosystemGame extends ApplicationAdapter {
 				if (tile.terrain == Terrain.Air) {
 					seed.dy -= 98f * dt;
 					if (seed.dy < -98f) seed.dy = -98f;
+				} else if (tile.terrain == Terrain.Water) {
+					// Seeds float on water
+					seed.dy = 0;
+					seed.y = getTopOfWater(tx, ty) * 16f;
 				} else {
 					seed.dx = 0;
 					seed.dy = 0;
-					seed.life -= dt;
+				}
 
-					// Die if lain around too long, or 'suffocated'
-					if ((seed.life < 0f)
-					 || (tiles[tx][ty + 1].terrain != Terrain.Air)){
-						seeds.removeIndex(i);
+				seed.life -= dt;
+
+				// Die if lain around too long, or 'suffocated'
+				if ((seed.life < 0f)
+					|| (tiles[tx][ty + 1].terrain.isSolid)) {
+					seeds.removeIndex(i);
+
+					// Randomly grow into a plant if there's room
+				} else {
+
+					boolean canGrowHere;
+
+					Tile targetTile;
+					if (seed.type.isAquatic) {
+						canGrowHere = tile.terrain == Terrain.Water;
+						targetTile = tiles[tx][ty];
 					} else {
-						// Randomly grow into a plant if there's room
-						if ((tiles[tx][ty + 1].plant == null)
+						canGrowHere = tile.terrain.isSolid;
+						targetTile = tiles[tx][ty + 1];
+					}
+
+					if (targetTile.plant == null) {
+
+						if (canGrowHere
 							&& (random.nextFloat() > 0.99f)) {
 							Plant newPlant = new Plant(seed.type, tx, ty + 1);
 							plants.add(newPlant);
-							tiles[tx][ty + 1].plant = newPlant;
+							targetTile.plant = newPlant;
 							seeds.removeIndex(i);
 						}
 					}
@@ -423,11 +475,16 @@ public class EcosystemGame extends ApplicationAdapter {
 			for (int y = 0; y < worldHeight; y++) {
 				Tile tile = tiles[x][y];
 
+//				if (tile.plant != null) {
+//					batch.setColor(Color.YELLOW);
+//					batch.draw(Terrain.Water.texture, x*16f, y*16f, 16f, 16f);
+//				}
+
 				switch (tile.terrain) {
 					case Water: {
 //						batch.setColor(Color.RED);
 //						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, 16f);
-						batch.setColor(Color.WHITE);
+						batch.setColor(1f, 1f, 1f, 0.5f);
 						batch.draw(tile.terrain.texture, x*16f, y*16f, 16f, tile.humidity * 16f);
 					} break;
 
@@ -444,6 +501,8 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		// Draw plants
 		for (Plant plant : plants) {
+			batch.setColor(Color.YELLOW);
+
 			setBatchColourLerped(colPlantDry, colPlantWet, plant.health);
 			for (int i=0; i<plant.size - 1; i++) {
 				batch.draw(plant.type.texPlant[i % plant.type.texPlant.length], plant.x * 16f, (plant.y + i) * 16f);
@@ -475,9 +534,13 @@ public class EcosystemGame extends ApplicationAdapter {
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, texCloud, interactionMode == Water)) {
 			interactionMode = Water;
 		}
-		buttonX += buttonSize;
-		if (drawButton(buttonX, 0, buttonSize, buttonSize, PlantType.Leafy.texSeed, interactionMode == InteractionMode.PlantSeed)) {
-			interactionMode = InteractionMode.PlantSeed;
+		for (PlantType plantType : PlantType.values()) {
+			buttonX += buttonSize;
+			if (drawButton(buttonX, 0, buttonSize, buttonSize, plantType.texSeed,
+				(interactionMode == InteractionMode.PlantSeed) && (seedType == plantType))) {
+				interactionMode = InteractionMode.PlantSeed;
+				seedType = plantType;
+			}
 		}
 		buttonX += buttonSize;
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, Terrain.Soil.texture, interactionMode == InteractionMode.MakeSoil)) {
@@ -495,6 +558,28 @@ public class EcosystemGame extends ApplicationAdapter {
 		batch.end();
 
 		mouseWasDown = Gdx.input.isTouched();
+	}
+
+	// Calculates where the top of the water is, starting in the given tile and looking up and down
+	private float getTopOfWater(int tileX, int tileY) {
+
+		// Find the bottom water tile
+		int y = tileY;
+		while ((y > 0) && (tiles[tileX][y-1].terrain == Terrain.Water)) {
+			y--;
+		}
+
+		if (tiles[tileX][y].terrain == Terrain.Water) {
+			// Climb upwards until there's no more water
+			while ((y < worldHeight-1) && (tiles[tileX][y+1].terrain == Terrain.Water)) {
+				y++;
+			}
+			return y + tiles[tileX][y].humidity;
+
+		} else {
+			// Lowest tile isn't water, so we just sit here.
+			return y;
+		}
 	}
 
 	private void modifyHumidity(Tile tile, float dHumidity) {
@@ -525,6 +610,9 @@ public class EcosystemGame extends ApplicationAdapter {
 						if (direction == Direction.Down) {
 							exchange = Math.min(source.humidity, 1.0f - dest.humidity) * dest.terrain.porosity;
 						} else {
+							if (dest.terrain == Terrain.Air) {
+								log("Transferring from water to air!");
+							}
 							exchange = difference * 0.5f * 0.2f * dest.terrain.porosity;
 						}
 					}
@@ -550,66 +638,92 @@ public class EcosystemGame extends ApplicationAdapter {
 	private boolean updatePlant(Plant plant, float dt) {
 		boolean plantDied = false;
 
-		Tile groundTile = tiles[plant.x][plant.y-1];
+		int tx = (int)plant.x,
+			ty = (int)plant.y;
 
-		// Water
-		//plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
-		//log("Plant water is " + plant.water);
-		float waterWanted = plant.type.desiredSoilHumidity - plant.water;
-		if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
-			log("Plant drank " + waterWanted);
-			float water = Math.min(waterWanted, groundTile.humidity) * dt;
-			modifyHumidity(groundTile, water);
-			plant.water += water;
+		Tile groundTile = tiles[tx][ty-1];
+
+		if (plant.type.isAquatic) {
+
+			// Move up or down so we're on the surface of the water
+			float newY = getTopOfWater(tx, ty);
+			int newTY = (int)newY;
+			if (newTY != ty) {
+				tiles[tx][ty].plant = null;
+				tiles[tx][newTY].plant = plant;
+			}
+
+			plant.y = newY;
+		} else {
+			if (!groundTile.terrain.isSolid) {
+				plantDied = true;
+			}
 		}
 
-		float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
-		log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
-		if (humidityDifference < 0.15f) {
-			// Happy
-			plant.health = Math.min(1.0f, plant.health + dt);
+		if (!plantDied) {
 
-			if (plant.health >= 0.99f) {
-				plant.growthTimer -= dt;
+			// Water
+			//plant.water -= dt * (plant.type.thirst * (1.0f + plant.size * 0.1f));
+			//log("Plant water is " + plant.water);
+			float waterWanted = plant.type.desiredSoilHumidity - plant.water;
+			if ((waterWanted > 0f) && (groundTile.humidity > 0f)) {
+				log("Plant drank " + waterWanted);
+				float water = Math.min(waterWanted, groundTile.humidity) * dt;
+				modifyHumidity(groundTile, water);
+				plant.water += water;
+			}
 
-				if (plant.growthTimer <= 0f) {
-					plant.growthTimer = randomFloat(random, plant.type.minGrowthTime, plant.type.maxGrowthTime);
+			float humidityDifference = Math.abs(groundTile.humidity - plant.type.desiredSoilHumidity);
+			log("Soil humidity = " + groundTile.humidity + ", Humidity difference is " + humidityDifference);
+			if (humidityDifference < 0.15f) {
+				// Happy
+				plant.health = Math.min(1.0f, plant.health + dt);
 
-					plant.water -= 0.1f;
-					if (plant.isMature) {
-						// Spawn seeds!
-						Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
-						seed.dx = (random.nextFloat() - 0.5f) * 50f;
-						seed.dy = 20f + (random.nextFloat() * 20f);
-						seeds.add(seed);
+				if (plant.health >= 0.99f) {
+					plant.growthTimer -= dt;
 
-					} else if (plant.size >= plant.matureHeight) {
-						plant.isMature = true;
-						plant.size = plant.matureHeight;
-					} else {
-						plant.size++;
+					if (plant.growthTimer <= 0f) {
+						plant.growthTimer = randomFloat(random, plant.type.minGrowthTime, plant.type.maxGrowthTime);
 
-						// Slightly hacky!
-						// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
-						if (plant.size >= plant.matureHeight) {
+						plant.water -= 0.1f;
+						if (plant.isMature) {
+							// Spawn seeds!
+							Seed seed = new Seed((plant.x + 0.5f) * 16f, (plant.y + plant.size + 0.5f) * 16f, plant.type);
+							seed.dx = (random.nextFloat() - 0.5f) * 50f;
+							seed.dy = 20f + (random.nextFloat() * 20f);
+							seeds.add(seed);
+
+						} else if (plant.size >= plant.matureHeight) {
 							plant.isMature = true;
 							plant.size = plant.matureHeight;
+						} else {
+							plant.size++;
+
+							// Slightly hacky!
+							// This way, plants can start immature and then grow to maturity, even if their mature height is just 1
+							if (plant.size >= plant.matureHeight) {
+								plant.isMature = true;
+								plant.size = plant.matureHeight;
+							}
 						}
 					}
 				}
+
+			} else if (humidityDifference < 0.4f) {
+				// Unhappy but ok
+			} else {
+				// Dying
+				plant.health -= (dt * 0.1f);
+				log("Dying, health = " + plant.health);
 			}
 
-		} else if (humidityDifference < 0.4f) {
-			// Unhappy but ok
-		} else {
-			// Dying
-			plant.health -= (dt * 0.1f);
-			log("Dying, health = " + plant.health);
+			if (plant.health <= 0f) {
+				plantDied = true;
+			}
 		}
 
-		if (plant.health <= 0f) {
-			plantDied = true;
-			tiles[plant.x][plant.y].plant = null;
+		if (plantDied) {
+			tiles[(int) plant.x][(int) plant.y].plant = null;
 		}
 
 		return plantDied;
@@ -656,7 +770,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
-		viewport.update(width, height);
+		viewport.update(width, height, true);
 		uiCamera.setToOrtho(false, width, height);
 	}
 }
