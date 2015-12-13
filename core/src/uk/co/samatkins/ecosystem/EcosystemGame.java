@@ -52,7 +52,10 @@ public class EcosystemGame extends ApplicationAdapter {
 
 	enum InteractionMode {
 		Water,
-		PlantSeed;
+		PlantSeed,
+		MakeSoil,
+		MakeRock,
+		Dig,
 	}
 
 	class Droplet {
@@ -164,7 +167,7 @@ public class EcosystemGame extends ApplicationAdapter {
 	InteractionMode interactionMode = Water;
 
 	NinePatch buttonBackground, buttonOverBackground, buttonHitBackground;
-	Texture texCloud;
+	Texture texCloud, texSpade;
 
 	final Array<Seed> seeds = new Array<Seed>(false, 128);
 	final Array<Plant> plants = new Array<Plant>(false, 128);
@@ -199,6 +202,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		texDroplet = new Texture("raindrop.png");
 		texCloud = new Texture("cloud.png");
+		texSpade = new Texture("spade.png");
 		buttonBackground = new NinePatch(new Texture("button.png"), 6, 6, 6, 6);
 		buttonOverBackground = new NinePatch(new Texture("button-over.png"), 6, 6, 6, 6);
 		buttonHitBackground = new NinePatch(new Texture("button-hit.png"), 6, 6, 6, 6);
@@ -258,7 +262,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0f);
 		camera.unproject(mousePos);
 
-		// Click for rain!
+		// Interactions!
 		switch (interactionMode) {
 			case Water: {
 				if (Gdx.input.isTouched()) {
@@ -268,6 +272,38 @@ public class EcosystemGame extends ApplicationAdapter {
 			case PlantSeed: {
 				if (Gdx.input.justTouched()) {
 					seeds.add(new Seed(mousePos.x, mousePos.y, PlantType.Leafy));
+				}
+			} break;
+			case MakeSoil: {
+				if (Gdx.input.isTouched()) {
+					int tx = (int) (mousePos.x / 16f),
+						ty = (int) (mousePos.y / 16f);
+					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+						tiles[tx][ty].terrain = Terrain.Soil;
+					}
+				}
+			} break;
+			case MakeRock: {
+				if (Gdx.input.isTouched()) {
+					int tx = (int) (mousePos.x / 16f),
+						ty = (int) (mousePos.y / 16f);
+					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+						tiles[tx][ty].terrain = Terrain.Rock;
+					}
+				}
+			} break;
+			case Dig: {
+				if (Gdx.input.isTouched()) {
+					int tx = (int) (mousePos.x / 16f),
+						ty = (int) (mousePos.y / 16f);
+					if (tx >=0 && tx < worldWidth && ty >= 0 && ty < worldHeight) {
+						Tile tile = tiles[tx][ty];
+						if (tile.humidity > 0f) {
+							tile.terrain = Terrain.Water;
+						} else {
+							tile.terrain = Terrain.Air;
+						}
+					}
 				}
 			} break;
 		}
@@ -450,6 +486,18 @@ public class EcosystemGame extends ApplicationAdapter {
 		buttonX += buttonSize;
 		if (drawButton(buttonX, 0, buttonSize, buttonSize, PlantType.Leafy.texSeed, interactionMode == InteractionMode.PlantSeed)) {
 			interactionMode = InteractionMode.PlantSeed;
+		}
+		buttonX += buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, Terrain.Soil.texture, interactionMode == InteractionMode.MakeSoil)) {
+			interactionMode = InteractionMode.MakeSoil;
+		}
+		buttonX += buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, Terrain.Rock.texture, interactionMode == InteractionMode.MakeRock)) {
+			interactionMode = InteractionMode.MakeRock;
+		}
+		buttonX += buttonSize;
+		if (drawButton(buttonX, 0, buttonSize, buttonSize, texSpade, interactionMode == InteractionMode.Dig)) {
+			interactionMode = InteractionMode.Dig;
 		}
 
 		batch.end();
