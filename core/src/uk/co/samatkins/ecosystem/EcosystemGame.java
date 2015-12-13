@@ -99,7 +99,7 @@ public class EcosystemGame extends ApplicationAdapter {
 		),
 		Lilypad(
 			true, 0.2f, 0.7f,
-			4f, 5f,
+			10f, 15f,
 			1, 1,
 			new Texture("plant2_top.png"),
 			new Texture[]{},
@@ -436,7 +436,8 @@ public class EcosystemGame extends ApplicationAdapter {
 						canGrowHere = tile.terrain.isWater;
 						targetTile = tiles[tx][ty];
 					} else {
-						canGrowHere = tile.terrain.isSolid;
+						canGrowHere = tile.terrain.isSolid
+							|| (tile.terrain.isWater && tile.humidity < 0.2f);
 						targetTile = tiles[tx][ty + 1];
 					}
 
@@ -601,7 +602,7 @@ public class EcosystemGame extends ApplicationAdapter {
 
 		if (tiles[tileX][y].terrain.isWater) {
 			// Climb upwards until there's no more water
-			while ((y < worldHeight-1) && (tiles[tileX][y+1].terrain.isWater)) {
+			while ((y < worldHeight-1) && (tiles[tileX][y].humidity > 0.95f) && (tiles[tileX][y+1].terrain.isWater)) {
 				y++;
 			}
 			return y + tiles[tileX][y].humidity;
