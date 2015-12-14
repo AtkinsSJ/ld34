@@ -756,8 +756,6 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 			xml.pop();
 			writer.close();
-
-			log("Game saved to " + saveFile.file().getAbsolutePath());
 		} catch (IOException e) {
 			e.printStackTrace();
 			log("Failed to save, with an error.");
@@ -840,7 +838,6 @@ public class EcosystemGame extends ApplicationAdapter {
 			}
 
 			reader.close();
-			log("Game loaded from " + saveFile.file().getAbsolutePath());
 		} catch (IOException e) {
 			e.printStackTrace();
 			log("Failed to load, with an error.");
